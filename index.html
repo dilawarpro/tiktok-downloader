@@ -868,60 +868,8 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Info + Caption + Downloads -->
-            <div class="col-lg-7" id="captions">
-
-                <!-- Video Info -->
-                <div class="res-card mb-4" id="videoInfoCard" style="display:none;">
-                    <div class="res-header">
-                        <i class="bi bi-info-circle-fill" style="color:var(--accent);font-size:1rem;" aria-hidden="true"></i>
-                        <h5>Video Information</h5>
-                    </div>
-                    <div class="res-body">
-                        <div class="info-grid">
-                            <div><div class="info-lbl">Author</div><div class="info-val" id="infoAuthor">—</div></div>
-                            <div><div class="info-lbl">Duration</div><div class="info-val" id="infoDuration">—</div></div>
-                            <div><div class="info-lbl"><i class="bi bi-heart-fill" style="color:var(--secondary);"></i> Likes</div><div class="info-val" id="infoLikes">—</div></div>
-                            <div><div class="info-lbl"><i class="bi bi-eye-fill" style="color:var(--accent);"></i> Views</div><div class="info-val" id="infoViews">—</div></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Caption -->
-                <div class="res-card mb-4">
-                    <div class="res-header">
-                        <i class="bi bi-card-text" style="color:var(--accent);font-size:1rem;" aria-hidden="true"></i>
-                        <h5>TikTok Caption / Description</h5>
-                        <span class="copy-count-badge" id="copyCountBadge" style="display:none;">
-                            <i class="bi bi-clipboard-check" aria-hidden="true"></i>
-                            Copied <span id="copyCountNum">0</span>x
-                        </span>
-                    </div>
-                    <div class="res-body">
-                        <textarea id="captionArea" class="caption-ta" rows="4" readonly
-                            placeholder="Video caption appears here automatically after fetching..."
-                            aria-label="TikTok video caption text"></textarea>
-                        <div class="char-count" id="charCount"></div>
-                        <div class="d-flex gap-2 mt-3 flex-wrap">
-                            <button class="dl-btn db-cap" style="padding:10px 16px;flex:1;min-width:130px;" onclick="copyCaption()" aria-label="Copy TikTok caption">
-                                <div class="dbi" style="width:30px;height:30px;border-radius:7px;font-size:0.9rem;"><i class="bi bi-clipboard" aria-hidden="true"></i></div>
-                                <span class="dl-btn-info"><span class="dl-btn-title" style="font-size:0.82rem;">Copy Caption</span></span>
-                            </button>
-                            <button class="dl-btn db-txt" style="padding:10px 16px;flex:1;min-width:130px;" onclick="saveCaption()" aria-label="Save caption as text file">
-                                <div class="dbi" style="width:30px;height:30px;border-radius:7px;font-size:0.9rem;background:rgba(108,62,244,0.1);color:var(--primary);"><i class="bi bi-file-text" aria-hidden="true"></i></div>
-                                <span class="dl-btn-info"><span class="dl-btn-title" style="font-size:0.82rem;">Save as .txt</span></span>
-                            </button>
-                            <button class="dl-btn db-txt" style="padding:10px 16px;flex:1;min-width:130px;" onclick="shareCaption()" aria-label="Share TikTok caption">
-                                <div class="dbi" style="width:30px;height:30px;border-radius:7px;font-size:0.9rem;background:rgba(0,200,83,0.1);color:var(--success);"><i class="bi bi-share" aria-hidden="true"></i></div>
-                                <span class="dl-btn-info"><span class="dl-btn-title" style="font-size:0.82rem;">Share Caption</span></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Downloads -->
-                <div class="res-card">
+<!-- Downloads -->
+               <div class="res-card">
                     <div class="res-header">
                         <i class="bi bi-download" style="color:var(--success);font-size:1rem;" aria-hidden="true"></i>
                         <h5>Download Options</h5>
@@ -962,6 +910,59 @@
 
             </div>
         </div>
+          <!-- Caption -->
+                <div class="res-card mb-4">
+                    <div class="res-header">
+                        <i class="bi bi-card-text" style="color:var(--accent);font-size:1rem;" aria-hidden="true"></i>
+                        <h5>TikTok Caption / Description</h5>
+                        <span class="copy-count-badge" id="copyCountBadge" style="display:none;">
+                            <i class="bi bi-clipboard-check" aria-hidden="true"></i>
+                            Copied <span id="copyCountNum">0</span>x
+                        </span>
+                    </div>
+                    <div class="res-body">
+                        <textarea id="captionArea" class="caption-ta" rows="4" readonly
+                            placeholder="Video caption appears here automatically after fetching..."
+                            aria-label="TikTok video caption text"></textarea>
+                        <div class="char-count" id="charCount"></div>
+                        <div class="d-flex gap-2 mt-3 flex-wrap">
+                            <button class="dl-btn db-cap" style="padding:10px 16px;flex:1;min-width:130px;" onclick="copyCaption()" aria-label="Copy TikTok caption">
+                                <div class="dbi" style="width:30px;height:30px;border-radius:7px;font-size:0.9rem;"><i class="bi bi-clipboard" aria-hidden="true"></i></div>
+                                <span class="dl-btn-info"><span class="dl-btn-title" style="font-size:0.82rem;">Copy Caption</span></span>
+                            </button>
+                            <button class="dl-btn db-txt" style="padding:10px 16px;flex:1;min-width:130px;" onclick="saveCaption()" aria-label="Save caption as text file">
+                                <div class="dbi" style="width:30px;height:30px;border-radius:7px;font-size:0.9rem;background:rgba(108,62,244,0.1);color:var(--primary);"><i class="bi bi-file-text" aria-hidden="true"></i></div>
+                                <span class="dl-btn-info"><span class="dl-btn-title" style="font-size:0.82rem;">Save as .txt</span></span>
+                            </button>
+                            <button class="dl-btn db-txt" style="padding:10px 16px;flex:1;min-width:130px;" onclick="shareCaption()" aria-label="Share TikTok caption">
+                                <div class="dbi" style="width:30px;height:30px;border-radius:7px;font-size:0.9rem;background:rgba(0,200,83,0.1);color:var(--success);"><i class="bi bi-share" aria-hidden="true"></i></div>
+                                <span class="dl-btn-info"><span class="dl-btn-title" style="font-size:0.82rem;">Share Caption</span></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+             
+
+            <!-- Info + Caption + Downloads -->
+            <div class="col-lg-7" id="captions">
+
+                <!-- Video Info -->
+                <div class="res-card mb-4" id="videoInfoCard" style="display:none;">
+                    <div class="res-header">
+                        <i class="bi bi-info-circle-fill" style="color:var(--accent);font-size:1rem;" aria-hidden="true"></i>
+                        <h5>Video Information</h5>
+                    </div>
+                    <div class="res-body">
+                        <div class="info-grid">
+                            <div><div class="info-lbl">Author</div><div class="info-val" id="infoAuthor">—</div></div>
+                            <div><div class="info-lbl">Duration</div><div class="info-val" id="infoDuration">—</div></div>
+                            <div><div class="info-lbl"><i class="bi bi-heart-fill" style="color:var(--secondary);"></i> Likes</div><div class="info-val" id="infoLikes">—</div></div>
+                            <div><div class="info-lbl"><i class="bi bi-eye-fill" style="color:var(--accent);"></i> Views</div><div class="info-val" id="infoViews">—</div></div>
+                        </div>
+                    </div>
+                </div>
+
 
         <!-- Rating Section -->
         <div class="row mt-4">
