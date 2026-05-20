@@ -85,16 +85,36 @@
         /* ============================================================
            BASE
         ============================================================ */
-        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-        html { scroll-behavior:smooth; }
-        body {
-            font-family:var(--font);
-            background:var(--bg);
-            color:var(--text);
-            overflow-x:hidden;
-            line-height:1.7;
-            transition:background 0.4s ease, color 0.4s ease;
-        }
+       /* Reset + Safe Box Model */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Prevent Horizontal Scrolling */
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* Media Safety */
+img,
+video,
+iframe,
+canvas,
+svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
         ::selection { background:var(--primary); color:#fff; }
         ::-webkit-scrollbar { width:5px; }
         ::-webkit-scrollbar-track { background:var(--bg); }
@@ -533,8 +553,20 @@
         /* ============================================================
            TOAST
         ============================================================ */
-        #toastBox { position:fixed;bottom:26px;right:26px;z-index:9999;display:flex;flex-direction:column;gap:9px;pointer-events:none; }
-        .toast-el { background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius-md);padding:13px 16px;display:flex;align-items:center;gap:11px;box-shadow:0 10px 40px rgba(0,0,0,0.2);max-width:310px;min-width:250px;pointer-events:all;transform:translateX(120%);opacity:0;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease; }
+      #toastBox {
+    position: fixed;
+    bottom: 20px;
+    left: 12px;
+    right: 12px;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+.toast-el {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+}
         .toast-el.show { transform:translateX(0);opacity:1; }
         .toast-el.hide { transform:translateX(120%);opacity:0; }
         .toast-el.success { border-left:3px solid var(--success); }
