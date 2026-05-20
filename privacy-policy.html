@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - TikTok Downloader by Dilawar Pro</title>
+    <meta name="description" content="Privacy Policy for TikTok Downloader by Dilawar Pro. Learn how we collect, use, and protect your data at tiktokdownloader.dilawarpro.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://tiktokdownloader.dilawarpro.com/privacy-policy">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6C3EF4;
+            --secondary: #FF2D78;
+            --accent: #00D4FF;
+            --success: #00C853;
+            --gradient: linear-gradient(135deg, #6C3EF4 0%, #FF2D78 100%);
+            --gradient-btn: linear-gradient(135deg, #6C3EF4, #FF2D78);
+            --font: 'Inter', sans-serif;
+            --radius: 20px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
+            --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+        }
+        [data-theme="dark"] {
+            --bg: #0A0A14; --bg-secondary: #111122; --bg-card: #161628;
+            --bg-input: rgba(255,255,255,0.06); --border-light: rgba(255,255,255,0.07);
+            --text: #F0F0FF; --text-muted: #8888AA; --nav-bg: rgba(10,10,20,0.95);
+            --shadow-card: 0 4px 20px rgba(0,0,0,0.2); --glass: rgba(255,255,255,0.04);
+            --glass-border: rgba(255,255,255,0.08); --section-alt: rgba(255,255,255,0.015);
+            --tag-bg: rgba(108,62,244,0.1); --tag-border: rgba(108,62,244,0.2); --tag-color: #9A8AFF;
+        }
+        [data-theme="light"] {
+            --bg: #F5F4FF; --bg-secondary: #EDEAFF; --bg-card: #FFFFFF;
+            --bg-input: rgba(108,62,244,0.05); --border-light: rgba(108,62,244,0.08);
+            --text: #1A1040; --text-muted: #6B5B95; --nav-bg: rgba(245,244,255,0.97);
+            --shadow-card: 0 4px 20px rgba(108,62,244,0.06); --glass: rgba(255,255,255,0.75);
+            --glass-border: rgba(108,62,244,0.12); --section-alt: rgba(108,62,244,0.025);
+            --tag-bg: rgba(108,62,244,0.07); --tag-border: rgba(108,62,244,0.14); --tag-color: #5429D4;
+        }
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body { font-family:var(--font); background:var(--bg); color:var(--text); overflow-x:hidden; line-height:1.7; transition:background 0.4s ease, color 0.4s ease; }
+        ::selection { background:var(--primary); color:#fff; }
+        ::-webkit-scrollbar { width:5px; }
+        ::-webkit-scrollbar-track { background:var(--bg); }
+        ::-webkit-scrollbar-thumb { background:var(--primary); border-radius:3px; }
+        a { text-decoration:none; color:inherit; }
+
+        /* NAVBAR */
+        .main-nav { background:var(--nav-bg); backdrop-filter:blur(24px); border-bottom:1px solid var(--border-light); padding:12px 0; position:sticky; top:0; z-index:1000; transition:var(--transition); }
+        .brand { display:flex; align-items:center; gap:9px; font-size:1.15rem; font-weight:900; background:var(--gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+        .brand-ico { width:34px; height:34px; background:var(--gradient); border-radius:9px; display:flex; align-items:center; justify-content:center; color:white; font-size:0.9rem; -webkit-text-fill-color:white; flex-shrink:0; }
+        .nav-links { display:flex; align-items:center; gap:6px; }
+        .nav-center{display:flex;align-items:center;gap:2px;flex:1;justify-content:center;}
+        .nav-link-item { color:var(--text-muted); font-weight:500; font-size:0.8rem; padding:6px 14px; border-radius:8px; transition:var(--transition); display:flex; align-items:center; gap:5px; text-decoration:none; }
+        .nav-link-item:hover { color:var(--primary); background:var(--tag-bg); }
+        .btn-home { display:inline-flex; align-items:center; gap:6px; background:var(--gradient-btn); color:white !important; -webkit-text-fill-color:white; border:none; border-radius:50px; padding:8px 18px; font-weight:700; font-size:0.82rem; transition:var(--transition); cursor:pointer; }
+        .btn-home:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(108,62,244,0.4); color:white; }
+        .theme-toggle { display:inline-flex; align-items:center; gap:8px; cursor:pointer; }
+        .tt-track { width:50px; height:26px; border-radius:50px; position:relative; transition:var(--transition); border:1.5px solid var(--border-light); flex-shrink:0; }
+        [data-theme="dark"] .tt-track { background:linear-gradient(135deg,#1C1C35,#2D2D55); border-color:rgba(108,62,244,0.4); }
+        [data-theme="light"] .tt-track { background:linear-gradient(135deg,#FFD700,#FFA500); border-color:#FFB300; }
+        .tt-thumb { width:20px; height:20px; background:#fff; border-radius:50%; position:absolute; top:2px; left:2px; transition:var(--transition); display:flex; align-items:center; justify-content:center; font-size:11px; box-shadow:0 2px 6px rgba(0,0,0,0.2); }
+        [data-theme="dark"] .tt-thumb { transform:translateX(24px); }
+
+        /* PAGE HERO */
+        .page-hero { background:linear-gradient(160deg, #0A0A14 0%, #1A0A2E 50%, #0A1428 100%); padding:70px 0 60px; position:relative; overflow:hidden; }
+        [data-theme="light"] .page-hero { background:linear-gradient(160deg, #EDE9FF 0%, #F5E6FF 50%, #E8F0FF 100%); }
+        .page-hero::before { content:''; position:absolute; top:-50%; left:-30%; width:600px; height:600px; background:var(--primary); border-radius:50%; filter:blur(120px); opacity:0.08; }
+        .page-hero::after { content:''; position:absolute; bottom:-30%; right:-20%; width:400px; height:400px; background:var(--secondary); border-radius:50%; filter:blur(100px); opacity:0.06; }
+        .page-hero-inner { position:relative; z-index:2; }
+        .page-badge { display:inline-flex; align-items:center; gap:7px; background:var(--glass); border:1px solid var(--glass-border); border-radius:50px; padding:6px 16px; font-size:0.78rem; font-weight:600; color:var(--text-muted); margin-bottom:18px; }
+        .page-title { font-size:clamp(2rem,4vw,3rem); font-weight:900; margin-bottom:14px; }
+        .text-gradient { background:var(--gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+        .page-subtitle { color:var(--text-muted); font-size:0.95rem; max-width:550px; margin:0 auto; }
+        .update-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(0,200,83,0.1); border:1px solid rgba(0,200,83,0.2); border-radius:50px; padding:5px 14px; font-size:0.75rem; font-weight:600; color:var(--success); margin-top:16px; }
+
+        /* CONTENT */
+        .content-wrap { padding:60px 0 80px; }
+        .policy-card { background:var(--bg-card); border:1px solid var(--border-light); border-radius:var(--radius); padding:36px; margin-bottom:24px; box-shadow:var(--shadow-card); transition:var(--transition); position:relative; overflow:hidden; }
+        .policy-card::before { content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--gradient); }
+        .policy-card:hover { box-shadow:0 8px 30px rgba(108,62,244,0.1); transform:translateY(-2px); }
+        .policy-num { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; background:var(--gradient-btn); border-radius:10px; font-weight:900; font-size:0.85rem; color:white; margin-bottom:14px; box-shadow:0 4px 12px rgba(108,62,244,0.35); }
+        .policy-title { font-size:1.15rem; font-weight:800; margin-bottom:12px; color:var(--text); }
+        .policy-body { font-size:0.88rem; color:var(--text-muted); line-height:1.9; }
+        .policy-body p { margin-bottom:10px; }
+        .policy-body p:last-child { margin-bottom:0; }
+        .policy-body strong { color:var(--text); font-weight:700; }
+        .policy-body a { color:var(--primary); font-weight:600; text-decoration:underline; text-underline-offset:3px; }
+        .policy-body ul { padding-left:18px; margin-top:8px; display:flex; flex-direction:column; gap:5px; }
+        .policy-body ul li { font-size:0.87rem; }
+
+        /* SIDEBAR */
+        .toc-card { background:var(--bg-card); border:1px solid var(--border-light); border-radius:var(--radius); padding:24px; position:sticky; top:90px; box-shadow:var(--shadow-card); }
+        .toc-title { font-size:0.9rem; font-weight:800; margin-bottom:16px; color:var(--text); display:flex; align-items:center; gap:8px; }
+        .toc-link { display:flex; align-items:center; gap:8px; color:var(--text-muted); font-size:0.82rem; font-weight:500; padding:7px 10px; border-radius:8px; transition:var(--transition); margin-bottom:3px; }
+        .toc-link:hover { color:var(--primary); background:var(--tag-bg); }
+        .toc-link i { font-size:0.75rem; color:var(--primary); flex-shrink:0; }
+        .contact-box { background:var(--gradient-btn); border-radius:var(--radius-sm); padding:20px; margin-top:16px; text-align:center; }
+        .contact-box p { color:rgba(255,255,255,0.85); font-size:0.8rem; margin-bottom:12px; }
+        .contact-box a { display:inline-flex; align-items:center; gap:6px; background:white; color:var(--primary); border-radius:50px; padding:8px 18px; font-weight:700; font-size:0.82rem; transition:var(--transition); }
+        .contact-box a:hover { transform:scale(1.03); }
+
+        /* FOOTER */
+        .page-footer { background:var(--bg-secondary); border-top:1px solid var(--border-light); padding:30px 0; text-align:center; }
+        .footer-links { display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-bottom:16px; }
+        .footer-link { color:var(--text-muted); font-size:0.8rem; padding:5px 12px; border-radius:20px; transition:var(--transition); border:1px solid var(--border-light); }
+        .footer-link:hover { color:var(--primary); border-color:var(--primary); background:var(--tag-bg); }
+        .watermark-wrap { display:inline-flex; align-items:center; gap:8px; background:var(--tag-bg); border:1px solid var(--tag-border); border-radius:50px; padding:9px 20px; margin:10px 0; transition:var(--transition); }
+        .watermark-wrap:hover { background:var(--gradient-btn); border-color:transparent; transform:scale(1.02); }
+        .watermark-wrap:hover .wm-text { -webkit-text-fill-color:white; }
+        .watermark-wrap:hover .wm-heart { color:white; }
+        .wm-text { background:var(--gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:800; font-size:0.85rem; }
+        .wm-heart { color:var(--secondary); animation:heartbeat 1.3s ease-in-out infinite; }
+        .wm-coffee { color:#FFB300; }
+        @keyframes heartbeat { 0%,100%{transform:scale(1);} 25%{transform:scale(1.3);} 75%{transform:scale(1.15);} }
+
+        @media(max-width:991px) { .toc-card { position:static; margin-bottom:24px; } }
+        @media(max-width:767px) { .policy-card { padding:24px 18px; } .page-hero { padding:50px 0 40px; } }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between gap-2">
+            <a href="./index.html" class="brand">
+                <span class="brand-ico"><i class="bi bi-tiktok"></i></span>
+                TikTok Downloader
+            </a>
+            <div class="nav-center">
+                <a href="./about.html" class="nav-link-item"><i class="bi bi-info-circle"></i> About</a>
+                <a href="./contact.html" class="nav-link-item"><i class="bi bi-chat-dots"></i> Contact</a>
+                <a href="./privacy-policy.html" class="nav-link-item"><i class="bi bi-shield-check"></i> Privacy</a>
+                <a href="./copyright.html" class="nav-link-item"><i class="bi bi-c-circle"></i> Copyright</a>
+            </div>
+            <div class="nav-links">
+                <div class="theme-toggle" onclick="toggleTheme()" tabindex="0" role="switch" aria-label="Toggle theme">
+                    <div class="tt-track"><div class="tt-thumb" id="ttThumb"><span id="ttEmoji">🌙</span></div></div>
+                </div>
+                <a href="./index.html" class="btn-home">
+                    <i class="bi bi-house-fill"></i> Go to Tool
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero text-center" aria-labelledby="privacy-title">
+    <div class="container page-hero-inner">
+        <div class="page-badge">
+            <i class="bi bi-shield-lock-fill" style="color:var(--primary);"></i>
+            Legal Document
+        </div>
+        <h1 class="page-title" id="privacy-title">
+            <span class="text-gradient">Privacy Policy</span>
+        </h1>
+        <p class="page-subtitle">
+            We take your privacy seriously. This policy explains how TikTok Downloader
+            by Dilawar Pro collects, uses, and protects your information.
+        </p>
+        <div class="update-badge">
+            <i class="bi bi-calendar-check"></i>
+            Last Updated: January 1, 2026
+        </div>
+    </div>
+</section>
+
+<!-- CONTENT -->
+<div class="content-wrap">
+    <div class="container">
+        <div class="row g-4">
+
+            <!-- Table of Contents (Sidebar) -->
+            <div class="col-lg-3 order-lg-2">
+                <div class="toc-card" role="navigation" aria-label="Table of contents">
+                    <div class="toc-title">
+                        <i class="bi bi-list-ul" style="color:var(--primary);"></i>
+                        Contents
+                    </div>
+                    <a href="#section-1" class="toc-link"><i class="bi bi-chevron-right"></i> Information We Collect</a>
+                    <a href="#section-2" class="toc-link"><i class="bi bi-chevron-right"></i> How We Use Information</a>
+                    <a href="#section-3" class="toc-link"><i class="bi bi-chevron-right"></i> Cookies & Storage</a>
+                    <a href="#section-4" class="toc-link"><i class="bi bi-chevron-right"></i> Third Party Services</a>
+                    <a href="#section-5" class="toc-link"><i class="bi bi-chevron-right"></i> Data Security</a>
+                    <a href="#section-6" class="toc-link"><i class="bi bi-chevron-right"></i> Children's Privacy</a>
+                    <a href="#section-7" class="toc-link"><i class="bi bi-chevron-right"></i> Your Rights</a>
+                    <a href="#section-8" class="toc-link"><i class="bi bi-chevron-right"></i> Changes to Policy</a>
+                    <a href="#section-9" class="toc-link"><i class="bi bi-chevron-right"></i> Contact Us</a>
+
+                    <div class="contact-box">
+                        <p>Have privacy questions?</p>
+                        <a href="https://dilawarpro.com" target="_blank" rel="noopener">
+                            <i class="bi bi-envelope"></i> Contact Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Policy Content -->
+            <div class="col-lg-9 order-lg-1">
+
+                <div class="policy-card" id="section-1">
+                    <div class="policy-num">1</div>
+                    <h2 class="policy-title"><i class="bi bi-database me-2" style="color:var(--primary);"></i>Information We Collect</h2>
+                    <div class="policy-body">
+                        <p><strong>TikTok Downloader by Dilawar Pro</strong> is designed with privacy-first principles. We collect minimal information necessary to provide our service.</p>
+                        <p><strong>Information You Provide:</strong></p>
+                        <ul>
+                            <li>TikTok video URLs you paste into our tool</li>
+                            <li>Feedback or messages you send us voluntarily</li>
+                        </ul>
+                        <p><strong>Information Collected Automatically:</strong></p>
+                        <ul>
+                            <li>Browser type and version (for compatibility)</li>
+                            <li>Device type (mobile, desktop, tablet)</li>
+                            <li>General geographic region (country level only)</li>
+                            <li>Pages visited and time spent on site</li>
+                            <li>Referring website (how you found us)</li>
+                        </ul>
+                        <p><strong>We do NOT collect:</strong> Your name, email address, phone number, or any personal identification information unless you contact us directly.</p>
+                    </div>
+                </div>
+
+                <div class="policy-card" id="section-2">
+                    <div class="policy-num">2</div>
+                    <h2 class="policy-title"><i class="bi bi-gear me-2" style="color:var(--primary);"></i>How We Use Your Information</h2>
+                    <div class="policy-body">
+                        <p>The information we collect is used solely to improve our service and your experience:</p>
+                        <ul>
+                            <li>To process TikTok video URLs and fetch content from TikTok's servers</li>
+                            <li>To analyze website performance and fix technical issues</li>
+                            <li>To understand which features users find most valuable</li>
+                            <li>To improve download speed, reliability, and success rates</li>
+                            <li>To detect and prevent abuse or misuse of our service</li>
+                        </ul>
+                        <p><strong>We never:</strong> Sell your data to third parties, use your data for advertising targeting, or share your URLs with unauthorized parties.</p>
+                        <p>TikTok video URLs you submit are processed in real-time to fetch the requested content. We do not store or log the URLs you submit beyond the current session.</p>
+                    </div>
+                </div>
+
+                <div class="policy-card" id="section-3">
+                    <div class="policy-num">3</div>
+                    <h2 class="policy-title"><i class="bi bi-archive me-2" style="color:var(--primary);"></i>Cookies & Local Storage</h2>
+                    <div class="policy-body">
+                        <p>Our website uses minimal cookies and browser local storage to enhance your experience:</p>
+                        <p><strong>Local Storage (Device Only):</strong></p>
+                        <ul>
+                            <li><strong>tt-theme</strong> — Stores your light/dark mode preference</li>
+                            <li><strong>tt-history</strong> — Stores your recent download history (last 10 items) locally on your device only</li>
+                            <li><strong>tt-user-rating</strong> — Stores your star rating preference</li>
+                        </ul>
+                        <p>All local storage data is stored exclusively on your device and is never transmitted to our servers. You can clear this data at any time by clearing your browser's local storage or site data.</p>
+                        <p><strong>Essential Cookies:</strong> We may use session cookies for basic site functionality. These expire when you close your browser.</p>
+                        <p><strong>Analytics Cookies:</strong> We may use privacy-respecting analytics (such as Google Analytics) to understand site traffic. You can opt out by using browser privacy settings or ad blockers.</p>
+                    </div>
+                </div>
+
+                <div class="policy-card" id="section-4">
+                    <div class="policy-num">4</div>
+                    <h2 class="policy-title"><i class="bi bi-share me-2" style="color:var(--primary);"></i>Third-Party Services</h2>
+                    <div class="policy-body">
+                        <p>Our tool integrates with the following third-party services to deliver its functionality:</p>
+                        <ul>
+                            <li><strong>TikWM API</strong> — Used to fetch TikTok video data, audio, and captions. Subject to TikWM's own privacy policy.</li>
+                            <li><strong>Bootstrap CDN</strong> — For website styling. May set performance cookies.</li>
+                            <li><strong>Google Fonts</strong> — For typography. Subject to Google's privacy policy.</li>
+                            <li><strong>Bootstrap Icons CDN</strong> — For interface icons.</li>
+                        </ul>
+                        <p>We are not responsible for the privacy practices of these third-party services. We encourage you to review their respective privacy policies.</p>
+                        <p><strong>TikTok Disclaimer:</strong> We are not affiliated with, endorsed by, or connected to TikTok, Douyin, or ByteDance Ltd. TikTok is a trademark of ByteDance Ltd.</p>
+                    </div>
+                </div>
+
+                <div class="policy-card" id="section-5">
+                    <div class="policy-num">5</div>
+                    <h2 class="policy-title"><i class="bi bi-shield-check me-2" style="color:var(--primary);"></i>Data Security</h2>
+                    <div class="policy-body">
+                        <p>We implement industry-standard security measures to protect our service and your interactions with it:</p>
+                        <ul>
+                            <li>HTTPS encryption for all data transmission</li>
+                            <li>No server-side storage of submitted URLs or video content</li>
+                            <li>Regular security audits of our codebase</li>
+                            <li>No user accounts or passwords to compromise</li>
+                            <li>Content is processed and delivered in real-time without retention</li>
+                        </ul>
+                        <p>While we implement strong security practices, no internet transmission is 100% secure. We cannot guarantee absolute security of data transmitted to our site, but we commit to using best practices to protect your information.</p>
+                    </div>
+                </div>
+
+                <div class="policy-card" id="section-6">
+                    <div class="policy-num">6</div>
+                    <h2 class="policy-title"><i class="bi bi-people me-2" style="color:var(--primary);"></i>Children's Privacy</h2>
+                    <div class="policy-body">
+                        <p>Our service is not directed to children under the age of 13 (or the applicable age of digital consent in your country).</p>
+                        <p>We do not knowingly collect personal information from children. If you are a parent or guardian and believe your child has provided us with personal information, please contact us immediately at <a href="https://dilawarpro.com" target="_blank" rel="noopener">dilawarpro.com</a> and we will take steps to remove such information.</p>
+                        <p>We encourage parents and guardians to monitor their children's internet usage and to help enforce our Privacy Policy by instructing their children never to provide personal information without parental permission.</p>
+                    </div>
+                </div>
+
+                <div class="policy-card" id="section-7">
+                    <div class="policy-num">7</div>
+                    <h2 class="policy-title"><i class="bi bi-person-check me-2" style="color:var(--primary);"></i>Your Privacy Rights</h2>
+                    <div class="policy-body">
+                        <p>Depending on your location, you may have the following rights regarding your data:</p>
+                        <ul>
+                            <li><strong>Right to Access</strong> — Request information about data we hold about you</li>
+                            <li><strong>Right to Delete</strong> — Request deletion of any personal data we may hold</li>
+                            <li><strong>Right to Opt-Out</strong> — Opt out of any analytics tracking</li>
+                            <li><strong>Right to Data Portability</strong> — Receive your data in a portable format</li>
+                            <li><strong>GDPR Rights</strong> — EU residents have full rights under GDPR</li>
+                            <li><strong>CCPA Rights</strong> — California residents have rights under CCPA</li>
+                        </ul>
+                        <p>Since we do not collect personal information, most of these rights may not apply directly. However, you can always clear your local storage to remove any locally stored preferences by going to <strong>Browser Settings → Privacy → Clear Site Data</strong>.</p>
+                        <p>To exercise any rights, contact us at <a href="https://dilawarpro.com" target="_blank" rel="noopener">dilawarpro.com</a>.</p>
+                    </div>
+                </div>
+
+                <div class="policy-card" id="section-8">
+                    <div class="policy-num">8</div>
+                    <h2 class="policy-title"><i class="bi bi-arrow-repeat me-2" style="color:var(--primary);"></i>Changes to This Policy</h2>
+                    <div class="policy-body">
+                        <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technology, or legal requirements. When we make significant changes, we will:</p>
+                        <ul>
+                            <li>Update the "Last Updated" date at the top of this page</li>
+                            <li>Display a notice on our main website</li>
+                            <li>Where required by law, notify affected users</li>
+                        </ul>
+                        <p>We encourage you to periodically review this Privacy Policy to stay informed about how we protect your information. Your continued use of our service after changes constitutes acceptance of the updated policy.</p>
+                    </div>
+                </div>
+
+                <div class="policy-card" id="section-9">
+                    <div class="policy-num">9</div>
+                    <h2 class="policy-title"><i class="bi bi-envelope me-2" style="color:var(--primary);"></i>Contact Us</h2>
+                    <div class="policy-body">
+                        <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:</p>
+                        <ul>
+                            <li><strong>Website:</strong> <a href="https://dilawarpro.com" target="_blank" rel="noopener">dilawarpro.com</a></li>
+                            <li><strong>Tool URL:</strong> <a href="https://tiktokdownloader.dilawarpro.com" target="_blank" rel="noopener">tiktokdownloader.dilawarpro.com</a></li>
+                            <li><strong>Creator:</strong> Dilawar Pro</li>
+                        </ul>
+                        <p>We will respond to all privacy-related inquiries within 30 business days.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="page-footer" role="contentinfo">
+    <div class="container">
+        <div class="footer-links">
+            <a href="./index.html" class="footer-link"><i class="bi bi-house"></i> Home</a>
+            <a href="./about.html" class="footer-link"><i class="bi bi-person"></i> About</a>
+            <a href="./contact.html" class="footer-link"><i class="bi bi-envelope"></i> Contact</a>
+            <a href="./privacy-policy.html" class="footer-link"><i class="bi bi-shield-lock"></i> Privacy</a>
+            <a href="./copyright.html" class="footer-link"><i class="bi bi-c-circle"></i> Copyright</a>
+            <a href="./404.html" class="footer-link"><i class="bi bi-exclamation-circle"></i> Error</a>
+        </div>
+        <a href="https://dilawarpro.com" target="_blank" rel="noopener" class="watermark-wrap" aria-label="Made by Dilawar Pro">
+            <span class="wm-coffee">☕</span>
+            <i class="bi bi-heart-fill wm-heart"></i>
+            <span class="wm-text">Designed &amp; Developed by Dilawar Pro</span>
+            <i class="bi bi-heart-fill wm-heart"></i>
+            <span style="font-size:0.78rem;color:var(--text-muted);font-weight:600;">for TikTok Lovers</span>
+        </a>
+        <p style="font-size:0.75rem;color:var(--text-muted);margin-top:8px;">
+            © <span id="yr"></span> TikTok Downloader by <a href="https://dilawarpro.com" target="_blank" rel="noopener" style="color:var(--primary);font-weight:700;">Dilawar Pro</a>. All rights reserved.
+        </p>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    const savedTheme = localStorage.getItem('tt-theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.getElementById('ttEmoji').textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+    function toggleTheme() {
+        const cur = document.documentElement.getAttribute('data-theme');
+        const next = cur === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        document.getElementById('ttEmoji').textContent = next === 'dark' ? '🌙' : '☀️';
+        localStorage.setItem('tt-theme', next);
+    }
+    document.getElementById('ttThumb').parentElement.parentElement.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTheme(); }
+    });
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const t = document.querySelector(a.getAttribute('href'));
+            if (t) { e.preventDefault(); t.scrollIntoView({ behavior:'smooth' }); }
+        });
+    });
+</script>
+</body>
+</html>

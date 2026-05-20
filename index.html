@@ -1,0 +1,2121 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>TikTok Downloader - Download TikTok Videos Without Watermark, MP3 & Copy Captions Free</title>
+    <meta name="description" content="Free TikTok Downloader tool. Download TikTok videos without watermark in HD MP4, extract MP3 audio, copy & download TikTok captions, and save slideshows instantly. No login required. Visit tiktokdownloader.dilawarpro.com">
+    <meta name="keywords" content="tiktok caption copy paste, tiktok video caption download, tiktok caption downloader, tiktok mp3 downloader, tiktok video downloader without watermark, tiktok downloader, download tiktok video, tiktok to mp3, tiktok hd downloader, tiktok audio downloader, tiktok slideshow downloader, save tiktok video, tiktok no watermark, tiktok mp4 downloader, free tiktok downloader, online tiktok downloader, tiktok music downloader, copy tiktok caption, tiktok caption extractor, tiktok caption grabber">
+    <meta name="author" content="Dilawar Pro">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="theme-color" content="#6C3EF4">
+    <meta name="language" content="English">
+    <link rel="canonical" href="https://tiktokdownloader.dilawarpro.com/">
+   <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+   <link rel="manifest" href="manifest.json">
+    <!-- OG Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tiktokdownloader.dilawarpro.com/">
+    <meta property="og:title" content="TikTok Downloader - No Watermark | MP3 | Copy Captions Free">
+    <meta property="og:description" content="Free TikTok video downloader. Save TikTok videos without watermark, extract MP3 audio, copy & download TikTok captions and slideshows. Fast, free, no login needed.">
+    <meta property="og:image" content="https://tiktokdownloader.dilawarpro.com/og-image.jpg">
+    <meta property="og:site_name" content="TikTok Downloader by Dilawar Pro">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TikTok Downloader - No Watermark | MP3 | Copy Captions">
+    <meta name="twitter:description" content="Download TikTok videos without watermark, extract MP3, copy captions instantly. 100% free.">
+    <meta name="twitter:image" content="https://tiktokdownloader.dilawarpro.com/og-image.jpg">
+
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "TikTok Downloader",
+      "alternateName": ["TikTok Caption Downloader", "TikTok MP3 Downloader", "TikTok Video Saver"],
+      "url": "https://tiktokdownloader.dilawarpro.com/",
+      "description": "Free online TikTok downloader. Download videos without watermark, extract MP3, copy captions, save slideshows.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": { "@type": "Person", "name": "Dilawar Pro", "url": "https://dilawarpro.com" },
+      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "18420", "bestRating": "5" },
+      "featureList": ["Download TikTok videos without watermark", "TikTok MP3 downloader", "TikTok caption copy paste", "TikTok slideshow downloader", "History & favorites", "Batch downloads"]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "How to copy TikTok video captions?", "acceptedAnswer": { "@type": "Answer", "text": "Visit tiktokdownloader.dilawarpro.com, paste the TikTok URL, click Download. The caption appears automatically. Click Copy Caption to copy it instantly." } },
+        { "@type": "Question", "name": "How to download TikTok videos without watermark?", "acceptedAnswer": { "@type": "Answer", "text": "Paste TikTok URL at tiktokdownloader.dilawarpro.com, click Download, then click Download Video (No Watermark) to save clean HD MP4." } },
+        { "@type": "Question", "name": "Is TikTok Downloader free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! 100% free. No registration, no login, no limits. Copy captions, download videos, MP3, slideshows — all free forever." } }
+      ]
+    }
+    </script>
+
+    <!-- CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+    <!-- <style>
+        /* ============================================================
+           CSS VARIABLES
+        ============================================================ */
+        :root {
+            --primary: #6C3EF4;
+            --primary-dark: #5429D4;
+            --primary-light: #8B5CF6;
+            --secondary: #FF2D78;
+            --accent: #00D4FF;
+            --success: #00C853;
+            --warning: #FFB300;
+            --danger: #FF4444;
+            --gradient: linear-gradient(135deg, #6C3EF4 0%, #FF2D78 100%);
+            --gradient-btn: linear-gradient(135deg, #6C3EF4, #FF2D78);
+            --gradient-gold: linear-gradient(135deg, #FFB300, #FF6B35);
+            --radius: 20px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
+            --radius-xs: 8px;
+            --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+            --font: 'Inter', sans-serif;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0A0A14;
+            --bg-secondary: #111122;
+            --bg-card: #161628;
+            --bg-card2: #1C1C35;
+            --bg-input: rgba(255,255,255,0.06);
+            --bg-input-focus: rgba(255,255,255,0.10);
+            --border: rgba(108,62,244,0.2);
+            --border-light: rgba(255,255,255,0.07);
+            --text: #F0F0FF;
+            --text-muted: #8888AA;
+            --nav-bg: rgba(10,10,20,0.95);
+            --shadow: 0 20px 60px rgba(108,62,244,0.2);
+            --shadow-sm: 0 8px 30px rgba(0,0,0,0.25);
+            --shadow-card: 0 4px 20px rgba(0,0,0,0.2);
+            --hero-bg: linear-gradient(160deg, #0A0A14 0%, #1A0A2E 50%, #0A1428 100%);
+            --glass: rgba(255,255,255,0.04);
+            --glass-border: rgba(255,255,255,0.08);
+            --section-alt: rgba(255,255,255,0.015);
+            --placeholder: rgba(255,255,255,0.3);
+            --tag-bg: rgba(108,62,244,0.1);
+            --tag-border: rgba(108,62,244,0.2);
+            --tag-color: #9A8AFF;
+            --story-border: rgba(108,62,244,0.2);
+            --quote-bg: rgba(255,45,120,0.06);
+            --history-bg: rgba(108,62,244,0.06);
+            --scrollbar: #6C3EF4;
+            --rating-bg: rgba(255,179,0,0.08);
+        }
+
+        [data-theme="light"] {
+            --bg: #F5F4FF;
+            --bg-secondary: #EDEAFF;
+            --bg-card: #FFFFFF;
+            --bg-card2: #F8F7FF;
+            --bg-input: rgba(108,62,244,0.05);
+            --bg-input-focus: rgba(108,62,244,0.09);
+            --border: rgba(108,62,244,0.15);
+            --border-light: rgba(108,62,244,0.08);
+            --text: #1A1040;
+            --text-muted: #6B5B95;
+            --nav-bg: rgba(245,244,255,0.97);
+            --shadow: 0 20px 60px rgba(108,62,244,0.12);
+            --shadow-sm: 0 8px 30px rgba(108,62,244,0.08);
+            --shadow-card: 0 4px 20px rgba(108,62,244,0.06);
+            --hero-bg: linear-gradient(160deg, #EDE9FF 0%, #F5E6FF 50%, #E8F0FF 100%);
+            --glass: rgba(255,255,255,0.75);
+            --glass-border: rgba(108,62,244,0.12);
+            --section-alt: rgba(108,62,244,0.025);
+            --placeholder: rgba(108,62,244,0.35);
+            --tag-bg: rgba(108,62,244,0.07);
+            --tag-border: rgba(108,62,244,0.14);
+            --tag-color: #5429D4;
+            --story-border: rgba(108,62,244,0.15);
+            --quote-bg: rgba(255,45,120,0.04);
+            --history-bg: rgba(108,62,244,0.04);
+            --scrollbar: #6C3EF4;
+            --rating-bg: rgba(255,179,0,0.06);
+        }
+
+        /* ============================================================
+           BASE
+        ============================================================ */
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body {
+            font-family:var(--font);
+            background:var(--bg);
+            color:var(--text);
+            overflow-x:hidden;
+            line-height:1.7;
+            transition:background 0.4s ease, color 0.4s ease;
+        }
+        ::selection { background:var(--primary); color:#fff; }
+        ::-webkit-scrollbar { width:5px; }
+        ::-webkit-scrollbar-track { background:var(--bg); }
+        ::-webkit-scrollbar-thumb { background:var(--primary); border-radius:3px; }
+        a { text-decoration:none; color:inherit; }
+        img { max-width:100%; }
+
+        /* ============================================================
+           THEME TOGGLE
+        ============================================================ */
+        .theme-toggle { display:inline-flex; align-items:center; gap:8px; cursor:pointer; user-select:none; }
+        .tt-track {
+            width:50px; height:26px; border-radius:50px;
+            position:relative; transition:var(--transition);
+            border:1.5px solid var(--border); flex-shrink:0;
+        }
+        [data-theme="dark"] .tt-track { background:linear-gradient(135deg,#1C1C35,#2D2D55); border-color:rgba(108,62,244,0.4); }
+        [data-theme="light"] .tt-track { background:linear-gradient(135deg,#FFD700,#FFA500); border-color:#FFB300; }
+        .tt-thumb {
+            width:20px; height:20px; background:#fff; border-radius:50%;
+            position:absolute; top:2px; left:2px;
+            transition:var(--transition);
+            display:flex; align-items:center; justify-content:center;
+            font-size:11px; box-shadow:0 2px 6px rgba(0,0,0,0.2);
+        }
+        [data-theme="dark"] .tt-thumb { transform:translateX(24px); }
+
+        /* ============================================================
+           ANNOUNCEMENT BAR
+        ============================================================ */
+        .announce-bar {
+            background:var(--gradient-btn);
+            color:white; text-align:center;
+            padding:9px 16px;
+            font-size:0.8rem; font-weight:600;
+            display:flex; align-items:center; justify-content:center; gap:10px;
+            position:relative; z-index:1001;
+        }
+        .announce-bar a { color:white; text-decoration:underline; text-underline-offset:3px; }
+        .announce-bar .close-bar {
+            position:absolute; right:14px;
+            background:none; border:none; color:white;
+            cursor:pointer; font-size:1rem; opacity:0.7;
+            transition:var(--transition);
+        }
+        .announce-bar .close-bar:hover { opacity:1; transform:scale(1.2); }
+
+        /* ============================================================
+           NAVBAR
+        ============================================================ */
+        .main-nav {
+            background:var(--nav-bg);
+            backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+            border-bottom:1px solid var(--border-light);
+            padding:11px 0; position:sticky; top:0; z-index:1000;
+            transition:var(--transition);
+        }
+        .main-nav.scrolled { box-shadow:0 4px 30px rgba(0,0,0,0.12); }
+        .brand {
+            display:flex; align-items:center; gap:9px;
+            font-size:1.15rem; font-weight:900;
+            background:var(--gradient);
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+        }
+        .brand-ico {
+            width:34px; height:34px; background:var(--gradient); border-radius:9px;
+            display:flex; align-items:center; justify-content:center;
+            color:white; font-size:0.9rem; -webkit-text-fill-color:white; flex-shrink:0;
+        }
+        .nav-links { display:flex; align-items:center; gap:3px; flex-wrap:wrap; }
+        .nav-link-item {
+            color:var(--text-muted); font-weight:500; font-size:0.83rem;
+            padding:6px 11px; border-radius:var(--radius-xs);
+            transition:var(--transition);
+            display:flex; align-items:center; gap:5px; white-space:nowrap;
+        }
+        .nav-link-item:hover, .nav-link-item.active { color:var(--primary); background:var(--tag-bg); }
+        .btn-install-nav {
+            display:inline-flex; align-items:center; gap:6px;
+            background:var(--gradient-btn); color:white !important;
+            -webkit-text-fill-color:white; border:none; border-radius:50px;
+            padding:7px 16px; font-weight:700; font-size:0.82rem;
+            transition:var(--transition); cursor:pointer; white-space:nowrap;
+        }
+        .btn-install-nav:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(108,62,244,0.4); color:white; }
+        .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px; }
+        .hamburger span { width:22px; height:2px; background:var(--text); border-radius:2px; transition:var(--transition); display:block; }
+
+        /* ============================================================
+           HERO
+        ============================================================ */
+        .hero {
+            background:var(--hero-bg);
+            min-height:88vh; display:flex; align-items:center; justify-content:center;
+            position:relative; overflow:hidden; padding:10px 0 100px;
+        }
+        .blob { position:absolute; border-radius:50%; filter:blur(80px); pointer-events:none; animation:blob-pulse 8s ease-in-out infinite; }
+        .blob-1 { width:400px;height:400px;background:var(--primary);top:-100px;left:-100px;opacity:0.12; }
+        .blob-2 { width:300px;height:300px;background:var(--secondary);top:50%;right:-80px;opacity:0.1;animation-delay:3s; }
+        .blob-3 { width:250px;height:250px;background:var(--accent);bottom:-60px;left:40%;opacity:0.08;animation-delay:5s; }
+        [data-theme="light"] .blob { opacity:0.06; }
+        @keyframes blob-pulse { 0%,100%{transform:scale(1) translate(0,0);} 33%{transform:scale(1.08) translate(15px,-15px);} 66%{transform:scale(0.95) translate(-10px,12px);} }
+        .hero-dots { position:absolute;inset:0;overflow:hidden;pointer-events:none; }
+        .dot { position:absolute;width:3px;height:3px;border-radius:50%;opacity:0;animation:dot-rise 7s infinite; }
+        @keyframes dot-rise { 0%{transform:translateY(100vh) scale(0);opacity:0;} 10%{opacity:0.5;} 90%{opacity:0.5;} 100%{transform:translateY(-50px) scale(1);opacity:0;} }
+        .hero-inner { position:relative; z-index:2; }
+        .hero-badge {
+            display:inline-flex; align-items:center; gap:8px;
+            background:var(--glass); border:1px solid var(--glass-border);
+            backdrop-filter:blur(10px); border-radius:50px; padding:7px 18px;
+            font-size:0.78rem; font-weight:600; color:var(--text-muted);
+            margin-bottom:22px; animation:fadeInDown 0.6s ease both;
+        }
+        .live-dot { width:8px;height:8px;background:var(--success);border-radius:50%;flex-shrink:0;animation:live-pulse 1.5s infinite; }
+        @keyframes live-pulse { 0%,100%{box-shadow:0 0 0 0 rgba(0,200,83,0.4);} 50%{box-shadow:0 0 0 6px rgba(0,200,83,0);} }
+        .hero-title { font-size:clamp(2rem,5.5vw,4rem);font-weight:900;line-height:1.1;margin-bottom:18px;animation:fadeInUp 0.7s ease both;animation-delay:0.1s; }
+        .text-gradient { background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+        .hero-subtitle { font-size:1rem;color:var(--text-muted);max-width:580px;margin:0 auto 36px;animation:fadeInUp 0.7s ease both;animation-delay:0.2s; }
+
+        /* ============================================================
+           DOWNLOAD BOX
+        ============================================================ */
+        .dl-box {
+            background:var(--glass); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+            border:1px solid var(--glass-border); border-radius:24px; padding:30px;
+            max-width:720px; margin:0 auto;
+            animation:fadeInUp 0.7s ease both; animation-delay:0.3s;
+            box-shadow:0 30px 80px rgba(0,0,0,0.15);
+        }
+        [data-theme="light"] .dl-box { background:rgba(255,255,255,0.8); box-shadow:0 20px 60px rgba(108,62,244,0.1); }
+        .url-label { font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin-bottom:12px;display:flex;align-items:center;gap:6px; }
+        .url-label i { color:var(--primary); }
+        .input-row { display:flex;gap:9px;flex-wrap:wrap; }
+        .url-input-wrap { flex:1;min-width:200px;position:relative; }
+        .url-input {
+            width:100%; background:var(--bg-input) !important;
+            border:1.5px solid var(--border-light) !important; border-radius:50px !important;
+            color:var(--text) !important; padding:13px 46px 13px 20px !important;
+            font-size:0.875rem !important; font-family:var(--font) !important;
+            transition:var(--transition) !important; outline:none !important; box-shadow:none !important;
+        }
+        .url-input::placeholder { color:var(--placeholder) !important; }
+        .url-input:focus { background:var(--bg-input-focus) !important; border-color:var(--primary) !important; box-shadow:0 0 0 3px rgba(108,62,244,0.12) !important; }
+        .url-input.valid { border-color:rgba(0,200,83,0.5) !important; }
+        .url-input.invalid { border-color:rgba(255,45,120,0.5) !important; }
+        .clear-btn { position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-muted);cursor:pointer;display:none;font-size:0.95rem;transition:var(--transition);line-height:1;padding:4px; }
+        .clear-btn:hover { color:var(--secondary); }
+        .btn-paste { background:var(--bg-input);border:1.5px solid var(--border-light);color:var(--text-muted);border-radius:50px;padding:13px 18px;font-weight:600;font-size:0.85rem;transition:var(--transition);display:flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap; }
+        .btn-paste:hover { border-color:var(--primary);color:var(--primary);background:var(--tag-bg); }
+        .btn-main-dl {
+            background:var(--gradient-btn);border:none;color:white;border-radius:50px;padding:13px 28px;
+            font-weight:800;font-size:0.92rem;transition:var(--transition);
+            display:flex;align-items:center;gap:7px;cursor:pointer;white-space:nowrap;position:relative;overflow:hidden;
+        }
+        .btn-main-dl::after { content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);transform:translateX(-100%);transition:0.5s; }
+        .btn-main-dl:hover::after { transform:translateX(100%); }
+        .btn-main-dl:hover { transform:translateY(-2px);box-shadow:0 12px 35px rgba(108,62,244,0.45);color:white; }
+        .btn-main-dl:disabled { opacity:0.6;cursor:not-allowed;transform:none; }
+
+        /* Progress */
+        .progress-section { display:none;margin-top:16px; }
+        .progress-header { display:flex;justify-content:space-between;margin-bottom:7px; }
+        .progress-label { font-size:0.78rem;color:var(--text-muted);font-weight:500; }
+        .progress-pct { font-size:0.78rem;font-weight:700;color:var(--primary); }
+        .progress-track { height:5px;background:var(--border-light);border-radius:3px;overflow:hidden; }
+        .progress-fill { height:100%;background:var(--gradient-btn);border-radius:3px;width:0%;transition:width 0.3s ease; }
+
+        /* Quick Actions */
+        .quick-actions { display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:14px; }
+        .quick-tag {
+            display:inline-flex;align-items:center;gap:5px;
+            background:var(--glass);border:1px solid var(--glass-border);
+            border-radius:50px;padding:5px 13px;font-size:0.75rem;font-weight:600;
+            color:var(--text-muted);cursor:pointer;transition:var(--transition);
+        }
+        .quick-tag:hover { border-color:var(--primary);color:var(--primary);background:var(--tag-bg); }
+
+        /* Install Hero */
+        .btn-install-hero {
+            display:inline-flex;align-items:center;gap:8px;
+            background:var(--glass);border:1.5px solid var(--glass-border);
+            backdrop-filter:blur(10px);border-radius:50px;padding:11px 22px;
+            font-weight:700;font-size:0.875rem;color:var(--text);
+            transition:var(--transition);cursor:pointer;margin-top:18px;
+        }
+        .btn-install-hero:hover { border-color:var(--primary);color:var(--primary);background:var(--tag-bg);transform:translateY(-2px); }
+        [data-theme="light"] .btn-install-hero { background:rgba(255,255,255,0.85); }
+
+        /* Disclaimer */
+        .disclaimer { display:flex;align-items:flex-start;gap:9px;background:rgba(255,179,0,0.06);border:1px solid rgba(255,179,0,0.15);border-radius:var(--radius-sm);padding:11px 15px;margin-top:16px;font-size:0.76rem;color:rgba(255,179,0,0.85);line-height:1.5; }
+        .disclaimer i { flex-shrink:0;margin-top:1px; }
+
+        /* ============================================================
+           STATS
+        ============================================================ */
+        .stats-bar { background:var(--bg-secondary);border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light);padding:22px 0; }
+        .stat-item { text-align:center;padding:10px; }
+        .stat-num { font-size:1.9rem;font-weight:900;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;line-height:1; }
+        .stat-lbl { font-size:0.76rem;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;display:block; }
+
+        /* ============================================================
+           RESULT SECTION
+        ============================================================ */
+        .result-section { display:none;padding:60px 0;animation:fadeInUp 0.5s ease; }
+        .res-card { background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-card);transition:var(--transition);
+           }
+        .res-card:hover { box-shadow:var(--shadow-sm); }
+        .res-header { background:var(--section-alt);border-bottom:1px solid var(--border-light);padding:14px 20px;display:flex;align-items:center;gap:9px; }
+        .res-header h5 { margin:0;font-size:0.92rem;font-weight:700;color:var(--text); }
+        .res-badge { margin-left:auto;background:var(--tag-bg);color:var(--tag-color);border:1px solid var(--tag-border);border-radius:50px;padding:3px 11px;font-size:0.7rem;font-weight:700; }
+        .res-body { padding:20px; }
+
+        /* Video */
+        .video-wrap { background:rgba(0,0,0,0.12);border-radius:var(--radius-md);overflow:hidden;display:none;align-items:center;justify-content:center;min-height:160px; }
+        [data-theme="light"] .video-wrap { background:rgba(108,62,244,0.04); }
+        #tiktokVideo { max-width:100%;max-height:460px;border-radius:var(--radius-md);width:100%; }
+
+        /* Slideshow */
+        .slides-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px; }
+        .slide-card { position:relative;border-radius:var(--radius-sm);overflow:hidden;aspect-ratio:9/16;background:var(--bg-secondary);cursor:pointer;transition:var(--transition);border:1px solid var(--border-light); }
+        .slide-card:hover { transform:scale(1.03);box-shadow:0 10px 30px rgba(108,62,244,0.25); }
+        .slide-card img { width:100%;height:100%;object-fit:cover; }
+        .slide-over { position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85),transparent);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:10px;opacity:0;transition:var(--transition); }
+        .slide-card:hover .slide-over { opacity:1; }
+        .slide-num { font-size:0.68rem;color:rgba(255,255,255,0.7);margin-bottom:5px;font-weight:600; }
+        .slide-dl { background:white;color:#0A0A14;border:none;border-radius:7px;padding:6px 14px;font-size:0.76rem;font-weight:700;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:4px;transition:var(--transition); }
+        .slide-dl:hover { background:var(--primary);color:white; }
+
+        /* Video Info */
+        .info-grid { display:grid;grid-template-columns:1fr 1fr;gap:12px; }
+        .info-lbl { font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:600;margin-bottom:2px; }
+        .info-val { font-weight:700;font-size:0.88rem;color:var(--text); }
+
+        /* Caption */
+        .caption-ta { width:100%;background:var(--bg-input);border:1.5px solid var(--border-light);border-radius:var(--radius-sm);color:var(--text);padding:13px 15px;font-size:0.85rem;font-family:var(--font);resize:none;outline:none;transition:var(--transition);line-height:1.7; }
+        .caption-ta:focus { border-color:var(--primary);box-shadow:0 0 0 3px rgba(108,62,244,0.1); }
+
+        /* Download Buttons */
+        .dl-btn-list { display:flex;flex-direction:column;gap:9px; }
+        .dl-btn { display:flex;align-items:center;gap:11px;padding:14px 18px;border-radius:var(--radius-md);font-weight:700;font-size:0.87rem;border:none;transition:var(--transition);cursor:pointer;position:relative;overflow:hidden; }
+        .dl-btn::after { content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);transform:translateX(-100%);transition:0.4s; }
+        .dl-btn:hover::after { transform:translateX(100%); }
+        .dl-btn:hover { transform:translateY(-2px);color:white; }
+        .dl-btn .dbi { width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0; }
+        .dl-btn-info { flex:1; }
+        .dl-btn-title { display:block;font-weight:800;font-size:0.87rem; }
+        .dl-btn-sub { display:block;font-size:0.72rem;opacity:0.8;margin-top:1px; }
+        .dl-arrow { margin-left:auto;font-size:0.9rem;transition:var(--transition); }
+        .dl-btn:hover .dl-arrow { transform:translateX(4px); }
+        .db-mp4 { background:linear-gradient(135deg,#6C3EF4,#5429D4);color:white;box-shadow:0 6px 20px rgba(108,62,244,0.3); }
+        .db-mp4:hover { box-shadow:0 12px 30px rgba(108,62,244,0.5); }
+        .db-mp3 { background:linear-gradient(135deg,#FF2D78,#D4196B);color:white;box-shadow:0 6px 20px rgba(255,45,120,0.3); }
+        .db-mp3:hover { box-shadow:0 12px 30px rgba(255,45,120,0.5); }
+        .db-img { background:linear-gradient(135deg,#00C853,#009624);color:white;box-shadow:0 6px 20px rgba(0,200,83,0.25); }
+        .db-img:hover { box-shadow:0 12px 30px rgba(0,200,83,0.4); }
+        .db-cap { background:linear-gradient(135deg,#00D4FF,#0099CC);color:white;box-shadow:0 6px 20px rgba(0,212,255,0.25); }
+        .db-cap:hover { box-shadow:0 12px 30px rgba(0,212,255,0.4); }
+        .db-txt { background:var(--bg-input);border:1.5px solid var(--border-light);color:var(--text-muted); }
+        .db-txt:hover { border-color:var(--primary);color:var(--primary);background:var(--tag-bg);box-shadow:none;transform:none; }
+
+        /* ============================================================
+           HISTORY SECTION
+        ============================================================ */
+        .history-section { padding:50px 0; }
+        .history-card { background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-card); }
+        .history-item {
+            display:flex;align-items:center;gap:14px;
+            padding:14px 18px;border-bottom:1px solid var(--border-light);
+            transition:var(--transition);cursor:pointer;
+        }
+        .history-item:last-child { border-bottom:none; }
+        .history-item:hover { background:var(--history-bg); }
+        .history-thumb {
+            width:50px;height:50px;border-radius:var(--radius-xs);
+            background:var(--gradient-btn);display:flex;align-items:center;justify-content:center;
+            color:white;font-size:1.2rem;flex-shrink:0;overflow:hidden;
+        }
+        .history-thumb img { width:100%;height:100%;object-fit:cover; }
+        .history-info { flex:1;min-width:0; }
+        .history-title { font-size:0.85rem;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px; }
+        .history-meta { font-size:0.72rem;color:var(--text-muted); }
+        .history-actions { display:flex;gap:6px; }
+        .history-btn { background:var(--tag-bg);border:1px solid var(--tag-border);color:var(--tag-color);border-radius:7px;padding:5px 10px;font-size:0.75rem;font-weight:600;cursor:pointer;transition:var(--transition);white-space:nowrap; }
+        .history-btn:hover { background:var(--primary);color:white;border-color:var(--primary); }
+        .history-empty { text-align:center;padding:40px 20px;color:var(--text-muted); }
+        .history-empty i { font-size:2.5rem;opacity:0.25;display:block;margin-bottom:12px; }
+
+        /* ============================================================
+           RATING SECTION
+        ============================================================ */
+        .rating-section { background:var(--rating-bg);border:1px solid rgba(255,179,0,0.15);border-radius:var(--radius);padding:28px;text-align:center; }
+        .stars-display { display:flex;gap:6px;justify-content:center;margin:12px 0; }
+        .star-btn { background:none;border:none;cursor:pointer;font-size:2rem;transition:var(--transition);filter:grayscale(1);opacity:0.4; }
+        .star-btn.active,.star-btn:hover,.star-btn.hover { filter:grayscale(0);opacity:1;transform:scale(1.15); }
+        .rating-label { font-size:0.85rem;color:var(--text-muted);margin-top:8px; }
+        .rating-count { font-size:0.75rem;color:var(--text-muted); }
+
+        /* ============================================================
+           COPY COUNT BADGE
+        ============================================================ */
+        .copy-count-badge {
+            display:inline-flex;align-items:center;gap:5px;
+            background:var(--tag-bg);border:1px solid var(--tag-border);
+            border-radius:50px;padding:4px 12px;
+            font-size:0.75rem;font-weight:700;color:var(--tag-color);
+            margin-left:auto;
+        }
+
+        /* ============================================================
+           CHAR COUNT
+        ============================================================ */
+        .char-count { font-size:0.72rem;color:var(--text-muted);text-align:right;margin-top:5px; }
+
+        /* ============================================================
+           SECTION HELPERS
+        ============================================================ */
+        .section-pad { padding:80px 0; }
+        .section-alt { background:var(--section-alt); }
+        .divider { height:1px;background:var(--border-light); }
+        .section-label { display:inline-flex;align-items:center;gap:6px;background:var(--tag-bg);border:1px solid var(--tag-border);color:var(--primary);padding:5px 13px;border-radius:50px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:13px; }
+        .section-title { font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;line-height:1.2;margin-bottom:10px; }
+        .section-desc { color:var(--text-muted);font-size:0.92rem;max-width:560px;margin:0 auto; }
+
+        /* ============================================================
+           FEATURE CARDS
+        ============================================================ */
+        .feat-card { background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius);padding:26px 22px;text-align:center;transition:var(--transition);height:100%;position:relative;overflow:hidden; }
+        .feat-card::before { content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gradient);transform:scaleX(0);transform-origin:left;transition:var(--transition); }
+        .feat-card:hover { transform:translateY(-6px);border-color:var(--border);box-shadow:var(--shadow); }
+        .feat-card:hover::before { transform:scaleX(1); }
+        .feat-icon { width:62px;height:62px;border-radius:15px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.6rem;transition:var(--transition); }
+        .feat-card:hover .feat-icon { transform:scale(1.1) rotate(5deg); }
+        .fi-1{background:rgba(108,62,244,0.1);color:var(--primary);}
+        .fi-2{background:rgba(255,45,120,0.1);color:var(--secondary);}
+        .fi-3{background:rgba(0,212,255,0.1);color:var(--accent);}
+        .fi-4{background:rgba(0,200,83,0.1);color:var(--success);}
+        .fi-5{background:rgba(255,179,0,0.1);color:var(--warning);}
+        .fi-6{background:rgba(255,107,53,0.1);color:#FF6B35;}
+        .feat-title { font-size:0.97rem;font-weight:700;margin-bottom:7px;color:var(--text); }
+        .feat-desc { font-size:0.83rem;color:var(--text-muted);line-height:1.65; }
+
+        /* ============================================================
+           STEP CARDS
+        ============================================================ */
+        .step-card { background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius);padding:26px;transition:var(--transition);height:100%; }
+        .step-card:hover { border-color:var(--border);transform:translateY(-4px);box-shadow:var(--shadow); }
+        .step-num { width:44px;height:44px;background:var(--gradient-btn);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;font-weight:900;color:white;margin-bottom:16px;box-shadow:0 6px 16px rgba(108,62,244,0.35); }
+        .step-title { font-size:1rem;font-weight:700;margin-bottom:7px;color:var(--text); }
+        .step-desc { font-size:0.83rem;color:var(--text-muted);line-height:1.65; }
+
+        /* ============================================================
+           INFO CARDS
+        ============================================================ */
+        .info-card { background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius);padding:30px;height:100%;transition:var(--transition); }
+        .info-card:hover { box-shadow:var(--shadow-sm); }
+        .info-card h3 { font-size:1.2rem;font-weight:800;margin-bottom:12px;color:var(--text); }
+        .info-card p { color:var(--text-muted);font-size:0.875rem;line-height:1.85; }
+        .check-list { list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:8px; }
+        .check-list li { display:flex;align-items:center;gap:8px;font-size:0.85rem;color:var(--text-muted); }
+        .check-list li i { color:var(--success);font-size:0.85rem;flex-shrink:0; }
+        .float-ico { text-align:center;animation:float-anim 3.5s ease-in-out infinite;filter:drop-shadow(0 15px 30px rgba(108,62,244,0.25)); }
+        @keyframes float-anim { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-16px);} }
+
+        /* ============================================================
+           STORY SECTION
+        ============================================================ */
+        .story-section { background:var(--section-alt); }
+        .story-card { background:var(--bg-card);border:1px solid var(--story-border);border-radius:var(--radius);padding:36px;position:relative;overflow:hidden; }
+        .story-card::before { content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--gradient); }
+        .story-avatar { width:60px;height:60px;background:var(--gradient);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:white;flex-shrink:0;box-shadow:0 8px 20px rgba(108,62,244,0.35); }
+        .story-quote { background:var(--quote-bg);border-left:4px solid var(--secondary);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:20px 22px;margin:24px 0;font-style:italic;font-size:1.05rem;color:var(--text);line-height:1.8;font-weight:500; }
+        .story-body { font-size:0.92rem;color:var(--text-muted);line-height:1.9; }
+        .story-body strong { color:var(--text);font-weight:700; }
+        .story-body a { color:var(--primary);font-weight:700;text-decoration:underline;text-underline-offset:3px; }
+        .story-highlight { display:inline-flex;align-items:center;gap:7px;background:var(--tag-bg);border:1px solid var(--tag-border);border-radius:50px;padding:6px 14px;font-size:0.8rem;font-weight:700;color:var(--tag-color);margin:4px; }
+        .story-cta { background:var(--gradient-btn);color:white;border:none;border-radius:50px;padding:13px 28px;font-weight:800;font-size:0.9rem;display:inline-flex;align-items:center;gap:8px;transition:var(--transition);cursor:pointer;margin-top:20px; }
+        .story-cta:hover { transform:translateY(-2px);box-shadow:0 12px 30px rgba(108,62,244,0.4);color:white; }
+        .usecase-card { background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius-md);padding:22px;transition:var(--transition);height:100%; }
+        .usecase-card:hover { border-color:var(--border);transform:translateY(-4px);box-shadow:var(--shadow); }
+        .usecase-icon { font-size:2.2rem;margin-bottom:12px;display:block; }
+        .usecase-title { font-size:0.95rem;font-weight:700;margin-bottom:7px;color:var(--text); }
+        .usecase-desc { font-size:0.82rem;color:var(--text-muted);line-height:1.6; }
+
+        /* ============================================================
+           TYPE CARDS
+        ============================================================ */
+        .type-card { background:var(--bg-card);border:1.5px solid var(--border-light);border-radius:var(--radius-md);padding:22px 16px;text-align:center;transition:var(--transition); }
+        .type-card:hover { border-color:var(--primary);transform:translateY(-4px);box-shadow:var(--shadow); }
+        .type-ico { font-size:2.3rem;display:block;margin-bottom:9px; }
+        .type-title { font-weight:700;font-size:0.92rem;margin-bottom:4px;color:var(--text); }
+        .type-desc { font-size:0.78rem;color:var(--text-muted); }
+
+        /* ============================================================
+           FAQ
+        ============================================================ */
+        .faq-item { background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius-md);margin-bottom:9px;overflow:hidden;transition:var(--transition); }
+        .faq-item:hover { border-color:var(--border); }
+        .faq-item.open { border-color:rgba(108,62,244,0.3); }
+        .faq-q { padding:16px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-weight:600;font-size:0.88rem;color:var(--text);gap:12px;user-select:none;transition:var(--transition); }
+        .faq-q:hover { color:var(--primary); }
+        .faq-item.open .faq-q { color:var(--primary); }
+        .faq-ico { width:26px;height:26px;border-radius:50%;background:var(--tag-bg);border:1px solid var(--tag-border);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--primary);font-size:0.75rem;transition:var(--transition); }
+        .faq-item.open .faq-ico { background:var(--primary);color:white;border-color:var(--primary);transform:rotate(45deg); }
+        .faq-a { max-height:0;overflow:hidden;padding:0 20px;font-size:0.83rem;color:var(--text-muted);line-height:1.8;transition:max-height 0.4s ease, padding 0.3s ease; }
+        .faq-item.open .faq-a { max-height:250px;padding:0 20px 16px; }
+
+        /* ============================================================
+           KEYWORDS
+        ============================================================ */
+        .kw-tag { display:inline-flex;align-items:center;gap:5px;background:var(--tag-bg);border:1px solid var(--tag-border);color:var(--tag-color);padding:5px 13px;border-radius:50px;font-size:0.76rem;font-weight:600;margin:3px;transition:var(--transition);cursor:pointer; }
+        .kw-tag:hover { background:var(--primary);color:white;border-color:var(--primary); }
+
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+        footer { background:var(--bg-secondary);border-top:1px solid var(--border-light);padding:52px 0 0; }
+        .footer-brand { display:flex;align-items:center;gap:9px;font-size:1.15rem;font-weight:900;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px; }
+        .footer-desc { color:var(--text-muted);font-size:0.83rem;line-height:1.8; }
+        .footer-social { display:flex;gap:9px;margin-top:18px; }
+        .soc-link { width:36px;height:36px;background:var(--bg-input);border:1px solid var(--border-light);border-radius:var(--radius-xs);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.9rem;transition:var(--transition); }
+        .soc-link:hover { background:var(--primary);color:white;border-color:var(--primary);transform:translateY(-3px); }
+        .footer-col-title { font-weight:700;font-size:0.88rem;color:var(--text);margin-bottom:16px; }
+        .footer-lnk { display:flex;align-items:center;gap:5px;color:var(--text-muted);font-size:0.83rem;padding:4px 0;transition:var(--transition); }
+        .footer-lnk:hover { color:var(--primary);transform:translateX(3px); }
+        .footer-bottom { margin-top:44px;padding:20px 0;border-top:1px solid var(--border-light);text-align:center; }
+        .watermark-wrap { display:inline-flex;align-items:center;gap:8px;background:var(--tag-bg);border:1px solid var(--tag-border);border-radius:50px;padding:10px 22px;margin:12px 0;transition:var(--transition);cursor:pointer;flex-wrap:wrap;justify-content:center; }
+        .watermark-wrap:hover { background:var(--gradient-btn);border-color:transparent;transform:scale(1.02); }
+        .watermark-wrap:hover .wm-text { -webkit-text-fill-color:white;color:white; }
+        .watermark-wrap:hover .wm-heart,.watermark-wrap:hover .wm-coffee { color:white; }
+        .wm-text { background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:800;font-size:0.88rem; }
+        .wm-heart { color:var(--secondary);animation:heartbeat 1.3s ease-in-out infinite;font-size:0.9rem; }
+        @keyframes heartbeat { 0%,100%{transform:scale(1);} 25%{transform:scale(1.3);} 75%{transform:scale(1.15);} }
+        .wm-coffee { font-size:0.9rem;color:var(--warning); }
+        .footer-copy { font-size:0.76rem;color:var(--text-muted);margin-top:8px; }
+
+        /* ============================================================
+           TOAST
+        ============================================================ */
+        #toastBox { position:fixed;bottom:26px;right:26px;z-index:9999;display:flex;flex-direction:column;gap:9px;pointer-events:none; }
+        .toast-el { background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius-md);padding:13px 16px;display:flex;align-items:center;gap:11px;box-shadow:0 10px 40px rgba(0,0,0,0.2);max-width:310px;min-width:250px;pointer-events:all;transform:translateX(120%);opacity:0;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease; }
+        .toast-el.show { transform:translateX(0);opacity:1; }
+        .toast-el.hide { transform:translateX(120%);opacity:0; }
+        .toast-el.success { border-left:3px solid var(--success); }
+        .toast-el.error { border-left:3px solid var(--secondary); }
+        .toast-el.info { border-left:3px solid var(--accent); }
+        .toast-ico { width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.95rem;flex-shrink:0; }
+        .success .toast-ico{background:rgba(0,200,83,0.1);color:var(--success);}
+        .error .toast-ico{background:rgba(255,45,120,0.1);color:var(--secondary);}
+        .info .toast-ico{background:rgba(0,212,255,0.1);color:var(--accent);}
+        .toast-title { font-size:0.83rem;font-weight:700;color:var(--text);display:block; }
+        .toast-sub { font-size:0.73rem;color:var(--text-muted);display:block;margin-top:1px; }
+
+        /* ============================================================
+           SCROLL TO TOP
+        ============================================================ */
+        .scroll-top { position:fixed;bottom:26px;left:26px;width:44px;height:44px;background:var(--gradient-btn);border:none;border-radius:50%;color:white;font-size:1.1rem;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 8px 25px rgba(108,62,244,0.4);transition:var(--transition);z-index:999; }
+        .scroll-top.show { display:flex; }
+        .scroll-top:hover { transform:translateY(-3px) scale(1.05);box-shadow:0 12px 30px rgba(108,62,244,0.5); }
+
+        /* ============================================================
+           ANIMATIONS
+        ============================================================ */
+        @keyframes fadeInUp { from{opacity:0;transform:translateY(22px);} to{opacity:1;transform:translateY(0);} }
+        @keyframes fadeInDown { from{opacity:0;transform:translateY(-14px);} to{opacity:1;transform:translateY(0);} }
+        .copy-flash { animation:copy-anim 0.4s ease; }
+        @keyframes copy-anim { 0%,100%{background:var(--bg-input);} 50%{background:rgba(0,200,83,0.08);border-color:var(--success) !important;} }
+
+        /* ============================================================
+           RESPONSIVE
+        ============================================================ */
+        @media(max-width:991px) {
+            .nav-links{display:none;flex-direction:column;width:100%;}
+            .nav-links.open{display:flex;padding:10px 0;}
+            .hamburger{display:flex;}
+            .nav-link-item{width:100%;}
+            .btn-install-nav{width:100%;justify-content:center;}
+            .float-ico{font-size:5rem;}
+        }
+        @media(max-width:767px) {
+            .section-pad{padding:52px 0;}
+            .dl-box{padding:20px 16px;}
+            .input-row{flex-direction:column;}
+            .btn-paste,.btn-main-dl{width:100%;justify-content:center;}
+            .hero{padding:10px 0 80px;min-height:auto;}
+            .info-grid{grid-template-columns:1fr 1fr;}
+            .slides-grid{grid-template-columns:repeat(2,1fr);}
+            #toastBox{right:12px;left:12px;}
+            .toast-el{max-width:100%;min-width:auto;}
+            .story-card{padding:24px 18px;}
+            .announce-bar{font-size:0.73rem;}
+            .scroll-top{bottom:16px;left:16px;width:38px;height:38px;}
+        }
+        @media(max-width:480px) {
+            .hero-title{font-size:1.85rem;}
+            .slides-grid{grid-template-columns:1fr 1fr;}
+            .info-grid{grid-template-columns:1fr;}
+        }
+    </style> -->
+</head>
+<body>
+
+<!-- ================================================================
+     ANNOUNCEMENT BAR
+================================================================ -->
+<div class="announce-bar" id="announceBar" role="banner">
+    <i class="bi bi-stars" aria-hidden="true"></i>
+    <span>🎉 <strong>New:</strong> Download History + Star Rating + Auto Dark Mode now live! — <a href="#downloader">Try it free</a></span>
+    <button class="close-bar" onclick="closeAnnounceBar()" aria-label="Close announcement">
+        <i class="bi bi-x-lg" aria-hidden="true"></i>
+    </button>
+</div>
+
+<!-- ================================================================
+     NAVBAR
+================================================================ -->
+<nav class="main-nav" id="mainNav" role="navigation" aria-label="Main navigation">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
+            <a href="https://tiktokdownloader.dilawarpro.com/" class="brand" aria-label="TikTok Downloader Home">
+                <span class="brand-ico" aria-hidden="true"><i class="bi bi-tiktok"></i></span>
+                TikTok Downloader
+            </a>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links" id="navLinks">
+                <a href="#downloader" class="nav-link-item active"><i class="bi bi-play-circle" aria-hidden="true"></i> Download</a>
+                <a href="#mp3" class="nav-link-item"><i class="bi bi-music-note-beamed" aria-hidden="true"></i> MP3</a>
+                <a href="#captions" class="nav-link-item"><i class="bi bi-card-text" aria-hidden="true"></i> Captions</a>
+                <a href="#history-section" class="nav-link-item"><i class="bi bi-clock-history" aria-hidden="true"></i> History</a>
+                <a href="#faq" class="nav-link-item"><i class="bi bi-question-circle" aria-hidden="true"></i> FAQ</a>
+                <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()" role="switch" aria-label="Toggle dark/light mode" tabindex="0" title="Toggle Theme">
+                    <div class="tt-track">
+                        <div class="tt-thumb" id="ttThumb"><span id="ttEmoji">🌙</span></div>
+                    </div>
+                </div>
+                <button class="btn-install-nav" onclick="handleInstall()" aria-label="Install TikTok Downloader App">
+                    <i class="bi bi-download" aria-hidden="true"></i> Install App
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ================================================================
+     HERO
+================================================================ -->
+<section class="hero" id="downloader" aria-labelledby="hero-h1">
+    <div class="blob blob-1" aria-hidden="true"></div>
+    <div class="blob blob-2" aria-hidden="true"></div>
+    <div class="blob blob-3" aria-hidden="true"></div>
+    <div class="hero-dots" aria-hidden="true">
+        <div class="dot" style="left:7%;animation-delay:0s;animation-duration:7s;background:#6C3EF4;"></div>
+        <div class="dot" style="left:21%;animation-delay:1.2s;animation-duration:5.5s;background:#FF2D78;"></div>
+        <div class="dot" style="left:44%;animation-delay:2s;animation-duration:8s;background:#00D4FF;"></div>
+        <div class="dot" style="left:67%;animation-delay:0.7s;animation-duration:6.5s;background:#6C3EF4;"></div>
+        <div class="dot" style="left:84%;animation-delay:3s;animation-duration:7.5s;background:#FF2D78;"></div>
+        <div class="dot" style="left:33%;animation-delay:1.8s;animation-duration:9s;background:#00C853;"></div>
+        <div class="dot" style="left:56%;animation-delay:2.5s;animation-duration:6s;background:#FFB300;"></div>
+        <div class="dot" style="left:77%;animation-delay:4s;animation-duration:8.5s;background:#6C3EF4;"></div>
+    </div>
+
+    <div class="container hero-inner" style="margin-top: 20px;">
+        <div class="text-center">
+            <div class="hero-badge">
+                <span class="live-dot"></span>
+                Free · No Watermark · HD Quality · No Login · No Limits
+            </div>
+            <h1 class="hero-title" id="hero-h1">
+                <span class="text-gradient">TikTok Downloader</span><br>
+                Without Watermark
+            </h1>
+            <p class="hero-subtitle">
+                Download TikTok videos in HD MP4, extract MP3 audio,
+                <strong>copy &amp; download TikTok captions</strong>,
+                save slideshows — all <strong>FREE</strong>. No login required.
+            </p>
+
+            <!-- Download Box -->
+            <div class="dl-box">
+                <div class="url-label">
+                    <i class="bi bi-link-45deg" aria-hidden="true"></i>
+                    Paste TikTok Video URL Below
+                </div>
+                <div class="input-row">
+                    <div class="url-input-wrap">
+                        <input
+                            type="url" id="tiktokUrl" class="url-input"
+                            placeholder="https://www.tiktok.com/@username/video/..."
+                            aria-label="TikTok video URL input"
+                            autocomplete="off" spellcheck="false"
+                        >
+                        <button class="clear-btn" id="clearBtn" onclick="clearInput()" aria-label="Clear URL input">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+                    <button class="btn-paste" onclick="pasteURL()" aria-label="Paste URL from clipboard">
+                        <i class="bi bi-clipboard" aria-hidden="true"></i> Paste
+                    </button>
+                    <button class="btn-main-dl" id="fetchBtn" onclick="fetchTikTok()" aria-label="Download TikTok content">
+                        <i class="bi bi-lightning-charge-fill" aria-hidden="true"></i> Download
+                    </button>
+                </div>
+
+                <!-- Progress -->
+                <div class="progress-section" id="progressSection">
+                    <div class="progress-header">
+                        <span class="progress-label" id="progressLabel">Connecting...</span>
+                        <span class="progress-pct" id="progressPct">0%</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <span class="quick-tag" onclick="setExample('video')"><i class="bi bi-camera-video" aria-hidden="true"></i> Try Example Video</span>
+                    <span class="quick-tag" onclick="setExample('audio')"><i class="bi bi-music-note" aria-hidden="true"></i> Try Example Audio</span>
+                    <span class="quick-tag" onclick="scrollToHistory()"><i class="bi bi-clock-history" aria-hidden="true"></i> View History</span>
+                </div>
+
+                <!-- Disclaimer -->
+                <!-- <div class="disclaimer">
+                    <i class="bi bi-shield-check" aria-hidden="true"></i>
+                    <span><strong>Personal Use Only.</strong> Not affiliated with TikTok or ByteDance. Please respect copyright and creators' rights.</span>
+                </div> -->
+            </div>
+
+            <a href="#" onclick="handleInstall(); return false;" class="btn-install-hero" aria-label="Install TikTok Downloader as web app">
+                <i class="bi bi-phone-fill" aria-hidden="true"></i>
+                Add to Home Screen — 100% Free!
+                <i class="bi bi-arrow-right" aria-hidden="true"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     STATS
+================================================================ -->
+<section class="stats-bar" aria-label="Tool statistics">
+    <div class="container">
+        <div class="row g-2 justify-content-center">
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <span class="stat-num" data-target="50" data-suffix="M+">0</span>
+                    <span class="stat-lbl">Videos Downloaded</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <span class="stat-num" data-target="5" data-suffix="M+">0</span>
+                    <span class="stat-lbl">Happy Users</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <span class="stat-num" data-target="99" data-suffix="%">0</span>
+                    <span class="stat-lbl">Success Rate</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <span class="stat-num" data-target="24" data-suffix="/7">0</span>
+                    <span class="stat-lbl">Always Online</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     RESULT SECTION
+================================================================ -->
+<section class="result-section" id="resultSection" aria-live="polite" aria-label="Download results">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h2 class="section-title">Your Content is <span class="text-gradient">Ready!</span></h2>
+            <p class="section-desc">Preview, copy captions, and download your TikTok content below.</p>
+        </div>
+        <div class="row g-4">
+
+            <!-- Preview -->
+            <div class="col-lg-5" id="mp3">
+                <div class="res-card">
+                    <div class="res-header">
+                        <i class="bi bi-play-circle-fill text-gradient" style="font-size:1rem;" aria-hidden="true"></i>
+                        <h5>Preview</h5>
+                        <span class="res-badge" id="contentBadge">Video</span>
+                    </div>
+                    <div class="res-body">
+                        <div class="video-wrap" id="videoWrap">
+                            <video id="tiktokVideo" controls preload="metadata" aria-label="TikTok video preview">
+                                Your browser does not support video playback.
+                            </video>
+                        </div>
+                        <div id="slideshowWrap" style="display:none;">
+                            <div class="slides-grid" id="slidesGrid" role="list" aria-label="TikTok slideshow images"></div>
+                        </div>
+                        <div id="previewPlaceholder" style="text-align:center;padding:28px;color:var(--text-muted);">
+                            <i class="bi bi-collection-play" style="font-size:2.8rem;opacity:0.25;" aria-hidden="true"></i>
+                            <p style="margin-top:9px;font-size:0.82rem;">Preview will appear here</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info + Caption + Downloads -->
+            <div class="col-lg-7" id="captions">
+
+                <!-- Video Info -->
+                <div class="res-card mb-4" id="videoInfoCard" style="display:none;">
+                    <div class="res-header">
+                        <i class="bi bi-info-circle-fill" style="color:var(--accent);font-size:1rem;" aria-hidden="true"></i>
+                        <h5>Video Information</h5>
+                    </div>
+                    <div class="res-body">
+                        <div class="info-grid">
+                            <div><div class="info-lbl">Author</div><div class="info-val" id="infoAuthor">—</div></div>
+                            <div><div class="info-lbl">Duration</div><div class="info-val" id="infoDuration">—</div></div>
+                            <div><div class="info-lbl"><i class="bi bi-heart-fill" style="color:var(--secondary);"></i> Likes</div><div class="info-val" id="infoLikes">—</div></div>
+                            <div><div class="info-lbl"><i class="bi bi-eye-fill" style="color:var(--accent);"></i> Views</div><div class="info-val" id="infoViews">—</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Caption -->
+                <div class="res-card mb-4">
+                    <div class="res-header">
+                        <i class="bi bi-card-text" style="color:var(--accent);font-size:1rem;" aria-hidden="true"></i>
+                        <h5>TikTok Caption / Description</h5>
+                        <span class="copy-count-badge" id="copyCountBadge" style="display:none;">
+                            <i class="bi bi-clipboard-check" aria-hidden="true"></i>
+                            Copied <span id="copyCountNum">0</span>x
+                        </span>
+                    </div>
+                    <div class="res-body">
+                        <textarea id="captionArea" class="caption-ta" rows="4" readonly
+                            placeholder="Video caption appears here automatically after fetching..."
+                            aria-label="TikTok video caption text"></textarea>
+                        <div class="char-count" id="charCount"></div>
+                        <div class="d-flex gap-2 mt-3 flex-wrap">
+                            <button class="dl-btn db-cap" style="padding:10px 16px;flex:1;min-width:130px;" onclick="copyCaption()" aria-label="Copy TikTok caption">
+                                <div class="dbi" style="width:30px;height:30px;border-radius:7px;font-size:0.9rem;"><i class="bi bi-clipboard" aria-hidden="true"></i></div>
+                                <span class="dl-btn-info"><span class="dl-btn-title" style="font-size:0.82rem;">Copy Caption</span></span>
+                            </button>
+                            <button class="dl-btn db-txt" style="padding:10px 16px;flex:1;min-width:130px;" onclick="saveCaption()" aria-label="Save caption as text file">
+                                <div class="dbi" style="width:30px;height:30px;border-radius:7px;font-size:0.9rem;background:rgba(108,62,244,0.1);color:var(--primary);"><i class="bi bi-file-text" aria-hidden="true"></i></div>
+                                <span class="dl-btn-info"><span class="dl-btn-title" style="font-size:0.82rem;">Save as .txt</span></span>
+                            </button>
+                            <button class="dl-btn db-txt" style="padding:10px 16px;flex:1;min-width:130px;" onclick="shareCaption()" aria-label="Share TikTok caption">
+                                <div class="dbi" style="width:30px;height:30px;border-radius:7px;font-size:0.9rem;background:rgba(0,200,83,0.1);color:var(--success);"><i class="bi bi-share" aria-hidden="true"></i></div>
+                                <span class="dl-btn-info"><span class="dl-btn-title" style="font-size:0.82rem;">Share Caption</span></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Downloads -->
+                <div class="res-card">
+                    <div class="res-header">
+                        <i class="bi bi-download" style="color:var(--success);font-size:1rem;" aria-hidden="true"></i>
+                        <h5>Download Options</h5>
+                    </div>
+                    <div class="res-body">
+                        <div class="dl-btn-list">
+                            <button class="dl-btn db-mp4" id="btnMp4" style="display:none;" onclick="doMp4()" aria-label="Download TikTok video without watermark">
+                                <div class="dbi"><i class="bi bi-camera-video-fill" aria-hidden="true"></i></div>
+                                <div class="dl-btn-info">
+                                    <span class="dl-btn-title">Download Video (No Watermark)</span>
+                                    <span class="dl-btn-sub">HD MP4 · Best Quality</span>
+                                </div>
+                                <i class="bi bi-arrow-right dl-arrow" aria-hidden="true"></i>
+                            </button>
+                            <button class="dl-btn db-mp3" id="btnMp3" style="display:none;" onclick="doMp3()" aria-label="Download TikTok audio as MP3">
+                                <div class="dbi"><i class="bi bi-music-note-beamed" aria-hidden="true"></i></div>
+                                <div class="dl-btn-info">
+                                    <span class="dl-btn-title">Download MP3 Audio</span>
+                                    <span class="dl-btn-sub">High Quality Audio Track</span>
+                                </div>
+                                <i class="bi bi-arrow-right dl-arrow" aria-hidden="true"></i>
+                            </button>
+                            <button class="dl-btn db-img" id="btnAllImg" style="display:none;" onclick="downloadAllSlides()" aria-label="Download all slideshow images">
+                                <div class="dbi"><i class="bi bi-images" aria-hidden="true"></i></div>
+                                <div class="dl-btn-info">
+                                    <span class="dl-btn-title">Download All Images</span>
+                                    <span class="dl-btn-sub" id="btnAllImgSub">Slideshow · All Slides</span>
+                                </div>
+                                <i class="bi bi-arrow-right dl-arrow" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <p class="mt-3 mb-0" style="font-size:0.73rem;color:var(--text-muted);display:flex;align-items:center;gap:5px;">
+                            <i class="bi bi-shield-check" style="color:var(--success);" aria-hidden="true"></i>
+                            Secure download. No data stored. No tracking.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Rating Section -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="rating-section">
+                    <h4 style="font-size:1rem;font-weight:700;margin-bottom:4px;">Rate Your Experience</h4>
+                    <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:10px;">Was this tool helpful? Let us know!</p>
+                    <div class="stars-display" role="group" aria-label="Rate this tool">
+                        <button class="star-btn" data-star="1" onclick="rateTool(1)" aria-label="Rate 1 star">⭐</button>
+                        <button class="star-btn" data-star="2" onclick="rateTool(2)" aria-label="Rate 2 stars">⭐</button>
+                        <button class="star-btn" data-star="3" onclick="rateTool(3)" aria-label="Rate 3 stars">⭐</button>
+                        <button class="star-btn" data-star="4" onclick="rateTool(4)" aria-label="Rate 4 stars">⭐</button>
+                        <button class="star-btn" data-star="5" onclick="rateTool(5)" aria-label="Rate 5 stars">⭐</button>
+                    </div>
+                    <div class="rating-label" id="ratingLabel">Click a star to rate</div>
+                    <div class="rating-count">⭐ 4.9 average from 5M+ ratings</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     HISTORY SECTION
+================================================================ -->
+<section class="history-section section-alt" id="history-section" aria-labelledby="history-h2">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
+            <div>
+                <span class="section-label"><i class="bi bi-clock-history" aria-hidden="true"></i> Download History</span>
+                <h2 class="section-title" style="margin-bottom:0;">Recent <span class="text-gradient">Downloads</span></h2>
+            </div>
+            <button class="dl-btn db-txt" style="padding:8px 18px;width:auto;" onclick="clearHistory()" aria-label="Clear download history">
+                <div class="dbi" style="width:28px;height:28px;border-radius:7px;font-size:0.85rem;background:rgba(255,45,120,0.1);color:var(--secondary);"><i class="bi bi-trash" aria-hidden="true"></i></div>
+                <span class="dl-btn-info"><span class="dl-btn-title" style="font-size:0.82rem;">Clear History</span></span>
+            </button>
+        </div>
+        <div class="history-card">
+            <div id="historyList">
+                <div class="history-empty">
+                    <i class="bi bi-clock-history" aria-hidden="true"></i>
+                    <p style="font-size:0.88rem;font-weight:600;">No downloads yet</p>
+                    <p style="font-size:0.78rem;">Your recent downloads will appear here</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     FEATURES
+================================================================ -->
+<section class="section-pad" aria-labelledby="feat-h2">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-label"><i class="bi bi-stars" aria-hidden="true"></i> Why Choose Us</span>
+            <h2 class="section-title" id="feat-h2">The Most <span class="text-gradient">Powerful</span> TikTok Downloader</h2>
+            <p class="section-desc">More features, better design, and faster speed than any other TikTok downloader online.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <article class="feat-card">
+                    <div class="feat-icon fi-1"><i class="bi bi-ban" aria-hidden="true"></i></div>
+                    <h3 class="feat-title">No Watermark Download</h3>
+                    <p class="feat-desc">Download TikTok videos completely clean — zero TikTok logo or branding. Perfect for editing and repurposing.</p>
+                </article>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <article class="feat-card">
+                    <div class="feat-icon fi-2"><i class="bi bi-music-note-beamed" aria-hidden="true"></i></div>
+                    <h3 class="feat-title">TikTok MP3 Downloader</h3>
+                    <p class="feat-desc">Extract high-quality MP3 audio from any TikTok video. Save trending sounds, viral music, and voiceovers.</p>
+                </article>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <article class="feat-card">
+                    <div class="feat-icon fi-3"><i class="bi bi-card-text" aria-hidden="true"></i></div>
+                    <h3 class="feat-title">TikTok Caption Downloader</h3>
+                    <p class="feat-desc">The only tool that lets you copy TikTok captions and download them as .txt files instantly and free.</p>
+                </article>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <article class="feat-card">
+                    <div class="feat-icon fi-4"><i class="bi bi-images" aria-hidden="true"></i></div>
+                    <h3 class="feat-title">Slideshow Downloader</h3>
+                    <p class="feat-desc">Download all images from TikTok carousels and photo slideshows — individually or all at once.</p>
+                </article>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <article class="feat-card">
+                    <div class="feat-icon fi-5"><i class="bi bi-clock-history" aria-hidden="true"></i></div>
+                    <h3 class="feat-title">Download History</h3>
+                    <p class="feat-desc">Access your recent downloads anytime. Re-download or copy captions from previously fetched TikTok content.</p>
+                </article>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <article class="feat-card">
+                    <div class="feat-icon fi-6"><i class="bi bi-phone-fill" aria-hidden="true"></i></div>
+                    <h3 class="feat-title">All Devices Supported</h3>
+                    <p class="feat-desc">Works on Android, iPhone, Windows, Mac & Linux. No app or extension needed — just paste and download.</p>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================================================================
+     STORY SECTION
+================================================================ -->
+<section class="section-pad story-section" aria-labelledby="story-h2">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-label"><i class="bi bi-journal-text" aria-hidden="true"></i> Our Story</span>
+            <h2 class="section-title" id="story-h2">Why We Built the Best <span class="text-gradient">TikTok Caption Downloader</span></h2>
+            <p class="section-desc">A real story from a TikTok lover that inspired this tool.</p>
+        </div>
+        <div class="row g-4 align-items-start">
+            <div class="col-lg-8">
+                <div class="story-card">
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <div class="story-avatar" aria-label="Dilawar Pro">👨‍💻</div>
+                        <div>
+                            <div style="font-weight:800;font-size:1rem;color:var(--text);">Dilawar Pro</div>
+                            <div style="font-size:0.8rem;color:var(--text-muted);">Creator · <a href="https://dilawarpro.com" target="_blank" rel="noopener" style="color:var(--primary);">dilawarpro.com</a></div>
+                        </div>
+                    </div>
+                    <blockquote class="story-quote">
+                        <i class="bi bi-quote" aria-hidden="true"></i>
+                        One day, I was scrolling TikTok and found the most beautiful caption on a video —
+                        but I couldn't copy it. I searched Google everywhere but <strong>nothing existed.</strong> So I built one.
+                    </blockquote>
+                    <div class="story-body">
+                        <p>It started as a simple frustration. I was scrolling through TikTok late one night and came across a video with an incredibly heartfelt caption — the kind you'd want to save or send to someone special. But TikTok doesn't let you copy captions directly.</p>
+                        <br>
+                        <p>I searched for <strong>"how to copy TikTok video caption"</strong>, <strong>"TikTok caption downloader"</strong>, and <strong>"TikTok caption copy paste tool"</strong> — page after page of results. Shocked to find <strong>no tool existed for this simple thing.</strong></p>
+                        <br>
+                        <p>So as a developer and TikTok lover, I built it myself — not just a caption copier but a <strong>complete TikTok downloader</strong>:</p>
+                        <div class="d-flex flex-wrap gap-2 my-3">
+                            <span class="story-highlight"><i class="bi bi-card-text" aria-hidden="true"></i> Copy TikTok Captions</span>
+                            <span class="story-highlight"><i class="bi bi-file-text" aria-hidden="true"></i> Download Captions as .TXT</span>
+                            <span class="story-highlight"><i class="bi bi-camera-video" aria-hidden="true"></i> Download Videos (No Watermark)</span>
+                            <span class="story-highlight"><i class="bi bi-music-note" aria-hidden="true"></i> Extract MP3 Audio</span>
+                            <span class="story-highlight"><i class="bi bi-images" aria-hidden="true"></i> Save Slideshow Images</span>
+                            <span class="story-highlight"><i class="bi bi-clock-history" aria-hidden="true"></i> Download History</span>
+                        </div>
+                        <p>If you see a <strong>love caption</strong> to send to your girlfriend, boyfriend, or loved one — visit <a href="https://tiktokdownloader.dilawarpro.com" target="_blank" rel="noopener">tiktokdownloader.dilawarpro.com</a>, paste the URL, and click <strong>Copy Caption</strong>. Done in seconds.</p>
+                    </div>
+                    <a href="#downloader" class="story-cta" aria-label="Try TikTok Caption Downloader">
+                        <i class="bi bi-lightning-charge-fill" aria-hidden="true"></i> Try It Now — It's Free!
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <h3 class="section-title" style="font-size:1.3rem;margin-bottom:20px;">Who Uses This <span class="text-gradient">Tool?</span></h3>
+                <div class="row g-3">
+                    <div class="col-12">
+                        <div class="usecase-card">
+                            <span class="usecase-icon" role="img" aria-label="Couple">💑</span>
+                            <div class="usecase-title">TikTok Lovers</div>
+                            <div class="usecase-desc">Copy beautiful love captions to send to your partner. Find the perfect words from TikTok in seconds.</div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="usecase-card">
+                            <span class="usecase-icon" role="img" aria-label="Creator">🎬</span>
+                            <div class="usecase-title">Content Creators</div>
+                            <div class="usecase-desc">Research competitor captions, hashtags, and descriptions. Download videos for inspiration.</div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="usecase-card">
+                            <span class="usecase-icon" role="img" aria-label="Student">🎓</span>
+                            <div class="usecase-title">Students & Researchers</div>
+                            <div class="usecase-desc">Archive TikTok content for research. Save captions, videos, and audio for offline study.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================================================================
+     HOW IT WORKS
+================================================================ -->
+<section class="section-pad section-alt" id="how-it-works" aria-labelledby="hiw-h2">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-label"><i class="bi bi-list-check" aria-hidden="true"></i> Simple Steps</span>
+            <h2 class="section-title" id="hiw-h2">How to <span class="text-gradient">Copy TikTok Caption</span> & Download Videos</h2>
+            <p class="section-desc">3 easy steps — no signup, no app, no watermark, no limits.</p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-4">
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <h3 class="step-title"><i class="bi bi-clipboard2-check me-2" style="color:var(--primary);" aria-hidden="true"></i>Copy TikTok URL</h3>
+                    <p class="step-desc">Open TikTok, find the video. Tap <strong>Share</strong> → <strong>Copy Link</strong>. The URL is now in your clipboard.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <h3 class="step-title"><i class="bi bi-lightning-charge me-2" style="color:var(--primary);" aria-hidden="true"></i>Paste & Download</h3>
+                    <p class="step-desc">Paste the link into the input above and click <strong>Download</strong>. Our tool instantly fetches video, caption, audio, and images.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <h3 class="step-title"><i class="bi bi-save me-2" style="color:var(--primary);" aria-hidden="true"></i>Save Your Content</h3>
+                    <p class="step-desc">Copy caption, download MP4 without watermark, save MP3 audio, or download slideshow images — all free!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================================================================
+     FAQ
+================================================================ -->
+<section class="section-pad" id="faq" aria-labelledby="faq-h2">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-label"><i class="bi bi-question-circle" aria-hidden="true"></i> FAQ</span>
+            <h2 class="section-title" id="faq-h2">Frequently Asked <span class="text-gradient">Questions</span></h2>
+            <p class="section-desc">Everything you need to know about our free TikTok downloader.</p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <div class="faq-q" onclick="toggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
+                        <span itemprop="name">Why can't I copy TikTok captions in the app?</span>
+                        <div class="faq-ico"><i class="bi bi-plus-lg" aria-hidden="true"></i></div>
+                    </div>
+                    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <div itemprop="text">TikTok doesn't provide a native "copy caption" button. That's exactly why we built this TikTok caption downloader — to let you easily copy and download any TikTok video caption for free at tiktokdownloader.dilawarpro.com.</div>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <div class="faq-q" onclick="toggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
+                        <span itemprop="name">How to copy a TikTok video caption?</span>
+                        <div class="faq-ico"><i class="bi bi-plus-lg" aria-hidden="true"></i></div>
+                    </div>
+                    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <div itemprop="text">Visit tiktokdownloader.dilawarpro.com, paste the TikTok URL, click Download. The caption appears automatically. Click "Copy Caption" to copy it instantly to your clipboard.</div>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <div class="faq-q" onclick="toggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
+                        <span itemprop="name">How to download TikTok videos without watermark?</span>
+                        <div class="faq-ico"><i class="bi bi-plus-lg" aria-hidden="true"></i></div>
+                    </div>
+                    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <div itemprop="text">Paste the TikTok URL at tiktokdownloader.dilawarpro.com, click Download, then click "Download Video (No Watermark)" to save a clean HD MP4 file with no TikTok logo.</div>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <div class="faq-q" onclick="toggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
+                        <span itemprop="name">How to download TikTok MP3 audio?</span>
+                        <div class="faq-ico"><i class="bi bi-plus-lg" aria-hidden="true"></i></div>
+                    </div>
+                    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <div itemprop="text">Paste any TikTok URL and click Download. Once the content loads, click "Download MP3 Audio" to save the audio as an MP3 file. Works for all TikTok videos, sounds, and music.</div>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <div class="faq-q" onclick="toggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
+                        <span itemprop="name">Is TikTok Downloader by Dilawar Pro free?</span>
+                        <div class="faq-ico"><i class="bi bi-plus-lg" aria-hidden="true"></i></div>
+                    </div>
+                    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <div itemprop="text">Yes! 100% free. No registration, no login, no subscription, no limits. Copy captions, download videos, extract MP3, save slideshows — all free forever at tiktokdownloader.dilawarpro.com.</div>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <div class="faq-q" onclick="toggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
+                        <span itemprop="name">What is the Download History feature?</span>
+                        <div class="faq-ico"><i class="bi bi-plus-lg" aria-hidden="true"></i></div>
+                    </div>
+                    <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <div itemprop="text">Every TikTok you fetch is automatically saved to your local Download History. You can re-load any previous download, copy its caption, or re-download content without pasting the URL again. History is stored locally on your device only.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Keywords -->
+<section style="padding:38px 0;background:var(--section-alt);" aria-label="Related searches">
+    <div class="container">
+        <div class="text-center mb-3">
+            <span style="font-size:0.76rem;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">
+                <i class="bi bi-search me-1" aria-hidden="true"></i> Related Searches
+            </span>
+        </div>
+        <div class="text-center">
+            <a href="#downloader" class="kw-tag"><i class="bi bi-camera-video" aria-hidden="true"></i> TikTok Video Downloader</a>
+            <a href="#downloader" class="kw-tag"><i class="bi bi-ban" aria-hidden="true"></i> No Watermark</a>
+            <a href="#mp3" class="kw-tag"><i class="bi bi-music-note" aria-hidden="true"></i> TikTok MP3 Downloader</a>
+            <a href="#captions" class="kw-tag"><i class="bi bi-card-text" aria-hidden="true"></i> TikTok Caption Downloader</a>
+            <a href="#captions" class="kw-tag"><i class="bi bi-clipboard" aria-hidden="true"></i> TikTok Caption Copy Paste</a>
+            <a href="#captions" class="kw-tag"><i class="bi bi-file-text" aria-hidden="true"></i> TikTok Video Caption Download</a>
+            <a href="#downloader" class="kw-tag"><i class="bi bi-download" aria-hidden="true"></i> TikTok to MP4</a>
+            <a href="#mp3" class="kw-tag"><i class="bi bi-music-note-beamed" aria-hidden="true"></i> TikTok to MP3</a>
+            <a href="#downloader" class="kw-tag"><i class="bi bi-images" aria-hidden="true"></i> Slideshow Downloader</a>
+            <a href="#downloader" class="kw-tag"><i class="bi bi-phone" aria-hidden="true"></i> TikTok on Android</a>
+            <a href="#downloader" class="kw-tag"><i class="bi bi-pc-display" aria-hidden="true"></i> TikTok for PC</a>
+            <a href="#captions" class="kw-tag"><i class="bi bi-heart" aria-hidden="true"></i> TikTok Love Caption</a>
+            <a href="#downloader" class="kw-tag"><i class="bi bi-globe" aria-hidden="true"></i> Free TikTok Downloader 2026</a>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     FOOTER
+================================================================ -->
+<footer role="contentinfo">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-4">
+                <div class="footer-brand">
+                    <span style="background:var(--gradient);border-radius:8px;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;color:white;font-size:0.85rem;-webkit-text-fill-color:white;flex-shrink:0;">
+                        <i class="bi bi-tiktok" aria-hidden="true"></i>
+                    </span>
+                    TikTok Downloader
+                </div>
+                <p class="footer-desc">
+                    The most powerful free TikTok downloader. Download videos without watermark,
+                    copy &amp; download captions, extract MP3, save slideshows.
+                    Built with ❤️ by <a href="https://dilawarpro.com" target="_blank" rel="noopener" style="color:var(--primary);font-weight:700;">Dilawar Pro</a> for TikTok lovers.
+                </p>
+                <div class="footer-social">
+                    <a href="https://dilawarpro.com" target="_blank" rel="noopener" class="soc-link" aria-label="Dilawar Pro Website"><i class="bi bi-globe2" aria-hidden="true"></i></a>
+                    <a href="#" class="soc-link" aria-label="Twitter X"><i class="bi bi-twitter-x" aria-hidden="true"></i></a>
+                    <a href="#" class="soc-link" aria-label="YouTube"><i class="bi bi-youtube" aria-hidden="true"></i></a>
+                    <a href="#" class="soc-link" aria-label="Instagram"><i class="bi bi-instagram" aria-hidden="true"></i></a>
+                    <a href="#" class="soc-link" aria-label="TikTok"><i class="bi bi-tiktok" aria-hidden="true"></i></a>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-2">
+                <div class="footer-col-title">Tools</div>
+                <a href="#downloader" class="footer-lnk"><i class="bi bi-camera-video" aria-hidden="true"></i> TikTok Downloader</a>
+                <a href="#mp3" class="footer-lnk"><i class="bi bi-music-note" aria-hidden="true"></i> MP3 Downloader</a>
+                <a href="#captions" class="footer-lnk"><i class="bi bi-card-text" aria-hidden="true"></i> Caption Tool</a>
+                <a href="#downloader" class="footer-lnk"><i class="bi bi-images" aria-hidden="true"></i> Slideshow Saver</a>
+                <a href="#history-section" class="footer-lnk"><i class="bi bi-clock-history" aria-hidden="true"></i> History</a>
+            </div>
+            <div class="col-sm-6 col-lg-2">
+                <div class="footer-col-title">Guides</div>
+                <a href="#how-it-works" class="footer-lnk"><i class="bi bi-list-check" aria-hidden="true"></i> How It Works</a>
+                <a href="#faq" class="footer-lnk"><i class="bi bi-question-circle" aria-hidden="true"></i> FAQ</a>
+                <a href="https://dilawarpro.com" target="_blank" rel="noopener" class="footer-lnk"><i class="bi bi-journal-text" aria-hidden="true"></i> Blog</a>
+            </div>
+            <div class="col-sm-6 col-lg-2">
+                <div class="footer-col-title">Legal</div>
+                <a href="./privacy-policy.html" class="footer-lnk"><i class="bi bi-shield-lock" aria-hidden="true"></i> Privacy Policy</a>
+                <a href="./about.html" class="footer-lnk"><i class="bi bi-file-text" aria-hidden="true"></i> About Us</a>
+                <a href="./copyright.html" class="footer-lnk"><i class="bi bi-c-circle" aria-hidden="true"></i> Copyright</a>
+                <a href="./404.html" class="footer-lnk"><i class="bi bi-exclamation-triangle" aria-hidden="true"></i> Error Page</a>
+            </div>
+            <div class="col-sm-6 col-lg-2">
+                <div class="footer-col-title">Contact</div>
+                <a href="https://dilawarpro.com" target="_blank" rel="noopener" class="footer-lnk"><i class="bi bi-person-circle" aria-hidden="true"></i> Dilawar Pro</a>
+                <a href="./contact.html" class="footer-lnk"><i class="bi bi-envelope" aria-hidden="true"></i> Contact Us</a>
+                <a href="./about.html" class="footer-lnk"><i class="bi bi-question-circle" aria-hidden="true"></i> About Tool</a>
+                <a href="https://dilawarpro.com" target="_blank" rel="noopener" class="footer-lnk"><i class="bi bi-globe2" aria-hidden="true"></i> Dilawarpro.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p style="font-size:0.76rem;color:var(--text-muted);margin-bottom:10px;">
+                ⚠️ Not affiliated with TikTok, Douyin, or ByteDance. For personal use only.
+            </p>
+            <a href="https://dilawarpro.com" target="_blank" rel="noopener" class="watermark-wrap" aria-label="Designed and Developed with coffee and love by Dilawar Pro for TikTok Lovers">
+                <span class="wm-coffee" aria-label="Coffee">☕</span>
+                <i class="bi bi-plus" style="color:var(--text-muted);font-size:0.7rem;" aria-hidden="true"></i>
+                <i class="bi bi-heart-fill wm-heart" aria-hidden="true"></i>
+                <span class="wm-text">Designed &amp; Developed by Dilawar Pro</span>
+                <i class="bi bi-heart-fill wm-heart" aria-hidden="true"></i>
+                <span style="font-size:0.78rem;color:var(--text-muted);font-weight:600;">for TikTok Lovers</span>
+            </a>
+            <div class="footer-copy">
+                © <span id="footerYear"></span>
+                <a href="https://tiktokdownloader.dilawarpro.com" style="color:var(--primary);font-weight:700;">TikTok Downloader</a>
+                by <a href="https://dilawarpro.com" target="_blank" rel="noopener" style="color:var(--primary);font-weight:700;">Dilawar Pro</a>.
+                All rights reserved.
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Scroll to Top -->
+<button class="scroll-top" id="scrollTopBtn" onclick="scrollToTop()" aria-label="Scroll to top">
+    <i class="bi bi-arrow-up" aria-hidden="true"></i>
+</button>
+
+<!-- Toast Container -->
+<div id="toastBox" aria-live="polite" aria-atomic="true"></div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/script.js"></script>
+<!-- <script>
+/* ============================================================
+   STATE
+============================================================ */
+const S = {
+    videoUrl: null,
+    audioUrl: null,
+    images: [],
+    caption: '',
+    theme: localStorage.getItem('tt-theme') || 'dark',
+    pwaPrompt: null,
+    progressTimer: null,
+    fetchTimer: null,
+    copyCount: 0,
+    userRating: 0,
+    history: JSON.parse(localStorage.getItem('tt-history') || '[]'),
+    currentData: null
+};
+
+/* ============================================================
+   AUTO THEME SYSTEM
+============================================================ */
+const AutoTheme = (() => {
+    const CFG = {
+        dayStart: 6, nightStart: 20,
+        manualKey: 'tt-theme-manual',
+        manualExpiryKey: 'tt-theme-manual-expiry',
+        manualDuration: 6 * 60 * 60 * 1000,
+        checkInterval: 60 * 1000
+    };
+    let _timer = null, _mq = null, _lastAuto = null;
+
+    function _hour() { return new Date().getHours(); }
+    function _timeTheme() { const h = _hour(); return (h >= CFG.dayStart && h < CFG.nightStart) ? 'light' : 'dark'; }
+    function _sysTheme() {
+        if (!window.matchMedia) return null;
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
+        if (window.matchMedia('(prefers-color-scheme: light)').matches) return 'light';
+        return null;
+    }
+    function _autoTheme() { return _sysTheme() || _timeTheme(); }
+    function _isManual() {
+        const m = localStorage.getItem(CFG.manualKey);
+        const e = localStorage.getItem(CFG.manualExpiryKey);
+        if (!m || !e) return false;
+        if (Date.now() > parseInt(e)) {
+            localStorage.removeItem(CFG.manualKey);
+            localStorage.removeItem(CFG.manualExpiryKey);
+            return false;
+        }
+        return true;
+    }
+    function _apply(theme, src) {
+        const cur = document.documentElement.getAttribute('data-theme');
+        if (cur === theme) return;
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('tt-theme', theme);
+        S.theme = theme;
+        const e = document.getElementById('ttEmoji');
+        if (e) e.textContent = theme === 'dark' ? '🌙' : '☀️';
+        if (src === 'auto-switch') {
+            showToast(theme === 'dark' ? '🌙 Dark Mode' : '☀️ Light Mode',
+                theme === 'dark' ? 'Switched automatically. Good evening!' : 'Switched automatically. Good morning!', 'info');
+        }
+    }
+    function _check(src) {
+        if (_isManual()) return;
+        const a = _autoTheme();
+        if (a !== _lastAuto) { _lastAuto = a; _apply(a, src); }
+    }
+    return {
+        init() {
+            if (_isManual()) {
+                _apply(localStorage.getItem(CFG.manualKey), 'manual-restore');
+            } else {
+                const a = _autoTheme();
+                _lastAuto = a; _apply(a, 'auto-init');
+            }
+            if (window.matchMedia) {
+                _mq = window.matchMedia('(prefers-color-scheme: dark)');
+                const handler = () => { if (!_isManual()) { const a = _autoTheme(); _lastAuto = a; _apply(a, 'system'); } };
+                _mq.addEventListener ? _mq.addEventListener('change', handler) : _mq.addListener(handler);
+            }
+            _timer = setInterval(() => _check('auto-switch'), CFG.checkInterval);
+        },
+        onManual(theme) {
+            localStorage.setItem(CFG.manualKey, theme);
+            localStorage.setItem(CFG.manualExpiryKey, (Date.now() + CFG.manualDuration).toString());
+            _apply(theme, 'manual');
+            showToast(`${theme === 'dark' ? '🌙' : '☀️'} ${theme === 'dark' ? 'Dark' : 'Light'} Mode`,
+                'Preference saved for 6 hours. Auto mode resumes after.', 'success');
+        },
+        getStatus() {
+            return { current: document.documentElement.getAttribute('data-theme'), auto: _autoTheme(), hour: _hour(), isManual: _isManual() };
+        }
+    };
+})();
+
+/* ============================================================
+   INIT
+============================================================ */
+document.addEventListener('DOMContentLoaded', () => {
+    AutoTheme.init();
+    document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+    const urlInput = document.getElementById('tiktokUrl');
+    urlInput.addEventListener('input', onInput);
+    urlInput.addEventListener('keydown', e => { if (e.key === 'Enter') fetchTikTok(); });
+
+    document.querySelectorAll('.faq-q').forEach(q => {
+        q.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFaq(q); } });
+    });
+    document.getElementById('themeToggle').addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTheme(); }
+    });
+
+    window.addEventListener('scroll', () => {
+        document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 40);
+        document.getElementById('scrollTopBtn').classList.toggle('show', window.scrollY > 400);
+    }, { passive: true });
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const t = document.querySelector(a.getAttribute('href'));
+            if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+        });
+    });
+
+    document.getElementById('hamburgerBtn').addEventListener('click', () => {
+        const nl = document.getElementById('navLinks');
+        const open = nl.classList.toggle('open');
+        document.getElementById('hamburgerBtn').setAttribute('aria-expanded', open);
+    });
+
+    // Star hover effects
+    document.querySelectorAll('.star-btn').forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+            const val = parseInt(btn.dataset.star);
+            document.querySelectorAll('.star-btn').forEach(s => {
+                s.classList.toggle('hover', parseInt(s.dataset.star) <= val);
+            });
+        });
+        btn.addEventListener('mouseleave', () => {
+            document.querySelectorAll('.star-btn').forEach(s => s.classList.remove('hover'));
+            updateStars(S.userRating);
+        });
+    });
+
+    initStats();
+    renderHistory();
+
+    window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); S.pwaPrompt = e; });
+
+    console.log('%c🎵 TikTok Downloader · tiktokdownloader.dilawarpro.com · by Dilawar Pro', 'background:#6C3EF4;color:#fff;padding:8px 18px;border-radius:8px;font-weight:700;');
+    window.AutoTheme = AutoTheme;
+});
+
+/* ============================================================
+   THEME
+============================================================ */
+function toggleTheme() {
+    const cur = document.documentElement.getAttribute('data-theme');
+    AutoTheme.onManual(cur === 'dark' ? 'light' : 'dark');
+}
+
+/* ============================================================
+   ANNOUNCE BAR
+============================================================ */
+function closeAnnounceBar() {
+    const bar = document.getElementById('announceBar');
+    bar.style.maxHeight = bar.offsetHeight + 'px';
+    bar.style.overflow = 'hidden';
+    bar.style.transition = 'max-height 0.4s ease, padding 0.4s ease, opacity 0.3s ease';
+    requestAnimationFrame(() => {
+        bar.style.maxHeight = '0';
+        bar.style.padding = '0';
+        bar.style.opacity = '0';
+    });
+    setTimeout(() => bar.remove(), 400);
+}
+
+/* ============================================================
+   INSTALL PWA
+============================================================ */
+function handleInstall() {
+    if (S.pwaPrompt) {
+        S.pwaPrompt.prompt();
+        S.pwaPrompt.userChoice.then(r => {
+            if (r.outcome === 'accepted') showToast('Installed!', 'TikTok Downloader added to your home screen.', 'success');
+            S.pwaPrompt = null;
+        });
+    } else {
+        showToast('Install TikTok Downloader', 'Tap your browser menu → "Add to Home Screen" to install.', 'info');
+    }
+}
+
+/* ============================================================
+   INPUT
+============================================================ */
+function onInput() {
+    const val = this.value.trim();
+    document.getElementById('clearBtn').style.display = val ? 'flex' : 'none';
+    if (!val) { this.className = 'url-input'; return; }
+    const ok = val.includes('tiktok.com') || val.includes('vm.tiktok.com') || val.includes('vt.tiktok.com');
+    this.className = 'url-input ' + (ok ? 'valid' : 'invalid');
+}
+
+function clearInput() {
+    const el = document.getElementById('tiktokUrl');
+    el.value = ''; el.className = 'url-input';
+    document.getElementById('clearBtn').style.display = 'none';
+    el.focus();
+}
+
+async function pasteURL() {
+    try {
+        const text = await navigator.clipboard.readText();
+        if (text) {
+            document.getElementById('tiktokUrl').value = text;
+            document.getElementById('tiktokUrl').dispatchEvent(new Event('input'));
+            showToast('Pasted!', text.includes('tiktok') ? 'TikTok URL pasted.' : 'Content pasted — verify the URL.', 'success');
+        } else {
+            showToast('Empty Clipboard', 'Nothing in clipboard.', 'error');
+        }
+    } catch {
+        showToast('Permission Denied', 'Allow clipboard access or paste manually (Ctrl+V).', 'error');
+    }
+}
+
+function setExample(type) {
+    const urls = {
+        video: 'https://www.tiktok.com/@mucaash4q/video/7621241062966742292?is_from_webapp=1&sender_device=pc',
+        audio: 'https://www.tiktok.com/@soundscapehits/video/7639120823592160532?is_from_webapp=1&sender_device=pc&web_id=7631390762047309320'
+    };
+    document.getElementById('tiktokUrl').value = urls[type];
+    document.getElementById('tiktokUrl').dispatchEvent(new Event('input'));
+    showToast('Example URL Set!', 'Click Download to test the tool.', 'info');
+}
+
+function scrollToHistory() {
+    document.getElementById('history-section').scrollIntoView({ behavior: 'smooth' });
+}
+
+/* ============================================================
+   SCROLL TO TOP
+============================================================ */
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ============================================================
+   STATS COUNTER
+============================================================ */
+function initStats() {
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { countUp(e.target); obs.unobserve(e.target); } });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-target]').forEach(el => obs.observe(el));
+}
+
+function countUp(el) {
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    let cur = 0;
+    const step = target / (1800 / 16);
+    const t = setInterval(() => {
+        cur = Math.min(cur + step, target);
+        el.textContent = Math.floor(cur) + suffix;
+        if (cur >= target) clearInterval(t);
+    }, 16);
+}
+
+/* ============================================================
+   PROGRESS
+============================================================ */
+function startProgress() {
+    document.getElementById('progressSection').style.display = 'block';
+    document.getElementById('progressFill').style.width = '0%';
+    const steps = [
+        {p:15, t:'Connecting to servers...'},
+        {p:32, t:'Fetching video data...'},
+        {p:55, t:'Extracting caption...'},
+        {p:74, t:'Processing content...'},
+        {p:90, t:'Preparing download links...'}
+    ];
+    let i = 0;
+    clearInterval(S.progressTimer);
+    S.progressTimer = setInterval(() => {
+        if (i < steps.length) {
+            document.getElementById('progressFill').style.width = steps[i].p + '%';
+            document.getElementById('progressLabel').textContent = steps[i].t;
+            document.getElementById('progressPct').textContent = steps[i].p + '%';
+            i++;
+        }
+    }, 550);
+}
+
+function finishProgress() {
+    clearInterval(S.progressTimer);
+    document.getElementById('progressFill').style.width = '100%';
+    document.getElementById('progressLabel').textContent = 'Done!';
+    document.getElementById('progressPct').textContent = '100%';
+    setTimeout(() => { document.getElementById('progressSection').style.display = 'none'; }, 700);
+}
+
+function resetProgress() {
+    clearInterval(S.progressTimer);
+    document.getElementById('progressSection').style.display = 'none';
+}
+
+/* ============================================================
+   FETCH TIKTOK
+============================================================ */
+async function fetchTikTok() {
+    const url = document.getElementById('tiktokUrl').value.trim();
+    if (!url) { showToast('URL Required', 'Paste a TikTok video URL first.', 'error'); document.getElementById('tiktokUrl').focus(); return; }
+    if (!url.includes('tiktok.com')) { showToast('Invalid URL', 'Please enter a valid TikTok URL.', 'error'); return; }
+
+    setLoading(true); hideResult(); startProgress();
+
+    if (S.fetchTimer) clearTimeout(S.fetchTimer);
+    S.fetchTimer = setTimeout(() => { setLoading(false); resetProgress(); showToast('Timeout', 'Request timed out. Try again.', 'error'); }, 30000);
+
+    try {
+        const res = await fetch(`https://www.tikwm.com/api/?url=${encodeURIComponent(url)}&hd=1`);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const json = await res.json();
+        clearTimeout(S.fetchTimer);
+        if (json && json.data && (json.data.play || json.data.images)) {
+            processData(json.data, url);
+        } else throw new Error('No data');
+    } catch (err) {
+        clearTimeout(S.fetchTimer);
+        try { await fetchBackup(url); }
+        catch { setLoading(false); resetProgress(); showToast('Failed', 'Could not load this TikTok. Check the URL and try again.', 'error'); }
+    }
+}
+
+async function fetchBackup(url) {
+    const res = await fetch(`https://api.tikmate.app/api/lookup?url=${encodeURIComponent(url)}`);
+    const json = await res.json();
+    if (json && json.id) {
+        processData({
+            play: `https://tikmate.app/download/${json.token}/${json.id}.mp4`,
+            music: json.musicUrl || null,
+            title: json.desc || '',
+            author: { nickname: json.author || 'TikTok User' },
+            duration: json.duration || 0,
+            images: []
+        }, url);
+    } else throw new Error('Backup failed');
+}
+
+/* ============================================================
+   PROCESS DATA
+============================================================ */
+function processData(data, originalUrl) {
+    S.images = data.images || [];
+    S.caption = data.title || '';
+    S.videoUrl = data.hdplay || data.play || data.playwm || null;
+    S.audioUrl = data.music || (data.music_info && data.music_info.play) || null;
+    S.currentData = data;
+    S.copyCount = 0;
+
+    // Caption
+    const captionEl = document.getElementById('captionArea');
+    captionEl.value = S.caption || 'No caption found for this video.';
+    document.getElementById('charCount').textContent = S.caption ? `${S.caption.length} characters` : '';
+    document.getElementById('copyCountBadge').style.display = 'none';
+
+    // Video Info
+    const author = data.author ? (data.author.nickname || data.author.unique_id || 'Unknown') : 'Unknown';
+    document.getElementById('infoAuthor').textContent = '@' + author;
+    document.getElementById('infoDuration').textContent = fmtDur(data.duration);
+    document.getElementById('infoLikes').textContent = fmtNum(data.digg_count);
+    document.getElementById('infoViews').textContent = fmtNum(data.play_count);
+    document.getElementById('videoInfoCard').style.display = 'block';
+
+    // Preview
+    const videoWrap = document.getElementById('videoWrap');
+    const videoEl = document.getElementById('tiktokVideo');
+    const slideshowWrap = document.getElementById('slideshowWrap');
+    const placeholder = document.getElementById('previewPlaceholder');
+
+    videoWrap.style.display = 'none';
+    slideshowWrap.style.display = 'none';
+    placeholder.style.display = 'none';
+    videoEl.src = '';
+
+    if (S.images.length > 0) {
+        document.getElementById('contentBadge').textContent = `📸 ${S.images.length} Images`;
+        buildSlides(S.images);
+        slideshowWrap.style.display = 'block';
+        document.getElementById('btnMp4').style.display = 'none';
+        document.getElementById('btnAllImg').style.display = 'flex';
+        document.getElementById('btnAllImgSub').textContent = `${S.images.length} slides · Save all at once`;
+    } else if (S.videoUrl) {
+        document.getElementById('contentBadge').textContent = '🎬 HD Video';
+        videoEl.src = S.videoUrl;
+        if (data.cover) videoEl.poster = data.cover;
+        videoWrap.style.display = 'flex';
+        document.getElementById('btnMp4').style.display = 'flex';
+        document.getElementById('btnAllImg').style.display = 'none';
+    } else {
+        placeholder.style.display = 'block';
+    }
+
+    document.getElementById('btnMp3').style.display = S.audioUrl ? 'flex' : 'none';
+
+    // Save to history
+    saveToHistory(data, originalUrl);
+
+    // Reset rating
+    S.userRating = 0;
+    updateStars(0);
+    document.getElementById('ratingLabel').textContent = 'Click a star to rate';
+
+    finishProgress();
+    setLoading(false);
+    showResult();
+    showToast('Success!', 'TikTok content fetched. Caption ready to copy!', 'success');
+    setTimeout(() => { document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 350);
+}
+
+/* ============================================================
+   SLIDESHOW
+============================================================ */
+function buildSlides(images) {
+    const grid = document.getElementById('slidesGrid');
+    grid.innerHTML = '';
+    images.forEach((src, i) => {
+        const card = document.createElement('div');
+        card.className = 'slide-card';
+        card.setAttribute('role', 'listitem');
+        card.innerHTML = `
+            <img src="${src}" alt="TikTok slideshow image ${i+1} of ${images.length}" loading="lazy"
+                onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22300%22%3E%3Crect fill=%22%23161628%22 width=%22200%22 height=%22300%22/%3E%3Ctext fill=%22%238888AA%22 font-size=%2212%22 x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22%3EImage ${i+1}%3C/text%3E%3C/svg%3E'">
+            <div class="slide-over">
+                <span class="slide-num">${i+1} of ${images.length}</span>
+                <button class="slide-dl" onclick="doDownload('${src}','TikTok_Slide_${i+1}.jpg')" aria-label="Download image ${i+1}">
+                    <i class="bi bi-download"></i> Save
+                </button>
+            </div>`;
+        grid.appendChild(card);
+    });
+}
+
+/* ============================================================
+   SHOW/HIDE
+============================================================ */
+function showResult() { document.getElementById('resultSection').style.display = 'block'; }
+function hideResult() {
+    document.getElementById('resultSection').style.display = 'none';
+    document.getElementById('videoInfoCard').style.display = 'none';
+    ['btnMp4','btnMp3','btnAllImg'].forEach(id => document.getElementById(id).style.display = 'none');
+}
+function setLoading(on) {
+    const btn = document.getElementById('fetchBtn');
+    btn.disabled = on;
+    btn.innerHTML = on
+        ? '<i class="bi bi-hourglass-split"></i> Fetching...'
+        : '<i class="bi bi-lightning-charge-fill"></i> Download';
+}
+
+/* ============================================================
+   DOWNLOAD
+============================================================ */
+function doDownload(url, filename) {
+    if (!url) { showToast('No URL', 'Download URL not available.', 'error'); return; }
+    showToast('Starting...', `Preparing ${filename}`, 'info');
+    fetch(url, { mode: 'cors' })
+        .then(r => { if (!r.ok) throw new Error(); return r.blob(); })
+        .then(blob => {
+            const bUrl = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = bUrl; a.download = filename;
+            document.body.appendChild(a); a.click();
+            document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(bUrl), 5000);
+            showToast('Downloaded!', `${filename} saved successfully.`, 'success');
+        })
+        .catch(() => {
+            const a = document.createElement('a');
+            a.href = url; a.download = filename;
+            a.target = '_blank'; a.rel = 'noopener';
+            document.body.appendChild(a); a.click();
+            document.body.removeChild(a);
+            showToast('Opening...', 'Long-press the video to save if it opens in browser.', 'info');
+        });
+}
+
+function doMp4() { if (!S.videoUrl) { showToast('No Video', 'Fetch a TikTok URL first.', 'error'); return; } doDownload(S.videoUrl, 'TikTok_Video_NoWatermark.mp4'); }
+function doMp3() { if (!S.audioUrl) { showToast('No Audio', 'No audio track found.', 'error'); return; } doDownload(S.audioUrl, 'TikTok_Audio.mp3'); }
+function downloadAllSlides() {
+    if (!S.images.length) { showToast('No Images', 'No slideshow images found.', 'error'); return; }
+    showToast('Bulk Download', `Downloading ${S.images.length} images...`, 'info');
+    S.images.forEach((url, i) => setTimeout(() => doDownload(url, `TikTok_Slide_${i+1}.jpg`), i * 900));
+}
+
+/* ============================================================
+   CAPTION
+============================================================ */
+function copyCaption() {
+    const el = document.getElementById('captionArea');
+    const val = el.value;
+    if (!val || val === 'No caption found for this video.') { showToast('No Caption', 'Fetch a TikTok video first.', 'error'); return; }
+    navigator.clipboard.writeText(val)
+        .then(() => {
+            el.classList.add('copy-flash');
+            setTimeout(() => el.classList.remove('copy-flash'), 400);
+            S.copyCount++;
+            document.getElementById('copyCountNum').textContent = S.copyCount;
+            document.getElementById('copyCountBadge').style.display = 'flex';
+            showToast('Caption Copied!', 'TikTok caption copied to clipboard.', 'success');
+        })
+        .catch(() => { el.select(); document.execCommand('copy'); showToast('Copied!', 'Caption copied.', 'success'); });
+}
+
+function saveCaption() {
+    const val = document.getElementById('captionArea').value;
+    if (!val) { showToast('No Caption', 'Fetch a TikTok video first.', 'error'); return; }
+    const blob = new Blob([val], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'TikTok_Caption.txt';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    showToast('Saved!', 'Caption downloaded as TikTok_Caption.txt', 'success');
+}
+
+async function shareCaption() {
+    const val = document.getElementById('captionArea').value;
+    if (!val || val === 'No caption found for this video.') { showToast('No Caption', 'Fetch a TikTok video first.', 'error'); return; }
+    if (navigator.share) {
+        try {
+            await navigator.share({ title: 'TikTok Caption', text: val });
+            showToast('Shared!', 'Caption shared successfully.', 'success');
+        } catch { showToast('Cancelled', 'Share was cancelled.', 'info'); }
+    } else {
+        navigator.clipboard.writeText(val).then(() => showToast('Copied!', 'Share not supported. Caption copied instead.', 'info'));
+    }
+}
+
+/* ============================================================
+   RATING
+============================================================ */
+function rateTool(stars) {
+    S.userRating = stars;
+    updateStars(stars);
+    const labels = ['', 'Poor 😔', 'Fair 😐', 'Good 😊', 'Great 😄', 'Amazing! 🤩'];
+    document.getElementById('ratingLabel').textContent = `${labels[stars]} — Thank you for rating!`;
+    localStorage.setItem('tt-user-rating', stars);
+    showToast('Thank You! ⭐', `You rated us ${stars} star${stars > 1 ? 's' : ''}. We appreciate it!`, 'success');
+}
+
+function updateStars(active) {
+    document.querySelectorAll('.star-btn').forEach(btn => {
+        btn.classList.toggle('active', parseInt(btn.dataset.star) <= active);
+    });
+}
+
+/* ============================================================
+   HISTORY
+============================================================ */
+function saveToHistory(data, url) {
+    const author = data.author ? (data.author.nickname || 'Unknown') : 'Unknown';
+    const item = {
+        id: Date.now(),
+        url,
+        title: data.title || 'No caption',
+        author: '@' + author,
+        type: data.images && data.images.length > 0 ? 'slideshow' : 'video',
+        cover: data.cover || null,
+        videoUrl: data.hdplay || data.play || null,
+        audioUrl: data.music || null,
+        images: data.images || [],
+        timestamp: Date.now()
+    };
+
+    // Remove duplicate URLs
+    S.history = S.history.filter(h => h.url !== url);
+    S.history.unshift(item);
+    if (S.history.length > 10) S.history.pop();
+    localStorage.setItem('tt-history', JSON.stringify(S.history));
+    renderHistory();
+}
+
+function renderHistory() {
+    const list = document.getElementById('historyList');
+    if (!S.history.length) {
+        list.innerHTML = `<div class="history-empty">
+            <i class="bi bi-clock-history" aria-hidden="true"></i>
+            <p style="font-size:0.88rem;font-weight:600;">No downloads yet</p>
+            <p style="font-size:0.78rem;">Your recent downloads will appear here</p>
+        </div>`;
+        return;
+    }
+    list.innerHTML = S.history.map(item => `
+        <div class="history-item" role="listitem">
+            <div class="history-thumb">
+                ${item.cover
+                    ? `<img src="${item.cover}" alt="TikTok video by ${item.author}" loading="lazy" onerror="this.style.display='none'">`
+                    : `<i class="bi bi-${item.type === 'slideshow' ? 'images' : 'camera-video'}" aria-hidden="true"></i>`
+                }
+            </div>
+            <div class="history-info">
+                <div class="history-title">${escHtml(item.title.substring(0, 60))}${item.title.length > 60 ? '...' : ''}</div>
+                <div class="history-meta">
+                    <i class="bi bi-person-circle" aria-hidden="true"></i> ${escHtml(item.author)} ·
+                    <i class="bi bi-${item.type === 'slideshow' ? 'images' : 'camera-video'}" aria-hidden="true"></i> ${item.type === 'slideshow' ? `${item.images.length} images` : 'Video'} ·
+                    ${fmtTime(item.timestamp)}
+                </div>
+            </div>
+            <div class="history-actions">
+                <button class="history-btn" onclick="reloadHistory(${item.id})" aria-label="Reload this download">
+                    <i class="bi bi-arrow-clockwise" aria-hidden="true"></i> Reload
+                </button>
+                <button class="history-btn" onclick="copyHistoryCaption(${item.id})" aria-label="Copy caption from history">
+                    <i class="bi bi-clipboard" aria-hidden="true"></i> Copy
+                </button>
+                <button class="history-btn" onclick="removeHistory(${item.id})" style="color:var(--secondary);" aria-label="Remove from history">
+                    <i class="bi bi-trash" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function reloadHistory(id) {
+    const item = S.history.find(h => h.id === id);
+    if (!item) return;
+    document.getElementById('tiktokUrl').value = item.url;
+    document.getElementById('tiktokUrl').dispatchEvent(new Event('input'));
+    fetchTikTok();
+    document.getElementById('downloader').scrollIntoView({ behavior: 'smooth' });
+}
+
+function copyHistoryCaption(id) {
+    const item = S.history.find(h => h.id === id);
+    if (!item || !item.title) { showToast('No Caption', 'No caption in history.', 'error'); return; }
+    navigator.clipboard.writeText(item.title)
+        .then(() => showToast('Copied!', 'Caption copied from history.', 'success'))
+        .catch(() => showToast('Failed', 'Could not copy caption.', 'error'));
+}
+
+function removeHistory(id) {
+    S.history = S.history.filter(h => h.id !== id);
+    localStorage.setItem('tt-history', JSON.stringify(S.history));
+    renderHistory();
+    showToast('Removed', 'Item removed from history.', 'info');
+}
+
+function clearHistory() {
+    if (!S.history.length) { showToast('Already Empty', 'History is already empty.', 'info'); return; }
+    S.history = [];
+    localStorage.setItem('tt-history', '[]');
+    renderHistory();
+    showToast('History Cleared', 'Download history has been cleared.', 'success');
+}
+
+/* ============================================================
+   FAQ
+============================================================ */
+function toggleFaq(el) {
+    const item = el.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-q').setAttribute('aria-expanded','false'); });
+    if (!wasOpen) { item.classList.add('open'); el.setAttribute('aria-expanded','true'); }
+}
+
+/* ============================================================
+   TOAST
+============================================================ */
+function showToast(title, sub, type = 'success') {
+    const icons = { success:'bi-check-circle-fill', error:'bi-x-circle-fill', info:'bi-info-circle-fill' };
+    const box = document.getElementById('toastBox');
+    const el = document.createElement('div');
+    el.className = `toast-el ${type}`;
+    el.innerHTML = `
+        <div class="toast-ico"><i class="bi ${icons[type] || icons.info}" aria-hidden="true"></i></div>
+        <div><span class="toast-title">${title}</span><span class="toast-sub">${sub}</span></div>`;
+    box.appendChild(el);
+    requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('show')));
+    setTimeout(() => { el.classList.add('hide'); setTimeout(() => el.remove(), 400); }, 3800);
+}
+
+/* ============================================================
+   HELPERS
+============================================================ */
+function fmtDur(s) { if (!s) return '—'; return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`; }
+function fmtNum(n) { if (!n) return '—'; if (n>=1e6) return (n/1e6).toFixed(1)+'M'; if (n>=1e3) return (n/1e3).toFixed(1)+'K'; return String(n); }
+function fmtTime(ts) {
+    const diff = Date.now() - ts;
+    if (diff < 60000) return 'Just now';
+    if (diff < 3600000) return `${Math.floor(diff/60000)}m ago`;
+    if (diff < 86400000) return `${Math.floor(diff/3600000)}h ago`;
+    return `${Math.floor(diff/86400000)}d ago`;
+}
+function escHtml(str) {
+    const d = document.createElement('div');
+    d.appendChild(document.createTextNode(str));
+    return d.innerHTML;
+}
+</script> -->
+<script>
+            let deferredPrompt;
+            // Listen for the `beforeinstallprompt` event
+            window.addEventListener('beforeinstallprompt', (e) => {
+              e.preventDefault(); // Prevent the default mini-infobar from appearing
+              deferredPrompt = e; // Save the event for later use
+              const installButton = document.getElementById('install-button');
+              installButton.style.display = 'block'; // Show the "Add to Home" button
+              // Add click event listener to the button
+              installButton.addEventListener('click', async () => {
+                if (deferredPrompt) {
+                  deferredPrompt.prompt(); // Show the install prompt
+                  const {
+                    outcome
+                  } = await deferredPrompt.userChoice;
+                  if (outcome === 'accepted') {
+                    console.log('User accepted the install prompt');
+                  } else {
+                    console.log('User dismissed the install prompt');
+                  }
+                  deferredPrompt = null; // Reset the deferred prompt
+                }
+              });
+            });
+            // Hide the button if the app is already installed
+            window.addEventListener('appinstalled', () => {
+              console.log('PWA installed');
+              const installButton = document.getElementById('install-button');
+              installButton.style.display = 'none'; // Hide the "Add to Home" button
+            });
+            if ("serviceWorker" in navigator) {
+              window.addEventListener("load", () => {
+                navigator.serviceWorker.register("service-worker.js").then(registration => {
+                  console.log("Service Worker registered with scope:", registration.scope);
+                }).catch(error => {
+                  console.error("Service Worker registration failed:", error);
+                });
+              });
+            }
+        </script>
+</body>
+</html>
