@@ -150,13 +150,14 @@
            NAVBAR
         ============================================================ */
         .main-nav {
-            background:var(--nav-bg);
+            background: rgb(245 244 255 / 0%);
             border:1px solid rgba(255,255,255,0.16);
             backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
             box-shadow:0 12px 35px rgba(0,0,0,0.12);
-            padding:11px 0; position:fixed; top:0; left:0; right:0; width:100%; z-index:1000;
+            padding:11px 0; position:fixed; top:0; left:0; right:0; width:100%; z-index:99999999;
             transition:var(--transition);
             background-clip:padding-box;
+
         }
         .main-nav.scrolled { box-shadow:0 4px 30px rgba(0,0,0,0.12); }
         .brand {
