@@ -217,7 +217,7 @@ async function pasteURL() {
         if (text) {
             document.getElementById('tiktokUrl').value = text;
             document.getElementById('tiktokUrl').dispatchEvent(new Event('input'));
-            showToast('Pasted!', text.includes('tiktok') ? 'TikTok URL pasted.' : 'Content pasted — verify the URL.', 'success');
+            showToast('Pasted!', text.includes('tiktok') ? 'TikTok URL pasted.' : 'Content pasted. Please verify the URL.', 'success');
         } else {
             showToast('Empty Clipboard', 'Nothing in clipboard.', 'error');
         }
@@ -547,7 +547,7 @@ function rateTool(stars) {
     S.userRating = stars;
     updateStars(stars);
     const labels = ['', 'Poor 😔', 'Fair 😐', 'Good 😊', 'Great 😄', 'Amazing! 🤩'];
-    document.getElementById('ratingLabel').textContent = `${labels[stars]} — Thank you for rating!`;
+    document.getElementById('ratingLabel').textContent = `${labels[stars]}. Thank you for rating!`;
     localStorage.setItem('tt-user-rating', stars);
     showToast('Thank You! ⭐', `You rated us ${stars} star${stars > 1 ? 's' : ''}. We appreciate it!`, 'success');
 }
@@ -686,8 +686,8 @@ function showToast(title, sub, type = 'success') {
 /* ============================================================
    HELPERS
 ============================================================ */
-function fmtDur(s) { if (!s) return '—'; return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`; }
-function fmtNum(n) { if (!n) return '—'; if (n>=1e6) return (n/1e6).toFixed(1)+'M'; if (n>=1e3) return (n/1e3).toFixed(1)+'K'; return String(n); }
+function fmtDur(s) { if (!s) return 'N/A'; return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`; }
+function fmtNum(n) { if (!n) return 'N/A'; if (n>=1e6) return (n/1e6).toFixed(1)+'M'; if (n>=1e3) return (n/1e3).toFixed(1)+'K'; return String(n); }
 function fmtTime(ts) {
     const diff = Date.now() - ts;
     if (diff < 60000) return 'Just now';
