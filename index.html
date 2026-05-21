@@ -161,6 +161,7 @@
             max-width:100vw;
             min-width:0;
             overflow-x:hidden;
+            padding-top:calc(72px + env(safe-area-inset-top));
             line-height:1.7;
             transition:background 0.4s ease, color 0.4s ease;
         }
@@ -216,10 +217,12 @@
         ============================================================ */
         .main-nav {
             background:var(--nav-bg);
+            border:1px solid rgba(255,255,255,0.16);
             backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
-            border-bottom:1px solid var(--border-light);
-            padding:11px 0; position:sticky; top:0; z-index:1000;
+            box-shadow:0 12px 35px rgba(0,0,0,0.12);
+            padding:11px 0; position:fixed; top:0; left:0; right:0; width:100%; z-index:1000;
             transition:var(--transition);
+            background-clip:padding-box;
         }
         .main-nav.scrolled { box-shadow:0 4px 30px rgba(0,0,0,0.12); }
         .brand {
