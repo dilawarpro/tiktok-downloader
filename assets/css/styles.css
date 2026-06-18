@@ -312,7 +312,7 @@
 #pasteBtn:hover, .clear-btn:hover {
     color: #6c3ef4;
 }
-        .btn-main-dl {
+        /* .btn-main-dl {
             background:var(--gradient-btn);border:none;color:white;border-radius:50px;padding:13px 28px;
             font-weight:800;font-size:0.92rem;transition:var(--transition);
             display:flex;align-items:center;gap:7px;cursor:pointer;white-space:nowrap;position:relative;overflow:hidden;
@@ -320,7 +320,7 @@
         .btn-main-dl::after { content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);transform:translateX(-100%);transition:0.5s; }
         .btn-main-dl:hover::after { transform:translateX(100%); }
         .btn-main-dl:hover { transform:translateY(-2px);box-shadow:0 12px 35px rgba(108,62,244,0.45);color:white; }
-        .btn-main-dl:disabled { opacity:0.6;cursor:not-allowed;transform:none; }
+        .btn-main-dl:disabled { opacity:0.6;cursor:not-allowed;transform:none; } */
 
         /* Progress */
         .progress-section { display:none;margin-top:16px; }
