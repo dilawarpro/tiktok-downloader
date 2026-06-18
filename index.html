@@ -153,32 +153,129 @@
                 save slideshows, all <strong>FREE</strong>. No login required.
             </p>
 
-            <!-- Download Box -->
-            <div class="dl-box">
-                <div class="url-label">
-                    <i class="bi bi-link-45deg" aria-hidden="true"></i>
-                    Paste TikTok Video URL Below
-                </div>
-                <div class="input-row">
-                    <div class="url-input-wrap">
-                        <input
-                            type="url" id="tiktokUrl" class="url-input"
-                            placeholder="https://www.tiktok.com/@username/video/..."
-                            aria-label="TikTok video URL input"
-                            autocomplete="off" spellcheck="false" autofocus
-                        >
-                        <button class="clear-btn" id="clearBtn" onclick="clearInput()" aria-label="Clear URL input">
-                            <i class="bi bi-x-lg"></i>
-                        </button>
-                    </div>
-                    <button class="btn-paste" onclick="pasteURL()" aria-label="Paste URL from clipboard">
-                        <i class="bi bi-clipboard" aria-hidden="true"></i> Paste
-                    </button>
-                    <button class="btn-main-dl" id="fetchBtn" onclick="fetchTikTok()" aria-label="Download TikTok content">
-                        <i class="bi bi-lightning-charge-fill" aria-hidden="true"></i> Download
-                    </button>
-                </div>
+          <!-- Download Box -->
+<div class="dl-box">
+    <div class="url-label">
+        <i class="bi bi-link-45deg" aria-hidden="true"></i>
+        Paste TikTok Video URL Below
+    </div>
 
+    <div class="input-row">
+        <div class="url-input-wrap">
+            <input
+                type="url"
+                id="tiktokUrl"
+                class="url-input"
+                placeholder="https://www.tiktok.com/@username/video/..."
+                aria-label="TikTok video URL input"
+                autocomplete="off"
+                spellcheck="false"
+                autofocus
+            >
+
+            <!-- Paste Button -->
+            <button
+                type="button"
+                class="input-action-btn"
+                id="pasteBtn"
+                onclick="pasteURL()"
+                aria-label="Paste URL from clipboard">
+                <i class="bi bi-clipboard"></i>
+            </button>
+
+            <!-- Clear Button -->
+            <button
+                type="button"
+                class="input-action-btn"
+                id="clearBtn"
+                onclick="clearInput()"
+                aria-label="Clear URL input">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <button
+            class="btn-main-dl"
+            id="fetchBtn"
+            onclick="fetchTikTok()"
+            aria-label="Download TikTok content">
+            <i class="bi bi-lightning-charge-fill" aria-hidden="true"></i>
+            Download
+        </button>
+    </div>
+</div>
+<style>
+    .url-input-wrap {
+    position: relative;
+    flex: 1;
+}
+
+.url-input {
+    width: 100%;
+    padding: 14px 50px 14px 14px; /* space for icon button */
+}
+
+.input-action-btn {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.input-action-btn:hover {
+    color: #000;
+}
+
+#clearBtn {
+    display: none;
+}
+</style>
+<script>
+ const urlInput = document.getElementById("tiktokUrl");
+const pasteBtn = document.getElementById("pasteBtn");
+const clearBtn = document.getElementById("clearBtn");
+
+// Toggle buttons based on input value
+function toggleInputButtons() {
+    const hasValue = urlInput.value.trim() !== "";
+
+    pasteBtn.style.display = hasValue ? "none" : "flex";
+    clearBtn.style.display = hasValue ? "flex" : "none";
+}
+
+// Clear input
+function clearInput() {
+    urlInput.value = "";
+    toggleInputButtons();
+    urlInput.focus();
+}
+
+// Paste URL
+async function pasteURL() {
+    try {
+        const text = await navigator.clipboard.readText();
+        urlInput.value = text;
+        toggleInputButtons();
+    } catch (err) {
+        console.error("Clipboard access denied", err);
+    }
+}
+
+// Detect typing/pasting manually
+urlInput.addEventListener("input", toggleInputButtons);
+
+// Initial state
+toggleInputButtons();
+</script>
                 <!-- Progress -->
                 <div class="progress-section" id="progressSection">
                     <div class="progress-header">
