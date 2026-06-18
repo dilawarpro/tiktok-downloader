@@ -153,108 +153,32 @@
                 save slideshows, all <strong>FREE</strong>. No login required.
             </p>
 
-<!-- Download Box -->
-<div class="dl-box">
-    <div class="url-label">
-        <i class="bi bi-link-45deg" aria-hidden="true"></i>
-        Paste TikTok Video URL Below
-    </div>
+            <!-- Download Box -->
+            <div class="dl-box">
+                <div class="url-label">
+                    <i class="bi bi-link-45deg" aria-hidden="true"></i>
+                    Paste TikTok Video URL Below
+                </div>
+                <div class="input-row">
+                    <div class="url-input-wrap">
+                        <input
+                            type="url" id="tiktokUrl" class="url-input"
+                            placeholder="https://www.tiktok.com/@username/video/..."
+                            aria-label="TikTok video URL input"
+                            autocomplete="off" spellcheck="false" autofocus
+                        >
+                        <button class="clear-btn" id="clearBtn" onclick="clearInput()" aria-label="Clear URL input">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+                    <button class="btn-paste" onclick="pasteURL()" aria-label="Paste URL from clipboard">
+                        <i class="bi bi-clipboard" aria-hidden="true"></i> Paste
+                    </button>
+                    <button class="btn-main-dl" id="fetchBtn" onclick="fetchTikTok()" aria-label="Download TikTok content">
+                        <i class="bi bi-lightning-charge-fill" aria-hidden="true"></i> Download
+                    </button>
+                </div>
 
-    <div class="input-row">
-        <div class="url-input-wrap">
-            <input
-                type="url"
-                id="tiktokUrl"
-                class="url-input"
-                placeholder="https://www.tiktok.com/@username/video/..."
-                aria-label="TikTok video URL"
-                autocomplete="off"
-                spellcheck="false"
-                autofocus
-            >
-
-            <button
-                type="button"
-                id="pasteBtn"
-                class="input-action-btn"
-                onclick="pasteURL()"
-                aria-label="Paste URL from clipboard">
-                <i class="bi bi-clipboard"></i>
-            </button>
-
-            <button
-                type="button"
-                id="clearBtn"
-                class="input-action-btn"
-                onclick="clearInput()"
-                aria-label="Clear URL">
-                <i class="bi bi-x-lg"></i>
-            </button>
-        </div>
-
-        <button
-            class="btn-main-dl"
-            id="fetchBtn"
-            onclick="fetchTikTok()"
-            aria-label="Download TikTok video">
-            <i class="bi bi-lightning-charge-fill" aria-hidden="true"></i>
-            Download
-        </button>
-    </div>
-</div>
-<style>
-    .url-input-wrap{
-    position:relative;
-    flex:1;
-}
-
-.url-input{
-    width:100%;
-    padding-right:52px;
-}
-
-.input-action-btn{
-    position:absolute;
-    top:50%;
-    right:14px;
-    transform:translateY(-50%);
-    border:none;
-    background:none;
-    color:var(--text-muted);
-    cursor:pointer;
-    font-size:1rem;
-    padding:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:var(--transition);
-}
-
-.input-action-btn:hover{
-    color:var(--primary);
-}
-
-#clearBtn{
-    display:none;
-}
-</style>
-<script>
-const urlInput = document.getElementById('tiktokUrl');
-const pasteBtn = document.getElementById('pasteBtn');
-const clearBtn = document.getElementById('clearBtn');
-
-function toggleInputButtons() {
-    const hasValue = urlInput.value.trim().length > 0;
-
-    pasteBtn.style.display = hasValue ? 'none' : 'flex';
-    clearBtn.style.display = hasValue ? 'flex' : 'none';
-}
-
-urlInput.addEventListener('input', toggleInputButtons);
-
-document.addEventListener('DOMContentLoaded', toggleInputButtons);
-
-</script>
                 <!-- Progress -->
                 <div class="progress-section" id="progressSection">
                     <div class="progress-header">

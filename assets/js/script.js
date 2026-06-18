@@ -214,33 +214,18 @@ function clearInput() {
 async function pasteURL() {
     try {
         const text = await navigator.clipboard.readText();
-
         if (text) {
-            urlInput.value = text;
-            toggleInputButtons();
-
-            showToast(
-                'Pasted!',
-                text.includes('tiktok')
-                    ? 'TikTok URL pasted.'
-                    : 'Content pasted. Please verify the URL.',
-                'success'
-            );
+            document.getElementById('tiktokUrl').value = text;
+            document.getElementById('tiktokUrl').dispatchEvent(new Event('input'));
+            showToast('Pasted!', text.includes('tiktok') ? 'TikTok URL pasted.' : 'Content pasted. Please verify the URL.', 'success');
         } else {
-            showToast(
-                'Empty Clipboard',
-                'Nothing in clipboard.',
-                'error'
-            );
+            showToast('Empty Clipboard', 'Nothing in clipboard.', 'error');
         }
     } catch {
-        showToast(
-            'Permission Denied',
-            'Allow clipboard access or paste manually (Ctrl+V).',
-            'error'
-        );
+        showToast('Permission Denied', 'Allow clipboard access or paste manually (Ctrl+V).', 'error');
     }
 }
+
 function setExample(type) {
     const urls = {
         video: 'https://www.tiktok.com/@mucaash4q/video/7621241062966742292?is_from_webapp=1&sender_device=pc',
