@@ -219,7 +219,7 @@
         @keyframes live-pulse { 0%,100%{box-shadow:0 0 0 0 rgba(0,200,83,0.4);} 50%{box-shadow:0 0 0 6px rgba(0,200,83,0);} }
         .hero-title { font-size:clamp(2rem,5.5vw,4rem);font-weight:900;line-height:1.1;margin-bottom:18px;animation:fadeInUp 0.7s ease both;animation-delay:0.1s; }
         .text-gradient { background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
-        .hero-subtitle { font-size:1rem;color:var(--text-muted);max-width:580px;margin:0 auto 36px;animation:fadeInUp 0.7s ease both;animation-delay:0.2s; }
+        .hero-subtitle { font-size:1rem;color:var(--text-muted);max-width:580px; margin:20px auto 0;animation:fadeInUp 0.7s ease both;animation-delay:0.2s; }
 
         /* ============================================================
            DOWNLOAD BOX
