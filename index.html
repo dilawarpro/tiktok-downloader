@@ -159,25 +159,86 @@
                     <i class="bi bi-link-45deg" aria-hidden="true"></i>
                     Paste TikTok Video URL Below
                 </div>
-                <div class="input-row">
-                    <div class="url-input-wrap">
-                        <input
-                            type="url" id="tiktokUrl" class="url-input"
-                            placeholder="https://www.tiktok.com/@username/video/..."
-                            aria-label="TikTok video URL input"
-                            autocomplete="off" spellcheck="false"
-                        >
-                        <button class="clear-btn" id="clearBtn" onclick="clearInput()" aria-label="Clear URL input">
-                            <i class="bi bi-x-lg"></i>
-                        </button>
-                    </div>
-                    <button class="btn-paste" onclick="pasteURL()" aria-label="Paste URL from clipboard">
-                        <i class="bi bi-clipboard" aria-hidden="true"></i> Paste
-                    </button>
-                    <button class="btn-main-dl" id="fetchBtn" onclick="fetchTikTok()" aria-label="Download TikTok content">
-                        <i class="bi bi-lightning-charge-fill" aria-hidden="true"></i> Download
-                    </button>
-                </div>
+               <div class="input-row">
+    <div class="url-input-wrap">
+        <input
+            type="url"
+            id="tiktokUrl"
+            class="url-input"
+            placeholder="https://www.tiktok.com/@username/video/..."
+            aria-label="TikTok video URL input"
+            autocomplete="off"
+            spellcheck="false"
+        >
+
+        <!-- Paste Button -->
+        <button
+            class="paste-btn"
+            onclick="pasteURL()"
+            aria-label="Paste URL from clipboard"
+            type="button"
+        >
+            <i class="bi bi-clipboard"></i>
+        </button>
+
+        <!-- Clear Button -->
+        <button
+            class="clear-btn"
+            id="clearBtn"
+            onclick="clearInput()"
+            aria-label="Clear URL input"
+            type="button"
+        >
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
+
+    <button
+        class="btn-main-dl"
+        id="fetchBtn"
+        onclick="fetchTikTok()"
+        aria-label="Download TikTok content"
+    >
+        <i class="bi bi-lightning-charge-fill"></i> Download
+    </button>
+</div>
+<style>
+    .url-input-wrap {
+    position: relative;
+    flex: 1;
+}
+
+.url-input {
+    width: 100%;
+    padding-right: 90px; /* Space for Paste & Clear icons */
+}
+
+.paste-btn,
+.clear-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #6c757d;
+    font-size: 18px;
+    transition: color 0.2s ease;
+}
+
+.paste-btn:hover,
+.clear-btn:hover {
+    color: #000;
+}
+
+.paste-btn {
+    right: 45px;
+}
+
+.clear-btn {
+    right: 12px;
+}
+</style>
 
                 <!-- Progress -->
                 <div class="progress-section" id="progressSection">
