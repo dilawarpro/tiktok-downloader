@@ -147,6 +147,11 @@
                 <span class="text-gradient">TikTok Downloader</span><br>
                 Without Watermark
             </h1>
+            <p class="hero-subtitle">
+                Download TikTok videos in HD MP4, extract MP3 audio,
+                <strong>copy &amp; download TikTok captions</strong>,
+                save slideshows, all <strong>FREE</strong>. No login required.
+            </p>
 
             <!-- Download Box -->
             <div class="dl-box">
@@ -155,28 +160,20 @@
                     Paste TikTok Video URL Below
                 </div>
                 <div class="input-row">
-                   <div class="url-input-wrap">
-    <input type="url" id="tiktokUrl" class="url-input" 
-           placeholder="https://www.tiktok.com/@username/video/..." 
-           aria-label="TikTok video URL input" 
-           autocomplete="off" 
-           spellcheck="false">
-    
-    <!-- Clear Button (hidden by default) -->
-    <button class="clear-btn" id="clearBtn" aria-label="Clear URL input">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-        </svg>
-    </button>
-
-    <!-- Paste Button -->
-    <button id="pasteBtn" type="button" aria-label="Paste from clipboard">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
-            <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
-        </svg>
-    </button>
-</div>
+                    <div class="url-input-wrap">
+                        <input
+                            type="url" id="tiktokUrl" class="url-input"
+                            placeholder="https://www.tiktok.com/@username/video/..."
+                            aria-label="TikTok video URL input"
+                            autocomplete="off" spellcheck="false" autofocus
+                        >
+                        <button class="clear-btn" id="clearBtn" onclick="clearInput()" aria-label="Clear URL input">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+                    <button class="btn-paste" onclick="pasteURL()" aria-label="Paste URL from clipboard">
+                        <i class="bi bi-clipboard" aria-hidden="true"></i> Paste
+                    </button>
                     <button class="btn-main-dl" id="fetchBtn" onclick="fetchTikTok()" aria-label="Download TikTok content">
                         <i class="bi bi-lightning-charge-fill" aria-hidden="true"></i> Download
                     </button>
@@ -199,12 +196,14 @@
                     <span class="quick-tag" onclick="setExample('audio')"><i class="bi bi-music-note" aria-hidden="true"></i> Try Example Audio</span>
                     <span class="quick-tag" onclick="scrollToHistory()"><i class="bi bi-clock-history" aria-hidden="true"></i> View History</span>
                 </div>
+
+                <!-- Disclaimer -->
+                <!-- <div class="disclaimer">
+                    <i class="bi bi-shield-check" aria-hidden="true"></i>
+                    <span><strong>Personal Use Only.</strong> Not affiliated with TikTok or ByteDance. Please respect copyright and creators' rights.</span>
+                </div> -->
             </div>
-  <p class="hero-subtitle">
-                Download TikTok videos in HD MP4, extract MP3 audio,
-                <strong>copy &amp; download TikTok captions</strong>,
-                save slideshows, all <strong>FREE</strong>. No login required.
-            </p>
+
             <a href="#" onclick="handleInstall(); return false;" class="btn-install-hero" aria-label="Install TikTok Downloader as web app">
                 <i class="bi bi-phone-fill" aria-hidden="true"></i>
                 Add to Home Screen. 100% Free!

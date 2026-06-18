@@ -211,63 +211,20 @@ function clearInput() {
     el.focus();
 }
 
-const input = document.getElementById('tiktokUrl');
-const clearBtn = document.getElementById('clearBtn');
-const pasteBtn = document.getElementById('pasteBtn');
-
-// Toggle Clear button visibility
-input.addEventListener('input', () => {
-    clearBtn.style.display = input.value ? 'flex' : 'none';
-});
-
-// Clear input function
-clearBtn.addEventListener('click', () => {
-    input.value = '';
-    clearBtn.style.display = 'none';
-    input.focus();
-
-    showToast(
-        'Cleared',
-        'URL removed successfully.',
-        'success'
-    );
-});
-
-// Paste from clipboard function
-pasteBtn.addEventListener('click', async () => {
+async function pasteURL() {
     try {
         const text = await navigator.clipboard.readText();
-
         if (text) {
-            input.value = text;
-
-            // Trigger input event to show clear button
-            input.dispatchEvent(new Event('input'));
-
-            showToast(
-                'Pasted!',
-                text.includes('tiktok')
-                    ? 'TikTok URL pasted.'
-                    : 'Content pasted. Please verify the URL.',
-                'success'
-            );
+            document.getElementById('tiktokUrl').value = text;
+            document.getElementById('tiktokUrl').dispatchEvent(new Event('input'));
+            showToast('Pasted!', text.includes('tiktok') ? 'TikTok URL pasted.' : 'Content pasted. Please verify the URL.', 'success');
         } else {
-            showToast(
-                'Empty Clipboard',
-                'Nothing in clipboard.',
-                'error'
-            );
+            showToast('Empty Clipboard', 'Nothing in clipboard.', 'error');
         }
-    } catch (err) {
-        console.error('Failed to read clipboard:', err);
-
-        showToast(
-            'Permission Denied',
-            'Allow clipboard access or paste manually (Ctrl+V).',
-            'error'
-        );
+    } catch {
+        showToast('Permission Denied', 'Allow clipboard access or paste manually (Ctrl+V).', 'error');
     }
-});
+}
 
 function setExample(type) {
     const urls = {
