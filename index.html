@@ -153,7 +153,7 @@
                 save slideshows, all <strong>FREE</strong>. No login required.
             </p>
 
-          <!-- Download Box -->
+<!-- Download Box -->
 <div class="dl-box">
     <div class="url-label">
         <i class="bi bi-link-45deg" aria-hidden="true"></i>
@@ -167,29 +167,27 @@
                 id="tiktokUrl"
                 class="url-input"
                 placeholder="https://www.tiktok.com/@username/video/..."
-                aria-label="TikTok video URL input"
+                aria-label="TikTok video URL"
                 autocomplete="off"
                 spellcheck="false"
                 autofocus
             >
 
-            <!-- Paste Button -->
             <button
                 type="button"
-                class="input-action-btn"
                 id="pasteBtn"
+                class="input-action-btn"
                 onclick="pasteURL()"
                 aria-label="Paste URL from clipboard">
                 <i class="bi bi-clipboard"></i>
             </button>
 
-            <!-- Clear Button -->
             <button
                 type="button"
-                class="input-action-btn"
                 id="clearBtn"
+                class="input-action-btn"
                 onclick="clearInput()"
-                aria-label="Clear URL input">
+                aria-label="Clear URL">
                 <i class="bi bi-x-lg"></i>
             </button>
         </div>
@@ -198,83 +196,64 @@
             class="btn-main-dl"
             id="fetchBtn"
             onclick="fetchTikTok()"
-            aria-label="Download TikTok content">
+            aria-label="Download TikTok video">
             <i class="bi bi-lightning-charge-fill" aria-hidden="true"></i>
             Download
         </button>
     </div>
 </div>
 <style>
-    .url-input-wrap {
-    position: relative;
-    flex: 1;
+    .url-input-wrap{
+    position:relative;
+    flex:1;
 }
 
-.url-input {
-    width: 100%;
-    padding: 14px 50px 14px 14px; /* space for icon button */
+.url-input{
+    width:100%;
+    padding-right:52px;
 }
 
-.input-action-btn {
-    position: absolute;
-    top: 50%;
-    right: 12px;
-    transform: translateY(-50%);
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    font-size: 18px;
-    color: #666;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: color 0.2s ease;
+.input-action-btn{
+    position:absolute;
+    top:50%;
+    right:14px;
+    transform:translateY(-50%);
+    border:none;
+    background:none;
+    color:var(--text-muted);
+    cursor:pointer;
+    font-size:1rem;
+    padding:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:var(--transition);
 }
 
-.input-action-btn:hover {
-    color: #000;
+.input-action-btn:hover{
+    color:var(--primary);
 }
 
-#clearBtn {
-    display: none;
+#clearBtn{
+    display:none;
 }
 </style>
 <script>
- const urlInput = document.getElementById("tiktokUrl");
-const pasteBtn = document.getElementById("pasteBtn");
-const clearBtn = document.getElementById("clearBtn");
+const urlInput = document.getElementById('tiktokUrl');
+const pasteBtn = document.getElementById('pasteBtn');
+const clearBtn = document.getElementById('clearBtn');
 
-// Toggle buttons based on input value
 function toggleInputButtons() {
-    const hasValue = urlInput.value.trim() !== "";
+    const hasValue = urlInput.value.trim().length > 0;
 
-    pasteBtn.style.display = hasValue ? "none" : "flex";
-    clearBtn.style.display = hasValue ? "flex" : "none";
+    pasteBtn.style.display = hasValue ? 'none' : 'flex';
+    clearBtn.style.display = hasValue ? 'flex' : 'none';
 }
 
-// Clear input
-function clearInput() {
-    urlInput.value = "";
-    toggleInputButtons();
-    urlInput.focus();
-}
+urlInput.addEventListener('input', toggleInputButtons);
 
-// Paste URL
-async function pasteURL() {
-    try {
-        const text = await navigator.clipboard.readText();
-        urlInput.value = text;
-        toggleInputButtons();
-    } catch (err) {
-        console.error("Clipboard access denied", err);
-    }
-}
+document.addEventListener('DOMContentLoaded', toggleInputButtons);
 
-// Detect typing/pasting manually
-urlInput.addEventListener("input", toggleInputButtons);
-
-// Initial state
-toggleInputButtons();
 </script>
                 <!-- Progress -->
                 <div class="progress-section" id="progressSection">
