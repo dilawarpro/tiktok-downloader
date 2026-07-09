@@ -775,6 +775,133 @@
         </div>
     </div>
 </footer>
+<!-- Modal for monetization -->
+<style>
+  .mm-overlay{
+    position:fixed; inset:0; background:rgba(17,10,33,0.6);
+    backdrop-filter: blur(6px);
+    display:flex; align-items:center; justify-content:center;
+    z-index:9999; opacity:0; pointer-events:none;
+    transition: opacity .3s ease;
+    padding: 20px;
+  }
+  .mm-overlay.show{ opacity:1; pointer-events:auto; }
+
+  .mm-card{
+    position:relative;
+    width:100%; max-width:400px;
+    background:#fff;
+    border-radius:24px;
+    overflow:hidden;
+    text-align:center;
+    padding: 44px 32px 32px;
+    transform: translateY(20px) scale(.96);
+    transition: transform .4s cubic-bezier(.2,.9,.25,1);
+    box-shadow: 0 40px 90px rgba(30,10,60,0.4);
+    font-family:'Segoe UI', Inter, -apple-system, sans-serif;
+  }
+  .mm-overlay.show .mm-card{ transform: translateY(0) scale(1); }
+
+  .mm-close{
+    position:absolute; top:16px; right:16px;
+    width:30px; height:30px; border-radius:50%;
+    background:#F3EEFC; border:none; color:#7C2FD1;
+    font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    transition: background .2s, transform .2s;
+  }
+  .mm-close:hover{ background:#E9DFFB; transform: rotate(90deg); }
+
+  .mm-icon{
+    width:64px; height:64px; margin:0 auto 20px;
+    border-radius:18px;
+    background:linear-gradient(135deg,#7C2FD1,#EE2A8B);
+    display:flex; align-items:center; justify-content:center;
+    font-size:30px;
+    box-shadow: 0 12px 24px rgba(124,47,209,0.35);
+  }
+
+  .mm-card h2{
+    margin:0 0 10px;
+    font-size:23px; line-height:1.3; font-weight:800;
+    color:#17102B;
+  }
+  .mm-card h2 span{
+    background:linear-gradient(135deg,#7C2FD1,#EE2A8B);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+
+  .mm-sub{
+    color:#6b5a91; font-size:14.5px; line-height:1.6;
+    margin:0 0 26px;
+  }
+
+  .mm-cta{
+    width:100%;
+    background:linear-gradient(135deg,#7C2FD1,#EE2A8B);
+    color:#fff; border:none; padding:16px 20px; border-radius:14px;
+    font-weight:700; font-size:15px; cursor:pointer;
+    box-shadow: 0 12px 28px rgba(124,47,209,0.35);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .mm-cta:hover{ transform: translateY(-2px); box-shadow: 0 16px 34px rgba(124,47,209,0.45); }
+
+  .mm-dismiss{
+    display:block; margin:16px auto 0;
+    background:none; border:none; color:#a597c0;
+    font-size:13px; cursor:pointer; padding:4px;
+  }
+  .mm-dismiss:hover{ color:#7C2FD1; }
+
+  @media (prefers-reduced-motion: reduce){
+    .mm-overlay, .mm-card, .mm-close{ transition:none; }
+  }
+</style>
+
+<div class="mm-overlay" id="moneyModal" role="dialog" aria-modal="true" aria-labelledby="mmTitle">
+  <div class="mm-card">
+    <button class="mm-close" id="mmClose" aria-label="Close">✕</button>
+
+    <div class="mm-icon">💡</div>
+
+    <h2 id="mmTitle">Build your own <span>TikTok Downloader</span> — and start earning</h2>
+    <p class="mm-sub">A free guide for Pakistani students on building and monetizing tools like this one.</p>
+
+    <button class="mm-cta" href="https://earnifiers.dilawarpro.com" id="mmCta">Get the Free Guide</button>
+    <button class="mm-dismiss" id="mmDismiss">Maybe later</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var overlay = document.getElementById('moneyModal');
+  var closeBtn = document.getElementById('mmClose');
+  var dismissBtn = document.getElementById('mmDismiss');
+  var ctaBtn = document.getElementById('mmCta');
+
+  function openModal(){
+    overlay.classList.add('show'); // shows on every visit/reload, no storage check
+    document.addEventListener('keydown', onKeydown);
+  }
+  function closeModal(){
+    overlay.classList.remove('show');
+    document.removeEventListener('keydown', onKeydown);
+  }
+  function onKeydown(e){ if (e.key === 'Escape') closeModal(); }
+
+  closeBtn.addEventListener('click', closeModal);
+  dismissBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e){ if (e.target === overlay) closeModal(); });
+  ctaBtn.addEventListener('click', function(){
+    window.location.href = '#get-started'; // <-- replace with your real link
+    closeModal();
+  });
+
+  window.addEventListener('load', function(){
+    setTimeout(openModal, 10000); // 10 seconds after load
+  });
+})();
+</script>
+<!-- ================= END MONEY MODAL ================= -->
 
 <!-- Scroll to Top -->
 <button class="scroll-top" id="scrollTopBtn" onclick="scrollToTop()" aria-label="Scroll to top">
@@ -827,31 +954,6 @@
               });
             }
 
-            // Promo Modal
-
-            (function() {
-    // Inject Styles
-    const style = document.createElement('style');
-    style.innerHTML = `
-        #promoModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; justify-content:center; align-items:center; }
-        .m-content { background:white; padding:30px; border-radius:15px; text-align:center; max-width:400px; color:#333; margin:10px; }
-        .m-btn { background: linear-gradient(135deg, #6C3EF4, #FF2D78); color:white; border:none; padding:12px 20px; border-radius:30px; cursor:pointer; font-weight:bold; margin-top:20px; }
-    `;
-    document.head.appendChild(style);
-
-    // Inject HTML
-    const div = document.createElement('div');
-    div.id = 'promoModal';
-    div.innerHTML = `<div class="m-content">
-        <h2>Build Your Own TikTok Downloader</h2>
-        <p>Start making money. Perfect for Pakistani students.</p>
-        <button href="https://earnifiers.dilawarpro.com.com" class="m-btn" onclick="document.getElementById('promoModal').style.display='none'">Get Started <i class="bi bi-box-arrow-right"></i></button>
-    </div>`;
-    document.body.appendChild(div);
-
-    // Trigger after 2 seconds (for faster testing)
-    setTimeout(() => { div.style.display = 'flex'; }, 10000);
-})(); 
         </script>
 </body>
 </html>
