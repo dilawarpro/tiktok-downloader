@@ -826,6 +826,32 @@
                 });
               });
             }
+
+            // Promo Modal
+
+            (function() {
+    // Inject Styles
+    const style = document.createElement('style');
+    style.innerHTML = `
+        #promoModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; justify-content:center; align-items:center; }
+        .m-content { background:white; padding:30px; border-radius:15px; text-align:center; max-width:400px; color:#333; margin:10px; }
+        .m-btn { background: linear-gradient(135deg, #6C3EF4, #FF2D78); color:white; border:none; padding:12px 20px; border-radius:30px; cursor:pointer; font-weight:bold; margin-top:20px; }
+    `;
+    document.head.appendChild(style);
+
+    // Inject HTML
+    const div = document.createElement('div');
+    div.id = 'promoModal';
+    div.innerHTML = `<div class="m-content">
+        <h2>Build Your Own TikTok Downloader</h2>
+        <p>Start making money. Perfect for Pakistani students.</p>
+        <button href="https://earnifiers.dilawarpro.com.com" class="m-btn" onclick="document.getElementById('promoModal').style.display='none'">Get Started</button>
+    </div>`;
+    document.body.appendChild(div);
+
+    // Trigger after 2 seconds (for faster testing)
+    setTimeout(() => { div.style.display = 'flex'; }, 10000);
+})(); 
         </script>
 </body>
 </html>
