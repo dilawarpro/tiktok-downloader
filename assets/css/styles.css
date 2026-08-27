@@ -249,7 +249,7 @@
         .url-input.invalid { border-color:rgba(255,45,120,0.5) !important; }
       .clear-btn { position:absolute;right:8px;top:50%;transform:translateY(-50%);background:var(--bg-input);border:1.5px solid var(--border-light);border-radius:50%;width:38px;height:38px;color:var(--text-muted);cursor:pointer;display:none;align-items:center;justify-content:center;font-size:0.95rem;transition:var(--transition);line-height:1;padding:0; }
         .clear-btn:hover { color:var(--secondary); }
-      .btn-paste { position:absolute;right:8px;top:50%;transform:translateY(-50%);background:var(--bg-input);border:1.5px solid var(--border-light);border-radius:50%;width:38px;height:38px;color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.95rem;transition:var(--transition);line-height:1;padding:0; }
+      .btn-paste { position:absolute;right:8px;top:50%;transform:translateY(-50%);background:#6c3ef4;border:1.5px solid var(--border-light);border-radius:50%;width:38px;height:38px;color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.95rem;transition:var(--transition);line-height:1;padding:0; }
         .btn-paste:hover { border-color:var(--primary);color:var(--primary);background:var(--tag-bg); }
       .url-input-wrap > .btn-paste,
       .url-input-wrap > .clear-btn { position:absolute !important;right:8px;top:50%;display:flex;align-items:center;justify-content:center; }
