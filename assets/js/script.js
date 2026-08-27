@@ -440,13 +440,11 @@ function processData(data, originalUrl) {
 function buildSlides(images) {
     const grid = document.getElementById('slidesGrid');
     grid.innerHTML = '';
-    const previewUrl = images[0];
     const preview = document.createElement('button');
     preview.type = 'button';
     preview.className = 'gallery-preview';
     preview.setAttribute('aria-label', `Open TikTok slideshow with ${images.length} photos`);
     const previewImage = document.createElement('img');
-    previewImage.src = previewUrl;
     previewImage.alt = 'TikTok slideshow preview';
     previewImage.loading = 'eager';
     previewImage.decoding = 'async';
@@ -488,7 +486,6 @@ function buildSlides(images) {
         link.setAttribute('data-download-filename', `TikTok_Slide_${i + 1}.jpg`);
         link.setAttribute('aria-label', `View TikTok slideshow image ${i + 1} of ${images.length}`);
         const image = document.createElement('img');
-        image.src = src;
         image.alt = `TikTok slideshow image ${i + 1} of ${images.length}`;
         image.loading = 'lazy';
         image.referrerPolicy = 'no-referrer';
@@ -542,6 +539,7 @@ function setImageFallbacks(image, originalUrl) {
         sourceIndex++;
         if (sourceIndex < sources.length) image.src = sources[sourceIndex];
     });
+    image.src = sources[0];
 }
 
 function hideResult() {
