@@ -439,8 +439,7 @@ function processData(data, originalUrl) {
 function buildSlides(images) {
     const grid = document.getElementById('slidesGrid');
     grid.innerHTML = '';
-    const preview = document.createElement('button');
-    preview.type = 'button';
+    const preview = document.createElement('div');
     preview.className = 'gallery-preview';
     preview.setAttribute('aria-label', `Open TikTok slideshow with ${images.length} photos`);
     const previewImage = document.createElement('img');
@@ -453,6 +452,26 @@ function buildSlides(images) {
     previewLabel.innerHTML = '<i class="bi bi-images" aria-hidden="true"></i> View ' + images.length + ' Photos';
     preview.appendChild(previewLabel);
     setImageFallbacks(previewImage, images[0]);
+    let currentIndex = 0;
+    const updatePreview = index => {
+        currentIndex = (index + images.length) % images.length;
+        setImageFallbacks(previewImage, images[currentIndex]);
+        previewLabel.innerHTML = `<i class="bi bi-images" aria-hidden="true"></i> ${currentIndex + 1} / ${images.length} Photos`;
+        if (currentDownload) currentDownload.onclick = () => doDownload(images[currentIndex], `TikTok_Slide_${currentIndex + 1}.jpg`);
+    };
+    const previousButton = document.createElement('button');
+    previousButton.type = 'button';
+    previousButton.className = 'gallery-nav gallery-nav-prev';
+    previousButton.setAttribute('aria-label', 'View previous slideshow image');
+    previousButton.innerHTML = '<i class="bi bi-chevron-left" aria-hidden="true"></i>';
+    const nextButton = document.createElement('button');
+    nextButton.type = 'button';
+    nextButton.className = 'gallery-nav gallery-nav-next';
+    nextButton.setAttribute('aria-label', 'View next slideshow image');
+    nextButton.innerHTML = '<i class="bi bi-chevron-right" aria-hidden="true"></i>';
+    previousButton.addEventListener('click', event => { event.stopPropagation(); updatePreview(currentIndex - 1); });
+    nextButton.addEventListener('click', event => { event.stopPropagation(); updatePreview(currentIndex + 1); });
+    preview.append(previousButton, nextButton);
     preview.addEventListener('click', () => {
         if (!window.Fancybox) return;
         Fancybox.show(images.map((src, i) => ({
@@ -489,7 +508,7 @@ function buildSlides(images) {
     });
     grid.appendChild(preview);
     const currentDownload = document.getElementById('downloadCurrentImage');
-    if (currentDownload) currentDownload.onclick = () => doDownload(images[0], 'TikTok_Slide_1.jpg');
+    if (currentDownload) currentDownload.onclick = () => doDownload(images[currentIndex], `TikTok_Slide_${currentIndex + 1}.jpg`);
 
 }
 
