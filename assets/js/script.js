@@ -440,6 +440,33 @@ function processData(data, originalUrl) {
 function buildSlides(images) {
     const grid = document.getElementById('slidesGrid');
     grid.innerHTML = '';
+    const preview = document.createElement('button');
+    preview.type = 'button';
+    preview.className = 'gallery-preview';
+    preview.setAttribute('aria-label', `Open TikTok slideshow with ${images.length} photos`);
+    preview.innerHTML = `<img src="${images[0]}" alt="TikTok slideshow preview" loading="eager"><span><i class="bi bi-images" aria-hidden="true"></i> View ${images.length} Photos</span>`;
+    preview.addEventListener('click', () => {
+        if (!window.Fancybox) return;
+        Fancybox.show(images.map((src, i) => ({
+            src,
+            caption: `TikTok slideshow image ${i + 1} of ${images.length}`,
+            downloadSrc: src,
+            downloadFilename: `TikTok_Slide_${i + 1}.jpg`
+        })), {
+            Carousel: {
+                Toolbar: {
+                    display: {
+                        left: ['infobar'],
+                        middle: ['prev', 'next'],
+                        right: ['download', 'thumbs', 'close']
+                    }
+                }
+            },
+            Thumbs: { autoStart: false }
+        });
+    });
+    grid.appendChild(preview);
+
     images.forEach((src, i) => {
         const link = document.createElement('a');
         link.className = 'fancybox-gallery-item';
@@ -449,7 +476,7 @@ function buildSlides(images) {
         link.setAttribute('data-download-src', src);
         link.setAttribute('data-download-filename', `TikTok_Slide_${i + 1}.jpg`);
         link.setAttribute('aria-label', `View TikTok slideshow image ${i + 1} of ${images.length}`);
-        link.innerHTML = `<img src="${src}" alt="TikTok slideshow image ${i + 1} of ${images.length}" loading="${i === 0 ? 'eager' : 'lazy'}">`;
+        link.innerHTML = `<img src="${src}" alt="TikTok slideshow image ${i + 1} of ${images.length}" loading="lazy">`;
         grid.appendChild(link);
     });
     if (window.Fancybox) {
