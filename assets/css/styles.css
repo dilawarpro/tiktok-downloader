@@ -249,7 +249,7 @@
         .url-input.invalid { border-color:rgba(255,45,120,0.5) !important; }
         .clear-btn { position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-muted);cursor:pointer;display:none;font-size:0.95rem;transition:var(--transition);line-height:1;padding:4px; }
         .clear-btn:hover { color:var(--secondary); }
-      .btn-paste { position:absolute;right:39px;top:50%;transform:translateY(-50%);background:var(--bg-input);border:1.5px solid var(--border-light);color:var(--text-muted);border-radius:50px;padding:7px 12px;font-weight:600;font-size:0.78rem;transition:var(--transition);display:flex;align-items:center;gap:5px;cursor:pointer;white-space:nowrap;z-index:1; }
+            .btn-paste { position:absolute;right:39px;top:50%;transform:translateY(-50%);margin:0;background:var(--bg-input);border:1.5px solid var(--border-light);color:var(--text-muted);border-radius:50px;padding:7px 12px;font-weight:600;font-size:0.78rem;transition:var(--transition);display:flex;align-items:center;gap:5px;cursor:pointer;white-space:nowrap;z-index:1; }
         .btn-paste:hover { border-color:var(--primary);color:var(--primary);background:var(--tag-bg); }
         .btn-main-dl {
             background:var(--gradient-btn);border:none;color:white;border-radius:50px;padding:13px 28px;
@@ -584,6 +584,10 @@
             .section-pad{padding:52px 0;}
             .dl-box{padding:20px 16px;}
             .input-row{flex-direction:column;}
+         .url-input-wrap{width:100%;min-width:0;}
+         .url-input{padding-right:112px !important;}
+         .btn-paste{right:34px;padding:6px 9px;font-size:0.72rem;}
+         .clear-btn{right:8px;}
             .btn-main-dl{width:100%;justify-content:center;}
             .hero{padding:10px 0 80px;min-height:auto;}
             .info-grid{grid-template-columns:1fr 1fr;}
