@@ -410,7 +410,6 @@ function processData(data, originalUrl) {
         document.getElementById('contentBadge').textContent = '🎬 HD Video';
         videoEl.src = S.videoUrl;
         if (data.cover) videoEl.poster = data.cover;
-        videoWrap.style.display = 'flex';
         document.getElementById('btnMp4').style.display = 'flex';
         document.getElementById('btnAllImg').style.display = 'none';
     } else {
@@ -503,11 +502,17 @@ function imagePreviewUrl(url) {
 
 function normalizeImages(images) {
     if (!Array.isArray(images)) return [];
-    return images.map(image => {
-        if (typeof image === 'string') return image;
-        if (!image || typeof image !== 'object') return null;
-        return image.url || image.src || image.image || image.download_url || null;
-    }).filter(url => typeof url === 'string' && /^https?:\/\//i.test(url));
+    return images.flatMap(image => {
+        if (typeof image === 'string') return [image];
+        if (!image || typeof image !== 'object') return [];
+        const candidates = [
+            image.url, image.src, image.image, image.download_url,
+            image.display_url, image.origin_cover, image.url_list
+        ];
+        return candidates.flatMap(candidate => Array.isArray(candidate) ? candidate : [candidate]);
+    }).filter((url, index, all) =>
+        typeof url === 'string' && /^https?:\/\//i.test(url) && all.indexOf(url) === index
+    );
 }
 
 function setImageFallbacks(image, originalUrl) {
