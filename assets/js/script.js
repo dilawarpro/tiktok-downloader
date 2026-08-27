@@ -440,19 +440,17 @@ function processData(data, originalUrl) {
 function buildSlides(images) {
     const grid = document.getElementById('slidesGrid');
     grid.innerHTML = '';
-    const previewUrl = imagePreviewUrl(images[0]);
+    const previewUrl = images[0];
     const preview = document.createElement('button');
     preview.type = 'button';
     preview.className = 'gallery-preview';
     preview.setAttribute('aria-label', `Open TikTok slideshow with ${images.length} photos`);
-    preview.innerHTML = `<img src="${previewUrl}" data-original-src="${images[0]}" alt="TikTok slideshow preview" loading="eager" decoding="async"><span><i class="bi bi-images" aria-hidden="true"></i> View ${images.length} Photos</span>`;
-    preview.querySelector('img').addEventListener('error', function () {
-        if (this.src !== this.dataset.originalSrc) this.src = this.dataset.originalSrc;
-    });
+    preview.innerHTML = `<img src="${previewUrl}" alt="TikTok slideshow preview" loading="eager" decoding="async"><span><i class="bi bi-images" aria-hidden="true"></i> View ${images.length} Photos</span>`;
+    setImageFallbacks(preview.querySelector('img'), images[0]);
     preview.addEventListener('click', () => {
         if (!window.Fancybox) return;
         Fancybox.show(images.map((src, i) => ({
-            src: imagePreviewUrl(src),
+            src,
             caption: `TikTok slideshow image ${i + 1} of ${images.length}`,
             downloadSrc: src,
             downloadFilename: `TikTok_Slide_${i + 1}.jpg`
@@ -481,6 +479,7 @@ function buildSlides(images) {
         link.setAttribute('data-download-filename', `TikTok_Slide_${i + 1}.jpg`);
         link.setAttribute('aria-label', `View TikTok slideshow image ${i + 1} of ${images.length}`);
         link.innerHTML = `<img src="${src}" alt="TikTok slideshow image ${i + 1} of ${images.length}" loading="lazy">`;
+        setImageFallbacks(link.querySelector('img'), src);
         grid.appendChild(link);
     });
     if (window.Fancybox) {
@@ -507,6 +506,19 @@ function showResult() { document.getElementById('resultSection').style.display =
 
 function imagePreviewUrl(url) {
     return `https://images.weserv.nl/?url=${encodeURIComponent(url)}`;
+}
+
+function setImageFallbacks(image, originalUrl) {
+    const sources = [
+        originalUrl,
+        `https://wsrv.nl/?url=${encodeURIComponent(originalUrl)}`,
+        imagePreviewUrl(originalUrl)
+    ];
+    let sourceIndex = 0;
+    image.addEventListener('error', () => {
+        sourceIndex++;
+        if (sourceIndex < sources.length) image.src = sources[sourceIndex];
+    });
 }
 
 function hideResult() {
