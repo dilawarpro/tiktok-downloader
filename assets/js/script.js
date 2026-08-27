@@ -469,8 +469,9 @@ function buildSlides(images) {
                                 tpl: '<button class="f-button" title="Download image"><i class="bi bi-download"></i></button>',
                                 click: (event, instance) => {
                                     const slide = instance.getSlide();
-                                    if (slide && slide.downloadSrc) {
-                                        doDownload(slide.downloadSrc, `TikTok_Slide_${(slide.index || 0) + 1}.jpg`);
+                                    const source = slide && (slide.downloadSrc || slide.src);
+                                    if (source) {
+                                        doDownload(source, `TikTok_Slide_${(slide.index || 0) + 1}.jpg`);
                                     }
                                 }
                             }
@@ -543,8 +544,10 @@ function doDownload(url, filename) {
     showToast('Starting...', `Preparing ${filename}`, 'info');
     const isImage = /\.(?:jpe?g|png|webp|gif|avif)(?:[?#]|$)/i.test(url) || /\.(?:jpe?g|png|webp|gif|avif)$/i.test(filename);
     const proxyUrl = imagePreviewUrl(url);
-    fetch(url, { mode: 'cors' })
-        .catch(() => isImage ? fetch(proxyUrl) : Promise.reject())
+    const downloadRequest = isImage
+        ? fetch(proxyUrl, { mode: 'cors' }).catch(() => fetch(url, { mode: 'cors' }))
+        : fetch(url, { mode: 'cors' });
+    downloadRequest
         .then(r => { if (!r.ok) throw new Error(); return r.blob(); })
         .then(blob => {
             const bUrl = URL.createObjectURL(blob);
