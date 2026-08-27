@@ -446,10 +446,10 @@ function buildSlides(images) {
         link.href = src;
         link.dataset.fancybox = 'tiktok-gallery';
         link.dataset.caption = `TikTok slideshow image ${i + 1} of ${images.length}`;
-        link.dataset.downloadSrc = src;
-        link.dataset.downloadFilename = `TikTok_Slide_${i + 1}.jpg`;
+        link.setAttribute('data-download-src', src);
+        link.setAttribute('data-download-filename', `TikTok_Slide_${i + 1}.jpg`);
         link.setAttribute('aria-label', `View TikTok slideshow image ${i + 1} of ${images.length}`);
-        link.innerHTML = `<img src="${src}" alt="TikTok slideshow image ${i + 1} of ${images.length}" loading="lazy">`;
+        link.innerHTML = `<img src="${src}" alt="TikTok slideshow image ${i + 1} of ${images.length}" loading="${i === 0 ? 'eager' : 'lazy'}">`;
         grid.appendChild(link);
     });
     if (window.Fancybox) {
@@ -492,7 +492,10 @@ function setLoading(on) {
 function doDownload(url, filename) {
     if (!url) { showToast('No URL', 'Download URL not available.', 'error'); return; }
     showToast('Starting...', `Preparing ${filename}`, 'info');
+    const isImage = /\.(?:jpe?g|png|webp|gif|avif)(?:[?#]|$)/i.test(url) || /\.(?:jpe?g|png|webp|gif|avif)$/i.test(filename);
+    const proxyUrl = `https://images.weserv.nl/?url=${encodeURIComponent(url)}`;
     fetch(url, { mode: 'cors' })
+        .catch(() => isImage ? fetch(proxyUrl) : Promise.reject())
         .then(r => { if (!r.ok) throw new Error(); return r.blob(); })
         .then(blob => {
             const bUrl = URL.createObjectURL(blob);
@@ -506,10 +509,9 @@ function doDownload(url, filename) {
         .catch(() => {
             const a = document.createElement('a');
             a.href = url; a.download = filename;
-            a.target = '_blank'; a.rel = 'noopener';
             document.body.appendChild(a); a.click();
             document.body.removeChild(a);
-            showToast('Opening...', 'Long-press the video to save if it opens in browser.', 'info');
+            showToast('Download unavailable', 'Your browser or the image server blocked direct saving.', 'error');
         });
 }
 
