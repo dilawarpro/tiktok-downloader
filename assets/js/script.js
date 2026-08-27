@@ -464,10 +464,21 @@ function buildSlides(images) {
         })), {
             Carousel: {
                 Toolbar: {
+                        items: {
+                            downloadPhoto: {
+                                tpl: '<button class="f-button" title="Download image"><i class="bi bi-download"></i></button>',
+                                click: (event, instance) => {
+                                    const slide = instance.getSlide();
+                                    if (slide && slide.downloadSrc) {
+                                        doDownload(slide.downloadSrc, `TikTok_Slide_${(slide.index || 0) + 1}.jpg`);
+                                    }
+                                }
+                            }
+                        },
                     display: {
                         left: ['infobar'],
                         middle: ['prev', 'next'],
-                        right: ['download', 'thumbs', 'close']
+                            right: ['downloadPhoto', 'thumbs', 'close']
                     }
                 }
             },
@@ -503,18 +514,12 @@ function setImageFallbacks(image, originalUrl) {
         imagePreviewUrl(originalUrl)
     ];
     let sourceIndex = 0;
-    let timeoutId;
     const tryNextSource = () => {
-        clearTimeout(timeoutId);
         sourceIndex++;
-        if (sourceIndex < sources.length) {
-            image.src = sources[sourceIndex];
-            timeoutId = setTimeout(tryNextSource, 1500);
-        }
+        if (sourceIndex < sources.length) image.src = sources[sourceIndex];
     };
     image.addEventListener('error', tryNextSource);
     image.src = sources[0];
-    timeoutId = setTimeout(tryNextSource, 1500);
 }
 
 function hideResult() {
@@ -537,7 +542,7 @@ function doDownload(url, filename) {
     if (!url) { showToast('No URL', 'Download URL not available.', 'error'); return; }
     showToast('Starting...', `Preparing ${filename}`, 'info');
     const isImage = /\.(?:jpe?g|png|webp|gif|avif)(?:[?#]|$)/i.test(url) || /\.(?:jpe?g|png|webp|gif|avif)$/i.test(filename);
-    const proxyUrl = `https://images.weserv.nl/?url=${encodeURIComponent(url)}`;
+    const proxyUrl = imagePreviewUrl(url);
     fetch(url, { mode: 'cors' })
         .catch(() => isImage ? fetch(proxyUrl) : Promise.reject())
         .then(r => { if (!r.ok) throw new Error(); return r.blob(); })
@@ -551,10 +556,6 @@ function doDownload(url, filename) {
             showToast('Downloaded!', `${filename} saved successfully.`, 'success');
         })
         .catch(() => {
-            const a = document.createElement('a');
-            a.href = url; a.download = filename;
-            document.body.appendChild(a); a.click();
-            document.body.removeChild(a);
             showToast('Download unavailable', 'Your browser or the image server blocked direct saving.', 'error');
         });
 }
