@@ -476,38 +476,6 @@ function buildSlides(images) {
     });
     grid.appendChild(preview);
 
-    images.forEach((src, i) => {
-        const link = document.createElement('a');
-        link.className = 'fancybox-gallery-item';
-        link.href = src;
-        link.dataset.fancybox = 'tiktok-gallery';
-        link.dataset.caption = `TikTok slideshow image ${i + 1} of ${images.length}`;
-        link.setAttribute('data-download-src', src);
-        link.setAttribute('data-download-filename', `TikTok_Slide_${i + 1}.jpg`);
-        link.setAttribute('aria-label', `View TikTok slideshow image ${i + 1} of ${images.length}`);
-        const image = document.createElement('img');
-        image.alt = `TikTok slideshow image ${i + 1} of ${images.length}`;
-        image.loading = 'lazy';
-        image.referrerPolicy = 'no-referrer';
-        link.appendChild(image);
-        setImageFallbacks(image, src);
-        grid.appendChild(link);
-    });
-    if (window.Fancybox) {
-        Fancybox.destroy();
-        Fancybox.bind('[data-fancybox="tiktok-gallery"]', {
-            Carousel: {
-                Toolbar: {
-                    display: {
-                        left: ['infobar'],
-                        middle: ['prev', 'next'],
-                        right: ['download', 'thumbs', 'close']
-                    }
-                }
-            },
-            Thumbs: { autoStart: false }
-        });
-    }
 }
 
 /* ============================================================
@@ -535,11 +503,18 @@ function setImageFallbacks(image, originalUrl) {
         imagePreviewUrl(originalUrl)
     ];
     let sourceIndex = 0;
-    image.addEventListener('error', () => {
+    let timeoutId;
+    const tryNextSource = () => {
+        clearTimeout(timeoutId);
         sourceIndex++;
-        if (sourceIndex < sources.length) image.src = sources[sourceIndex];
-    });
+        if (sourceIndex < sources.length) {
+            image.src = sources[sourceIndex];
+            timeoutId = setTimeout(tryNextSource, 1500);
+        }
+    };
+    image.addEventListener('error', tryNextSource);
     image.src = sources[0];
+    timeoutId = setTimeout(tryNextSource, 1500);
 }
 
 function hideResult() {
