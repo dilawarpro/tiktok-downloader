@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', e => {
             const t = document.querySelector(a.getAttribute('href'));
-            if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+            if (t) { e.preventDefault(); t.scrollIntoView(); }
         });
     });
 
@@ -237,14 +237,14 @@ function setExample(type) {
 }
 
 function scrollToHistory() {
-    document.getElementById('history-section').scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('history-section').scrollIntoView();
 }
 
 /* ============================================================
    SCROLL TO TOP
 ============================================================ */
 function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
 }
 
 /* ============================================================
@@ -418,7 +418,7 @@ function processData(data, originalUrl) {
     setLoading(false);
     showResult();
     showToast('Success!', 'TikTok content fetched. Caption ready to copy!', 'success');
-    setTimeout(() => { document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 350);
+    setTimeout(() => { document.getElementById('resultSection').scrollIntoView({ block: 'start' }); }, 350);
 }
 
 /* ============================================================
@@ -631,7 +631,7 @@ function reloadHistory(id) {
     document.getElementById('tiktokUrl').value = item.url;
     document.getElementById('tiktokUrl').dispatchEvent(new Event('input'));
     fetchTikTok();
-    document.getElementById('downloader').scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('downloader').scrollIntoView();
 }
 
 function copyHistoryCaption(id) {
