@@ -436,17 +436,21 @@ function buildSlides(images) {
         link.dataset.fancybox = 'tiktok-gallery';
         link.dataset.caption = `TikTok slideshow image ${i + 1} of ${images.length}`;
         link.dataset.downloadSrc = src;
+        link.dataset.downloadFilename = `TikTok_Slide_${i + 1}.jpg`;
         link.setAttribute('aria-label', `View TikTok slideshow image ${i + 1} of ${images.length}`);
         link.innerHTML = `<img src="${src}" alt="TikTok slideshow image ${i + 1} of ${images.length}" loading="lazy">`;
         grid.appendChild(link);
     });
     if (window.Fancybox) {
+        Fancybox.destroy();
         Fancybox.bind('[data-fancybox="tiktok-gallery"]', {
-            Toolbar: {
-                display: {
-                    left: ['infobar'],
-                    middle: ['prev', 'next'],
-                    right: ['slideshow', 'download', 'thumbs', 'close']
+            Carousel: {
+                Toolbar: {
+                    display: {
+                        left: ['infobar'],
+                        middle: ['prev', 'next'],
+                        right: ['download', 'thumbs', 'close']
+                    }
                 }
             },
             Thumbs: { autoStart: false }

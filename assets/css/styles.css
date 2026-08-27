@@ -334,6 +334,8 @@
       .fancybox-gallery-item { display:block;position:relative;max-width:280px;margin:0 auto; }
       .fancybox-gallery-item img { display:block;width:100%;border-radius:var(--radius-sm); }
       .fancybox-gallery-item:not(:first-child) { display:none; }
+      .gallery-download-all { display:flex;align-items:center;justify-content:center;gap:7px;width:100%;margin-top:12px;padding:10px 14px;border:0;border-radius:var(--radius-sm);background:var(--gradient-btn);color:#fff;font:700 0.82rem var(--font);cursor:pointer; }
+      .gallery-download-all:hover { box-shadow:0 8px 20px rgba(108,62,244,0.25); }
 
         /* Video Info */
         .info-grid { display:grid;grid-template-columns:1fr 1fr;gap:12px; }
