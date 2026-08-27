@@ -430,20 +430,28 @@ function buildSlides(images) {
     const grid = document.getElementById('slidesGrid');
     grid.innerHTML = '';
     images.forEach((src, i) => {
-        const card = document.createElement('div');
-        card.className = 'slide-card';
-        card.setAttribute('role', 'listitem');
-        card.innerHTML = `
-            <img src="${src}" alt="TikTok slideshow image ${i+1} of ${images.length}" loading="lazy"
-                onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22300%22%3E%3Crect fill=%22%23161628%22 width=%22200%22 height=%22300%22/%3E%3Ctext fill=%22%238888AA%22 font-size=%2212%22 x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22%3EImage ${i+1}%3C/text%3E%3C/svg%3E'">
-            <div class="slide-over">
-                <span class="slide-num">${i+1} of ${images.length}</span>
-                <button class="slide-dl" onclick="doDownload('${src}','TikTok_Slide_${i+1}.jpg')" aria-label="Download image ${i+1}">
-                    <i class="bi bi-download"></i> Save
-                </button>
-            </div>`;
-        grid.appendChild(card);
+        const link = document.createElement('a');
+        link.className = 'fancybox-gallery-item';
+        link.href = src;
+        link.dataset.fancybox = 'tiktok-gallery';
+        link.dataset.caption = `TikTok slideshow image ${i + 1} of ${images.length}`;
+        link.dataset.downloadSrc = src;
+        link.setAttribute('aria-label', `View TikTok slideshow image ${i + 1} of ${images.length}`);
+        link.innerHTML = `<img src="${src}" alt="TikTok slideshow image ${i + 1} of ${images.length}" loading="lazy">`;
+        grid.appendChild(link);
     });
+    if (window.Fancybox) {
+        Fancybox.bind('[data-fancybox="tiktok-gallery"]', {
+            Toolbar: {
+                display: {
+                    left: ['infobar'],
+                    middle: ['prev', 'next'],
+                    right: ['slideshow', 'download', 'thumbs', 'close']
+                }
+            },
+            Thumbs: { autoStart: false }
+        });
+    }
 }
 
 /* ============================================================
