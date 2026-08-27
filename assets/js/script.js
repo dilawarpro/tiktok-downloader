@@ -488,6 +488,8 @@ function buildSlides(images) {
         });
     });
     grid.appendChild(preview);
+    const currentDownload = document.getElementById('downloadCurrentImage');
+    if (currentDownload) currentDownload.onclick = () => doDownload(images[0], 'TikTok_Slide_1.jpg');
 
 }
 

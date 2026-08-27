@@ -337,6 +337,8 @@
       .gallery-preview { display:block;position:relative;width:100%;max-width:280px;min-height:220px;margin:0 auto;padding:0;border:0;border-radius:var(--radius-sm);overflow:hidden;background:var(--bg-secondary);cursor:pointer; }
       .gallery-preview img { display:block;width:100%;height:auto;max-height:460px;min-height:220px;object-fit:contain;border-radius:var(--radius-sm); }
       .gallery-preview span { position:absolute;right:10px;bottom:10px;display:flex;align-items:center;gap:5px;padding:7px 10px;border-radius:50px;background:rgba(10,10,20,0.78);color:#fff;font:700 0.72rem var(--font); }
+      .gallery-download-current { display:flex;align-items:center;justify-content:center;gap:7px;width:100%;margin-top:12px;padding:10px 14px;border:1px solid var(--border-light);border-radius:var(--radius-sm);background:var(--bg-input);color:var(--text);font:700 0.82rem var(--font);cursor:pointer; }
+      .gallery-download-current:hover { border-color:var(--primary);color:var(--primary);background:var(--tag-bg); }
       .gallery-download-all { display:flex;align-items:center;justify-content:center;gap:7px;width:100%;margin-top:12px;padding:10px 14px;border:0;border-radius:var(--radius-sm);background:var(--gradient-btn);color:#fff;font:700 0.82rem var(--font);cursor:pointer; }
       .gallery-download-all:hover { box-shadow:0 8px 20px rgba(108,62,244,0.25); }
 
