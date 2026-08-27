@@ -199,6 +199,7 @@ function handleInstall() {
 function onInput() {
     const val = this.value.trim();
     document.getElementById('clearBtn').style.display = val ? 'flex' : 'none';
+    document.querySelector('.btn-paste').style.display = val ? 'none' : 'flex';
     if (!val) { this.className = 'url-input'; return; }
     const ok = val.includes('tiktok.com') || val.includes('vm.tiktok.com') || val.includes('vt.tiktok.com');
     this.className = 'url-input ' + (ok ? 'valid' : 'invalid');
@@ -208,6 +209,7 @@ function clearInput() {
     const el = document.getElementById('tiktokUrl');
     el.value = ''; el.className = 'url-input';
     document.getElementById('clearBtn').style.display = 'none';
+    document.querySelector('.btn-paste').style.display = 'flex';
     el.focus();
 }
 
