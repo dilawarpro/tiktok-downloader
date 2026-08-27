@@ -105,6 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlInput = document.getElementById('tiktokUrl');
     urlInput.addEventListener('input', onInput);
     urlInput.addEventListener('keydown', e => { if (e.key === 'Enter') fetchTikTok(); });
+    syncCaptionLayout();
+    window.addEventListener('resize', syncCaptionLayout);
 
     document.querySelectorAll('.faq-q').forEach(q => {
         q.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFaq(q); } });
@@ -153,6 +155,15 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('%c🎵 TikTok Downloader · tiktokdownloader.dilawarpro.com · by Dilawar Pro', 'background:#6C3EF4;color:#fff;padding:8px 18px;border-radius:8px;font-weight:700;');
     window.AutoTheme = AutoTheme;
 });
+
+function syncCaptionLayout() {
+    const caption = document.getElementById('captionCard');
+    const previewColumn = document.getElementById('mp3');
+    const captionsColumn = document.getElementById('captions');
+    if (!caption || !previewColumn || !captionsColumn) return;
+    if (window.innerWidth <= 991) previewColumn.appendChild(caption);
+    else captionsColumn.appendChild(caption);
+}
 
 /* ============================================================
    THEME

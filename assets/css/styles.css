@@ -333,7 +333,8 @@
         .slide-dl:hover { background:var(--primary);color:white; }
       .fancybox-gallery-item { display:block;position:relative;max-width:280px;margin:0 auto; }
       .fancybox-gallery-item img { display:block;width:100%;border-radius:var(--radius-sm); }
-      .fancybox-gallery-item:not(:first-child) { display:none; }
+      .fancybox-gallery-item:first-child { display:block !important; }
+      .fancybox-gallery-item:not(:first-child) { display:none !important; }
       .gallery-download-all { display:flex;align-items:center;justify-content:center;gap:7px;width:100%;margin-top:12px;padding:10px 14px;border:0;border-radius:var(--radius-sm);background:var(--gradient-btn);color:#fff;font:700 0.82rem var(--font);cursor:pointer; }
       .gallery-download-all:hover { box-shadow:0 8px 20px rgba(108,62,244,0.25); }
 
@@ -607,4 +608,7 @@
             .hero-title{font-size:1.85rem;}
             .info-grid{grid-template-columns:1fr;}
         }
+         @media(max-width:991px) {
+            #mp3 #captionCard { display:block; }
+         }
    
