@@ -367,7 +367,7 @@ async function fetchBackup(url) {
    PROCESS DATA
 ============================================================ */
 function processData(data, originalUrl) {
-    S.images = data.images || [];
+    S.images = normalizeImages(data.images);
     S.caption = data.title || '';
     S.videoUrl = data.hdplay || data.play || data.playwm || null;
     S.audioUrl = data.music || (data.music_info && data.music_info.play) || null;
@@ -445,8 +445,17 @@ function buildSlides(images) {
     preview.type = 'button';
     preview.className = 'gallery-preview';
     preview.setAttribute('aria-label', `Open TikTok slideshow with ${images.length} photos`);
-    preview.innerHTML = `<img src="${previewUrl}" alt="TikTok slideshow preview" loading="eager" decoding="async"><span><i class="bi bi-images" aria-hidden="true"></i> View ${images.length} Photos</span>`;
-    setImageFallbacks(preview.querySelector('img'), images[0]);
+    const previewImage = document.createElement('img');
+    previewImage.src = previewUrl;
+    previewImage.alt = 'TikTok slideshow preview';
+    previewImage.loading = 'eager';
+    previewImage.decoding = 'async';
+    previewImage.referrerPolicy = 'no-referrer';
+    preview.appendChild(previewImage);
+    const previewLabel = document.createElement('span');
+    previewLabel.innerHTML = '<i class="bi bi-images" aria-hidden="true"></i> View ' + images.length + ' Photos';
+    preview.appendChild(previewLabel);
+    setImageFallbacks(previewImage, images[0]);
     preview.addEventListener('click', () => {
         if (!window.Fancybox) return;
         Fancybox.show(images.map((src, i) => ({
@@ -478,8 +487,13 @@ function buildSlides(images) {
         link.setAttribute('data-download-src', src);
         link.setAttribute('data-download-filename', `TikTok_Slide_${i + 1}.jpg`);
         link.setAttribute('aria-label', `View TikTok slideshow image ${i + 1} of ${images.length}`);
-        link.innerHTML = `<img src="${src}" alt="TikTok slideshow image ${i + 1} of ${images.length}" loading="lazy">`;
-        setImageFallbacks(link.querySelector('img'), src);
+        const image = document.createElement('img');
+        image.src = src;
+        image.alt = `TikTok slideshow image ${i + 1} of ${images.length}`;
+        image.loading = 'lazy';
+        image.referrerPolicy = 'no-referrer';
+        link.appendChild(image);
+        setImageFallbacks(image, src);
         grid.appendChild(link);
     });
     if (window.Fancybox) {
@@ -506,6 +520,15 @@ function showResult() { document.getElementById('resultSection').style.display =
 
 function imagePreviewUrl(url) {
     return `https://images.weserv.nl/?url=${encodeURIComponent(url)}`;
+}
+
+function normalizeImages(images) {
+    if (!Array.isArray(images)) return [];
+    return images.map(image => {
+        if (typeof image === 'string') return image;
+        if (!image || typeof image !== 'object') return null;
+        return image.url || image.src || image.image || image.download_url || null;
+    }).filter(url => typeof url === 'string' && /^https?:\/\//i.test(url));
 }
 
 function setImageFallbacks(image, originalUrl) {
