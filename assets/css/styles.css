@@ -331,9 +331,6 @@
         .slide-num { font-size:0.68rem;color:rgba(255,255,255,0.7);margin-bottom:5px;font-weight:600; }
         .slide-dl { background:white;color:#0A0A14;border:none;border-radius:7px;padding:6px 14px;font-size:0.76rem;font-weight:700;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:4px;transition:var(--transition); }
         .slide-dl:hover { background:var(--primary);color:white; }
-      .fancybox-gallery-item { display:block;position:relative;max-width:280px;margin:0 auto; }
-      .fancybox-gallery-item img { display:block;width:100%;border-radius:var(--radius-sm); }
-      .fancybox-gallery-item { position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none; }
       .gallery-preview { display:block;position:relative;width:100%;max-width:280px;min-height:220px;margin:0 auto;padding:0;border:0;border-radius:var(--radius-sm);overflow:hidden;background:var(--bg-secondary);cursor:pointer; }
       .gallery-preview img { display:block;width:100%;height:auto;max-height:460px;min-height:220px;object-fit:contain;border-radius:var(--radius-sm); }
       .gallery-preview span { position:absolute;right:10px;bottom:10px;display:flex;align-items:center;gap:5px;padding:7px 10px;border-radius:50px;background:rgba(10,10,20,0.78);color:#fff;font:700 0.72rem var(--font); }

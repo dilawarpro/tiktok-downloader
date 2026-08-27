@@ -472,40 +472,6 @@ function buildSlides(images) {
     previousButton.addEventListener('click', event => { event.stopPropagation(); updatePreview(currentIndex - 1); });
     nextButton.addEventListener('click', event => { event.stopPropagation(); updatePreview(currentIndex + 1); });
     preview.append(previousButton, nextButton);
-    preview.addEventListener('click', () => {
-        if (!window.Fancybox) return;
-        Fancybox.show(images.map((src, i) => ({
-            src: imagePreviewUrl(src),
-            caption: `TikTok slideshow image ${i + 1} of ${images.length}`,
-            downloadSrc: src,
-            downloadFilename: `TikTok_Slide_${i + 1}.jpg`
-        })), {
-            Carousel: {
-                Toolbar: {
-                        items: {
-                            downloadPhoto: {
-                                tpl: '<button class="f-button" title="Download image"><i class="bi bi-download"></i></button>',
-                                click: (event, instance) => {
-                                    event.preventDefault();
-                                    event.stopPropagation();
-                                    const slide = instance.getSlide();
-                                    const source = slide && (slide.downloadSrc || slide.origSrc || S.images[slide.index] || slide.src);
-                                    if (source) {
-                                        doDownload(source, `TikTok_Slide_${(slide.index || 0) + 1}.jpg`);
-                                    }
-                                }
-                            }
-                        },
-                    display: {
-                        left: ['infobar'],
-                        middle: ['prev', 'next'],
-                            right: ['downloadPhoto', 'thumbs', 'close']
-                    }
-                }
-            },
-            Thumbs: { autoStart: false }
-        });
-    });
     grid.appendChild(preview);
     const currentDownload = document.getElementById('downloadCurrentImage');
     if (currentDownload) currentDownload.onclick = () => doDownload(images[currentIndex], `TikTok_Slide_${currentIndex + 1}.jpg`);
