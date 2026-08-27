@@ -457,7 +457,7 @@ function buildSlides(images) {
     preview.addEventListener('click', () => {
         if (!window.Fancybox) return;
         Fancybox.show(images.map((src, i) => ({
-            src,
+            src: imagePreviewUrl(src),
             caption: `TikTok slideshow image ${i + 1} of ${images.length}`,
             downloadSrc: src,
             downloadFilename: `TikTok_Slide_${i + 1}.jpg`
@@ -468,8 +468,10 @@ function buildSlides(images) {
                             downloadPhoto: {
                                 tpl: '<button class="f-button" title="Download image"><i class="bi bi-download"></i></button>',
                                 click: (event, instance) => {
+                                    event.preventDefault();
+                                    event.stopPropagation();
                                     const slide = instance.getSlide();
-                                    const source = slide && (slide.downloadSrc || slide.src);
+                                    const source = slide && (slide.downloadSrc || slide.origSrc || S.images[slide.index] || slide.src);
                                     if (source) {
                                         doDownload(source, `TikTok_Slide_${(slide.index || 0) + 1}.jpg`);
                                     }
@@ -496,7 +498,7 @@ function buildSlides(images) {
 function showResult() { document.getElementById('resultSection').style.display = 'block'; }
 
 function imagePreviewUrl(url) {
-    return `https://images.weserv.nl/?url=${encodeURIComponent(url)}`;
+    return `https://wsrv.nl/?url=${encodeURIComponent(url)}&output=jpg`;
 }
 
 function normalizeImages(images) {
@@ -509,11 +511,7 @@ function normalizeImages(images) {
 }
 
 function setImageFallbacks(image, originalUrl) {
-    const sources = [
-        originalUrl,
-        `https://wsrv.nl/?url=${encodeURIComponent(originalUrl)}`,
-        imagePreviewUrl(originalUrl)
-    ];
+    const sources = [imagePreviewUrl(originalUrl), `https://images.weserv.nl/?url=${encodeURIComponent(originalUrl)}`, originalUrl];
     let sourceIndex = 0;
     const tryNextSource = () => {
         sourceIndex++;
@@ -543,10 +541,13 @@ function doDownload(url, filename) {
     if (!url) { showToast('No URL', 'Download URL not available.', 'error'); return; }
     showToast('Starting...', `Preparing ${filename}`, 'info');
     const isImage = /\.(?:jpe?g|png|webp|gif|avif)(?:[?#]|$)/i.test(url) || /\.(?:jpe?g|png|webp|gif|avif)$/i.test(filename);
-    const proxyUrl = imagePreviewUrl(url);
-    const downloadRequest = isImage
-        ? fetch(proxyUrl, { mode: 'cors' }).catch(() => fetch(url, { mode: 'cors' }))
-        : fetch(url, { mode: 'cors' });
+    const downloadSources = isImage
+        ? [imagePreviewUrl(url), `https://images.weserv.nl/?url=${encodeURIComponent(url)}`, url]
+        : [url];
+    const downloadRequest = downloadSources.reduce(
+        (request, source) => request.catch(() => fetch(source, { mode: 'cors' })),
+        Promise.reject()
+    );
     downloadRequest
         .then(r => { if (!r.ok) throw new Error(); return r.blob(); })
         .then(blob => {
