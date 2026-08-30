@@ -34,6 +34,75 @@ function resolveTikwmUrl(u) {
     return u;
 }
 
+// FIX: TikWM sometimes returns http:// links. Your page is served over
+// https://, and a browser will silently block (or auto-upgrade-and-fail)
+// an http:// video/audio request from an https:// page — this shows a
+// poster/frame but the file never actually plays. Force https here.
+function forceHttps(u) {
+    if (!u) return u;
+    return u.replace(/^http:\/\//i, 'https://');
+}
+
+function cleanMediaUrl(u) {
+    return forceHttps(resolveTikwmUrl(u));
+}
+
+/* Build an ordered, deduped list of every video URL TikWM gave us
+   (HD, standard, watermarked) so we can fall back automatically if
+   one CDN link is blocked/throttled while another still works. */
+function videoCandidates(data) {
+    return [data.hdplay, data.play, data.wmplay]
+        .map(cleanMediaUrl)
+        .filter((u, i, all) => u && all.indexOf(u) === i);
+}
+
+/* Attaches src with automatic fallback across candidates. Handles both
+   load-time errors (fires 'error') and play-time stalls (playback never
+   actually starts even though metadata loaded fine — the exact symptom
+   of "preview shows but play button does nothing"). */
+function loadVideoWithFallback(videoEl, candidates, onAllFailed) {
+    let i = 0;
+    let stallTimer = null;
+
+    function clearStallTimer() { if (stallTimer) { clearTimeout(stallTimer); stallTimer = null; } }
+
+    function tryNext() {
+        clearStallTimer();
+        if (i >= candidates.length) {
+            console.warn('[TikTok Downloader] All video sources failed:', candidates);
+            onAllFailed();
+            return;
+        }
+        const url = candidates[i];
+        console.log(`[TikTok Downloader] Trying video source ${i + 1}/${candidates.length}:`, url);
+        i++;
+        videoEl.src = url;
+        videoEl.load();
+    }
+
+    videoEl.onerror = () => {
+        const err = videoEl.error;
+        console.warn('[TikTok Downloader] Video error on source', i, '- code:', err && err.code, '- src:', videoEl.currentSrc);
+        tryNext();
+    };
+
+    videoEl.onplay = () => {
+        clearStallTimer();
+        // If "playing" hasn't fired within 6s of hitting play, the stream
+        // is stalled (blocked/throttled) rather than erroring outright.
+        stallTimer = setTimeout(() => {
+            console.warn('[TikTok Downloader] Playback stalled on source', i, '- readyState:', videoEl.readyState, '- networkState:', videoEl.networkState);
+            videoEl.pause();
+            tryNext();
+        }, 6000);
+    };
+
+    videoEl.onplaying = clearStallTimer;
+    videoEl.onpause = clearStallTimer;
+
+    tryNext();
+}
+
 /* ============================================================
    AUTO THEME SYSTEM
 ============================================================ */
@@ -395,10 +464,11 @@ async function fetchBackup(url) {
 function processData(data, originalUrl) {
     S.images = normalizeImages(data.images);
     S.caption = data.title || '';
-    // FIX: resolve possibly-relative TikWM URLs (see resolveTikwmUrl above).
-    // This is the fix for the video preview not appearing.
-    S.videoUrl = resolveTikwmUrl(data.hdplay || data.play || data.wmplay || null);
-    S.audioUrl = resolveTikwmUrl(data.music || (data.music_info && data.music_info.play) || null);
+    // FIX: resolve possibly-relative + http:// TikWM URLs (see cleanMediaUrl
+    // above). This is the fix for the video preview not appearing/playing.
+    const vCandidates = videoCandidates(data);
+    S.videoUrl = vCandidates[0] || null; // used by the "Download Video" button
+    S.audioUrl = cleanMediaUrl(data.music || (data.music_info && data.music_info.play) || null);
     S.currentData = data;
     S.copyCount = 0;
 
@@ -425,6 +495,10 @@ function processData(data, originalUrl) {
     videoWrap.style.display = 'none';
     slideshowWrap.style.display = 'none';
     placeholder.style.display = 'none';
+    videoEl.onerror = null;
+    videoEl.onplay = null;
+    videoEl.onplaying = null;
+    videoEl.onpause = null;
     videoEl.removeAttribute('poster');
     videoEl.src = '';
     videoEl.load();
@@ -438,22 +512,23 @@ function processData(data, originalUrl) {
         document.getElementById('btnMp4').style.display = 'none';
         document.getElementById('btnAllImg').style.display = 'flex';
         document.getElementById('btnAllImgSub').textContent = `${S.images.length} slides · Save all at once`;
-    } else if (S.videoUrl) {
+    } else if (vCandidates.length > 0) {
         document.getElementById('contentBadge').textContent = '🎬 HD Video';
-        const resolvedCover = resolveTikwmUrl(data.cover || data.origin_cover || null);
+        const resolvedCover = cleanMediaUrl(data.cover || data.origin_cover || null);
         if (resolvedCover) videoEl.poster = resolvedCover;
-        videoEl.src = S.videoUrl;
-        videoEl.load();
-        // FIX: surface a clear toast instead of a silent blank box if the
-        // resolved video URL still fails to load (e.g. TikWM CDN hiccup).
-        videoEl.onerror = () => {
-            videoWrap.style.display = 'none';
-            placeholder.style.display = 'block';
-            showToast('Preview Unavailable', 'The video file could not be loaded for preview, but download links below should still work.', 'error');
-        };
         videoWrap.style.display = 'block';
         document.getElementById('btnMp4').style.display = 'flex';
         document.getElementById('btnAllImg').style.display = 'none';
+
+        // FIX: try each candidate URL (HD → standard → watermarked) and
+        // auto-fallback on load error OR playback stall, instead of
+        // giving up on the first source that doesn't actually play.
+        loadVideoWithFallback(videoEl, vCandidates, () => {
+            videoWrap.style.display = 'none';
+            placeholder.style.display = 'block';
+            document.getElementById('btnMp4').style.display = 'none';
+            showToast('Preview Unavailable', 'This video could not be streamed for preview (open DevTools → Console for details). The Download button may still work.', 'error');
+        });
     } else {
         placeholder.style.display = 'block';
     }
@@ -680,11 +755,12 @@ function saveToHistory(data, url) {
         title: data.title || 'No caption',
         author: '@' + author,
         type: data.images && data.images.length > 0 ? 'slideshow' : 'video',
-        // FIX: resolve relative TikWM paths before persisting to history too,
-        // otherwise reloaded history thumbnails/downloads break the same way.
-        cover: resolveTikwmUrl(data.cover || data.origin_cover || null),
-        videoUrl: resolveTikwmUrl(data.hdplay || data.play || null),
-        audioUrl: resolveTikwmUrl(data.music || null),
+        // FIX: resolve relative/http TikWM paths before persisting to
+        // history too, otherwise reloaded history thumbnails/downloads
+        // break the same way.
+        cover: cleanMediaUrl(data.cover || data.origin_cover || null),
+        videoUrl: cleanMediaUrl(data.hdplay || data.play || null),
+        audioUrl: cleanMediaUrl(data.music || null),
         images: normalizeImages(data.images),
         timestamp: Date.now()
     };
