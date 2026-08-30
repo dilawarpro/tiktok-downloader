@@ -17,6 +17,24 @@ const S = {
 };
 
 /* ============================================================
+   URL RESOLUTION (FIX: TikWM often returns relative paths like
+   "/video/media/hdplay/xxx.mp4" instead of full URLs. Without
+   resolving these against the TikWM host, the browser resolves
+   them against OUR domain instead, which 404s and silently
+   breaks the <video>/<img>/<audio> preview. This was the root
+   cause of "video preview does not appear".)
+============================================================ */
+const TIKWM_HOST = 'https://www.tikwm.com';
+
+function resolveTikwmUrl(u) {
+    if (!u || typeof u !== 'string') return null;
+    if (/^https?:\/\//i.test(u)) return u;      // already absolute
+    if (u.startsWith('//')) return 'https:' + u; // protocol-relative
+    if (u.startsWith('/')) return TIKWM_HOST + u; // relative path
+    return u;
+}
+
+/* ============================================================
    AUTO THEME SYSTEM
 ============================================================ */
 const AutoTheme = (() => {
@@ -69,6 +87,8 @@ const AutoTheme = (() => {
     }
     return {
         init() {
+            // NOTE: theme is now also set synchronously in <head> (see index.html)
+            // to avoid a flash of the wrong theme before this script runs.
             if (_isManual()) {
                 _apply(localStorage.getItem(CFG.manualKey), 'manual-restore');
             } else {
@@ -334,13 +354,19 @@ async function fetchTikTok() {
     S.fetchTimer = setTimeout(() => { setLoading(false); resetProgress(); showToast('Timeout', 'Request timed out. Try again.', 'error'); }, 30000);
 
     try {
-        const res = await fetch(`https://www.tikwm.com/api/?url=${encodeURIComponent(url)}&hd=1`);
+        const res = await fetch(`${TIKWM_HOST}/api/?url=${encodeURIComponent(url)}&hd=1`);
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const json = await res.json();
         clearTimeout(S.fetchTimer);
-        if (json && json.data && (json.data.play || json.data.images)) {
+        // FIX: TikWM returns { code: 0, data: {...} } on success and
+        // { code: -1, msg: "..." } (data can be missing/null) on failure.
+        // The previous check only looked at json.data.play/images, which
+        // threw a confusing error instead of surfacing the real API message.
+        if (json && json.code === 0 && json.data && (json.data.play || json.data.hdplay || (json.data.images && json.data.images.length))) {
             processData(json.data, url);
-        } else throw new Error('No data');
+        } else {
+            throw new Error((json && json.msg) || 'No data');
+        }
     } catch (err) {
         clearTimeout(S.fetchTimer);
         try { await fetchBackup(url); }
@@ -369,8 +395,10 @@ async function fetchBackup(url) {
 function processData(data, originalUrl) {
     S.images = normalizeImages(data.images);
     S.caption = data.title || '';
-    S.videoUrl = data.hdplay || data.play || data.playwm || null;
-    S.audioUrl = data.music || (data.music_info && data.music_info.play) || null;
+    // FIX: resolve possibly-relative TikWM URLs (see resolveTikwmUrl above).
+    // This is the fix for the video preview not appearing.
+    S.videoUrl = resolveTikwmUrl(data.hdplay || data.play || data.wmplay || null);
+    S.audioUrl = resolveTikwmUrl(data.music || (data.music_info && data.music_info.play) || null);
     S.currentData = data;
     S.copyCount = 0;
 
@@ -397,6 +425,7 @@ function processData(data, originalUrl) {
     videoWrap.style.display = 'none';
     slideshowWrap.style.display = 'none';
     placeholder.style.display = 'none';
+    videoEl.removeAttribute('poster');
     videoEl.src = '';
     videoEl.load();
     videoEl.pause();
@@ -411,9 +440,17 @@ function processData(data, originalUrl) {
         document.getElementById('btnAllImgSub').textContent = `${S.images.length} slides · Save all at once`;
     } else if (S.videoUrl) {
         document.getElementById('contentBadge').textContent = '🎬 HD Video';
+        const resolvedCover = resolveTikwmUrl(data.cover || data.origin_cover || null);
+        if (resolvedCover) videoEl.poster = resolvedCover;
         videoEl.src = S.videoUrl;
         videoEl.load();
-        if (data.cover) videoEl.poster = data.cover;
+        // FIX: surface a clear toast instead of a silent blank box if the
+        // resolved video URL still fails to load (e.g. TikWM CDN hiccup).
+        videoEl.onerror = () => {
+            videoWrap.style.display = 'none';
+            placeholder.style.display = 'block';
+            showToast('Preview Unavailable', 'The video file could not be loaded for preview, but download links below should still work.', 'error');
+        };
         videoWrap.style.display = 'block';
         document.getElementById('btnMp4').style.display = 'flex';
         document.getElementById('btnAllImg').style.display = 'none';
@@ -456,14 +493,16 @@ function buildSlides(images) {
     const previewLabel = document.createElement('span');
     previewLabel.innerHTML = '<i class="bi bi-images" aria-hidden="true"></i> View ' + images.length + ' Photos';
     preview.appendChild(previewLabel);
-    setImageFallbacks(previewImage, images[0]);
     let currentIndex = 0;
+    const currentDownload = document.getElementById('downloadCurrentImage');
     const updatePreview = index => {
         currentIndex = (index + images.length) % images.length;
         setImageFallbacks(previewImage, images[currentIndex]);
         previewLabel.innerHTML = `<i class="bi bi-images" aria-hidden="true"></i> ${currentIndex + 1} / ${images.length} Photos`;
         if (currentDownload) currentDownload.onclick = () => doDownload(images[currentIndex], `TikTok_Slide_${currentIndex + 1}.jpg`);
     };
+    setImageFallbacks(previewImage, images[0]);
+    if (currentDownload) currentDownload.onclick = () => doDownload(images[0], `TikTok_Slide_1.jpg`);
     const previousButton = document.createElement('button');
     previousButton.type = 'button';
     previousButton.className = 'gallery-nav gallery-nav-prev';
@@ -478,9 +517,6 @@ function buildSlides(images) {
     nextButton.addEventListener('click', event => { event.stopPropagation(); updatePreview(currentIndex + 1); });
     preview.append(previousButton, nextButton);
     grid.appendChild(preview);
-    const currentDownload = document.getElementById('downloadCurrentImage');
-    if (currentDownload) currentDownload.onclick = () => doDownload(images[currentIndex], `TikTok_Slide_${currentIndex + 1}.jpg`);
-
 }
 
 /* ============================================================
@@ -502,9 +538,11 @@ function normalizeImages(images) {
             image.display_url, image.origin_cover, image.url_list
         ];
         return candidates.flatMap(candidate => Array.isArray(candidate) ? candidate : [candidate]);
-    }).filter((url, index, all) =>
-        typeof url === 'string' && /^https?:\/\//i.test(url) && all.indexOf(url) === index
-    );
+    })
+        .map(resolveTikwmUrl) // FIX: resolve relative TikWM image paths too
+        .filter((url, index, all) =>
+            typeof url === 'string' && /^https?:\/\//i.test(url) && all.indexOf(url) === index
+        );
 }
 
 function setImageFallbacks(image, originalUrl) {
@@ -642,10 +680,12 @@ function saveToHistory(data, url) {
         title: data.title || 'No caption',
         author: '@' + author,
         type: data.images && data.images.length > 0 ? 'slideshow' : 'video',
-        cover: data.cover || null,
-        videoUrl: data.hdplay || data.play || null,
-        audioUrl: data.music || null,
-        images: data.images || [],
+        // FIX: resolve relative TikWM paths before persisting to history too,
+        // otherwise reloaded history thumbnails/downloads break the same way.
+        cover: resolveTikwmUrl(data.cover || data.origin_cover || null),
+        videoUrl: resolveTikwmUrl(data.hdplay || data.play || null),
+        audioUrl: resolveTikwmUrl(data.music || null),
+        images: normalizeImages(data.images),
         timestamp: Date.now()
     };
 
@@ -671,7 +711,7 @@ function renderHistory() {
         <div class="history-item" role="listitem">
             <div class="history-thumb">
                 ${item.cover
-                    ? `<img src="${item.cover}" alt="TikTok video by ${item.author}" loading="lazy" onerror="this.style.display='none'">`
+                    ? `<img src="${item.cover}" alt="TikTok video by ${escHtml(item.author)}" loading="lazy" width="56" height="56" onerror="this.style.display='none'">`
                     : `<i class="bi bi-${item.type === 'slideshow' ? 'images' : 'camera-video'}" aria-hidden="true"></i>`
                 }
             </div>
@@ -750,7 +790,7 @@ function showToast(title, sub, type = 'success') {
     el.className = `toast-el ${type}`;
     el.innerHTML = `
         <div class="toast-ico"><i class="bi ${icons[type] || icons.info}" aria-hidden="true"></i></div>
-        <div><span class="toast-title">${title}</span><span class="toast-sub">${sub}</span></div>`;
+        <div><span class="toast-title">${escHtml(title)}</span><span class="toast-sub">${escHtml(sub)}</span></div>`;
     box.appendChild(el);
     requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('show')));
     setTimeout(() => { el.classList.add('hide'); setTimeout(() => el.remove(), 400); }, 3800);
