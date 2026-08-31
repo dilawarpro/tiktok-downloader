@@ -56,51 +56,39 @@ function videoCandidates(data) {
         .filter((u, i, all) => u && all.indexOf(u) === i);
 }
 
-/* Attaches src with automatic fallback across candidates. Handles both
-   load-time errors (fires 'error') and play-time stalls (playback never
-   actually starts even though metadata loaded fine — the exact symptom
-   of "preview shows but play button does nothing"). */
-function loadVideoWithFallback(videoEl, candidates, onAllFailed) {
-    let i = 0;
-    let stallTimer = null;
-
-    function clearStallTimer() { if (stallTimer) { clearTimeout(stallTimer); stallTimer = null; } }
-
-    function tryNext() {
-        clearStallTimer();
-        if (i >= candidates.length) {
-            console.warn('[TikTok Downloader] All video sources failed:', candidates);
-            onAllFailed();
-            return;
-        }
-        const url = candidates[i];
-        console.log(`[TikTok Downloader] Trying video source ${i + 1}/${candidates.length}:`, url);
-        i++;
-        videoEl.src = url;
-        videoEl.load();
+/* Fetches each candidate video fully (same approach as the working
+   "Download Video" button) and plays it from a local blob URL instead
+   of streaming directly from the remote URL. This sidesteps a very
+   common issue with TikTok's video CDN: it handles HTTP Range requests
+   (which is what a <video> tag uses to stream/seek) unreliably for
+   cross-origin players, even though a plain single-shot fetch/image
+   request to the same CDN works fine. That mismatch is exactly the
+   "thumbnail shows, video never actually plays" symptom. */
+async function loadVideoAsBlob(videoEl, candidates, onAllFailed) {
+    if (videoEl.dataset.blobUrl) {
+        URL.revokeObjectURL(videoEl.dataset.blobUrl);
+        delete videoEl.dataset.blobUrl;
     }
-
-    videoEl.onerror = () => {
-        const err = videoEl.error;
-        console.warn('[TikTok Downloader] Video error on source', i, '- code:', err && err.code, '- src:', videoEl.currentSrc);
-        tryNext();
-    };
-
-    videoEl.onplay = () => {
-        clearStallTimer();
-        // If "playing" hasn't fired within 6s of hitting play, the stream
-        // is stalled (blocked/throttled) rather than erroring outright.
-        stallTimer = setTimeout(() => {
-            console.warn('[TikTok Downloader] Playback stalled on source', i, '- readyState:', videoEl.readyState, '- networkState:', videoEl.networkState);
-            videoEl.pause();
-            tryNext();
-        }, 6000);
-    };
-
-    videoEl.onplaying = clearStallTimer;
-    videoEl.onpause = clearStallTimer;
-
-    tryNext();
+    for (let i = 0; i < candidates.length; i++) {
+        const url = candidates[i];
+        try {
+            console.log(`[TikTok Downloader] Fetching video for preview (source ${i + 1}/${candidates.length}):`, url);
+            const res = await fetch(url, { mode: 'cors' });
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            const blob = await res.blob();
+            if (!blob || blob.size < 1000) throw new Error('Empty/invalid response (size ' + (blob && blob.size) + ')');
+            const objectUrl = URL.createObjectURL(blob);
+            videoEl.dataset.blobUrl = objectUrl;
+            videoEl.src = objectUrl;
+            videoEl.load();
+            console.log('[TikTok Downloader] Preview loaded via blob from source', i + 1, '- size:', blob.size, 'type:', blob.type);
+            return;
+        } catch (err) {
+            console.warn(`[TikTok Downloader] Source ${i + 1} failed for preview:`, err && err.message ? err.message : err);
+        }
+    }
+    console.warn('[TikTok Downloader] All video sources failed for preview:', candidates);
+    onAllFailed();
 }
 
 /* ============================================================
@@ -496,9 +484,7 @@ function processData(data, originalUrl) {
     slideshowWrap.style.display = 'none';
     placeholder.style.display = 'none';
     videoEl.onerror = null;
-    videoEl.onplay = null;
-    videoEl.onplaying = null;
-    videoEl.onpause = null;
+    if (videoEl.dataset.blobUrl) { URL.revokeObjectURL(videoEl.dataset.blobUrl); delete videoEl.dataset.blobUrl; }
     videoEl.removeAttribute('poster');
     videoEl.src = '';
     videoEl.load();
@@ -520,14 +506,15 @@ function processData(data, originalUrl) {
         document.getElementById('btnMp4').style.display = 'flex';
         document.getElementById('btnAllImg').style.display = 'none';
 
-        // FIX: try each candidate URL (HD → standard → watermarked) and
-        // auto-fallback on load error OR playback stall, instead of
-        // giving up on the first source that doesn't actually play.
-        loadVideoWithFallback(videoEl, vCandidates, () => {
+        // FIX: fetch the video fully and play from a local blob instead of
+        // streaming <video src> directly from the remote CDN — avoids the
+        // Range-request streaming issue that leaves the play button dead
+        // even though the poster/thumbnail (a plain image request) works.
+        loadVideoAsBlob(videoEl, vCandidates, () => {
             videoWrap.style.display = 'none';
             placeholder.style.display = 'block';
             document.getElementById('btnMp4').style.display = 'none';
-            showToast('Preview Unavailable', 'This video could not be streamed for preview (open DevTools → Console for details). The Download button may still work.', 'error');
+            showToast('Preview Unavailable', 'This video could not be loaded for preview (open DevTools → Console for details). The Download button may still work.', 'error');
         });
     } else {
         placeholder.style.display = 'block';
