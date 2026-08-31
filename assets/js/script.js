@@ -49,11 +49,87 @@ function cleanMediaUrl(u) {
 
 /* Build an ordered, deduped list of every video URL TikWM gave us
    (HD, standard, watermarked) so we can fall back automatically if
-   one CDN link is blocked/throttled while another still works. */
+   one CDN link is blocked/throttled while another still works.
+   Used for the "Download Video" button, where HD quality matters. */
 function videoCandidates(data) {
     return [data.hdplay, data.play, data.wmplay]
         .map(cleanMediaUrl)
         .filter((u, i, all) => u && all.indexOf(u) === i);
+}
+
+/* Same links, but reordered smallest/fastest-first for the on-page
+   PREVIEW specifically. The preview doesn't need HD — prioritizing the
+   smaller standard-res files means less data has to arrive before
+   playback can start, which is the single biggest lever on load time. */
+function previewVideoCandidates(data) {
+    return [data.play, data.wmplay, data.hdplay]
+        .map(cleanMediaUrl)
+        .filter((u, i, all) => u && all.indexOf(u) === i);
+}
+
+/* Warms up the DNS/TLS connection to a URL's origin the moment we know
+   it, so the browser isn't starting that handshake from zero when we
+   actually assign it as a video src a moment later. */
+function preconnectTo(url) {
+    try {
+        const origin = new URL(url).origin;
+        if (document.querySelector(`link[rel="preconnect"][href="${origin}"]`)) return;
+        const link = document.createElement('link');
+        link.rel = 'preconnect';
+        link.href = origin;
+        link.crossOrigin = 'anonymous';
+        document.head.appendChild(link);
+    } catch (e) { /* ignore invalid URLs */ }
+}
+
+/* Races several candidate URLs at once using hidden probe <video>
+   elements, resolving with whichever becomes playable first instead of
+   trying candidates one at a time. This is the main speed win: if the
+   fastest CDN link responds in 300ms, we don't waste time waiting out a
+   slow/dead one first. */
+function raceNativeCandidates(candidates, timeoutMs) {
+    return new Promise((resolve, reject) => {
+        if (!candidates.length) { reject(new Error('no candidates')); return; }
+        let settled = false;
+        let failCount = 0;
+        const probes = candidates.map(url => {
+            const probe = document.createElement('video');
+            probe.preload = 'auto';
+            probe.muted = true;
+            probe.playsInline = true;
+            probe.style.display = 'none';
+            probe.src = url;
+            probe.load();
+            probe.oncanplay = () => finish(url);
+            probe.onerror = fail;
+            return probe;
+        });
+        function cleanup() {
+            probes.forEach(p => { p.oncanplay = null; p.onerror = null; try { p.src = ''; p.load(); } catch (e) {} p.remove(); });
+        }
+        function finish(url) {
+            if (settled) return;
+            settled = true;
+            clearTimeout(timer);
+            cleanup();
+            resolve(url);
+        }
+        function fail() {
+            failCount++;
+            if (failCount >= probes.length && !settled) {
+                settled = true;
+                clearTimeout(timer);
+                cleanup();
+                reject(new Error('all candidates errored'));
+            }
+        }
+        const timer = setTimeout(() => {
+            if (settled) return;
+            settled = true;
+            cleanup();
+            reject(new Error('timeout'));
+        }, timeoutMs);
+    });
 }
 
 /* Fetches a candidate video fully with a hard timeout (so a slow/blocked
@@ -107,32 +183,26 @@ function setPosterWithFallback(videoEl, data) {
     })();
 }
 
-/* Two-stage strategy, fastest-working option wins, WITH continuous
-   mid-playback stall detection (not just initial-load detection):
-
-   STAGE 1 — Native streaming: point <video src> straight at the candidate.
-   Needs NO CORS approval (browsers can always play cross-origin media
-   natively) and starts instantly, so it's tried first everywhere,
-   including mobile. Even after the first frame loads successfully, we
-   keep watching for the browser's 'waiting'/'stalled' events — the
-   signature of a Range-request that got cut off mid-stream (thumbnail
-   shows, playback freezes at 0:00) — and escalate to Stage 2 if playback
-   doesn't recover within a few seconds.
-
-   STAGE 2 — Blob fallback: fetch the whole file (same technique as the
-   working Download button) and play from a local blob URL, which needs
-   no further streaming/Range requests at all. Slower to start (needs a
-   full download) but far more reliable for CDN links that mishandle
-   cross-origin Range streaming — and it's also the safety net if native
-   streaming looked fine at first but then stalled mid-playback. */
+/* Race-first strategy for speed:
+   STAGE 1 — Race every candidate at once via hidden probes (see
+   raceNativeCandidates). Whichever CDN link responds first wins — we
+   don't wait out a dead one before trying the next. Tight 1.2s timeout:
+   if nothing is playable that fast, something's blocked, so bail early
+   instead of waiting it out.
+   STAGE 2 — Continuous mid-playback stall watch (unchanged from before):
+   catches the "first frame loads, then freezes" case.
+   STAGE 3 — Full-fetch blob fallback, only if racing + stall-recovery
+   both fail. Tries the smallest/fastest variant first (candidates are
+   already ordered that way by previewVideoCandidates) with an 8s cap
+   per source. */
 function playVideoFast(videoEl, videoWrap, candidates, onAllFailed) {
     if (videoEl.dataset.blobUrl) {
         URL.revokeObjectURL(videoEl.dataset.blobUrl);
         delete videoEl.dataset.blobUrl;
     }
+    candidates.forEach(preconnectTo);
     setVideoLoadingHint(videoWrap, true);
 
-    let i = 0;
     let escalated = false;
     let usingBlob = false;
     let stallTimer = null;
@@ -146,61 +216,43 @@ function playVideoFast(videoEl, videoWrap, candidates, onAllFailed) {
             console.warn('[TikTok Downloader] Playback stalled mid-stream at', videoEl.currentTime, '- escalating to full-fetch fallback.');
             escalated = true;
             tryBlobFallback();
-        }, 4000);
+        }, 2500);
     }
 
-    function tryNativeNext() {
-        if (i >= candidates.length) { tryBlobFallback(); return; }
-        const url = candidates[i];
-        console.log(`[TikTok Downloader] Native streaming attempt ${i + 1}/${candidates.length}:`, url);
-        i++;
+    function attachPlayingSource(url) {
         videoEl.onerror = null;
         videoEl.oncanplay = null;
-        videoEl.onwaiting = null;
-        videoEl.onstalled = null;
-        videoEl.onplaying = null;
-        videoEl.src = url;
-        videoEl.load();
-
-        let readyFired = false;
-        const readyTimer = setTimeout(() => {
-            if (readyFired || escalated) return;
-            console.warn('[TikTok Downloader] Native streaming timed out (no canplay within 3.5s):', url);
-            tryNativeNext();
-        }, 3500);
-
-        videoEl.oncanplay = () => {
-            if (readyFired || escalated) return;
-            readyFired = true;
-            clearTimeout(readyTimer);
-            setVideoLoadingHint(videoWrap, false);
-            console.log('[TikTok Downloader] Native streaming ready:', url);
-            // Keep watching AFTER the first frame loads — a stall here
-            // (data stops arriving mid-playback) is the "thumbnail shows
-            // but never plays" symptom and needs its own escalation.
-            videoEl.onwaiting = armStallWatch;
-            videoEl.onstalled = armStallWatch;
-            videoEl.onplaying = clearStallTimer;
-        };
-        videoEl.onerror = () => {
-            if (readyFired || escalated) return;
-            clearTimeout(readyTimer);
-            console.warn('[TikTok Downloader] Native streaming error on:', url);
-            tryNativeNext();
-        };
+        videoEl.onwaiting = armStallWatch;
+        videoEl.onstalled = armStallWatch;
+        videoEl.onplaying = clearStallTimer;
+        setVideoLoadingHint(videoWrap, false);
+        console.log('[TikTok Downloader] Playing from:', url);
     }
+
+    console.log(`[TikTok Downloader] Racing ${candidates.length} source(s) in parallel...`);
+    raceNativeCandidates(candidates, 1200)
+        .then(winnerUrl => {
+            if (escalated) return;
+            videoEl.src = winnerUrl;
+            videoEl.load();
+            attachPlayingSource(winnerUrl);
+        })
+        .catch(err => {
+            if (escalated) return;
+            console.warn('[TikTok Downloader] Native race failed/timed out:', err.message, '- trying full-fetch fallback...');
+            tryBlobFallback();
+        });
 
     async function tryBlobFallback() {
         if (usingBlob) return;
         usingBlob = true;
         clearStallTimer();
         setVideoLoadingHint(videoWrap, true);
-        console.log('[TikTok Downloader] Trying full-fetch fallback...');
         for (let j = 0; j < candidates.length; j++) {
             const url = candidates[j];
             try {
                 console.log(`[TikTok Downloader] Fetching video (fallback ${j + 1}/${candidates.length}):`, url);
-                const blob = await fetchVideoBlob(url, 12000);
+                const blob = await fetchVideoBlob(url, 8000);
                 const objectUrl = URL.createObjectURL(blob);
                 videoEl.dataset.blobUrl = objectUrl;
                 videoEl.onerror = null;
@@ -221,8 +273,6 @@ function playVideoFast(videoEl, videoWrap, candidates, onAllFailed) {
         console.warn('[TikTok Downloader] All video sources failed (native + fallback):', candidates);
         onAllFailed();
     }
-
-    tryNativeNext();
 }
 
 /* ============================================================
@@ -588,7 +638,8 @@ function processData(data, originalUrl) {
     S.caption = data.title || '';
     // FIX: resolve possibly-relative + http:// TikWM URLs (see cleanMediaUrl
     // above). This is the fix for the video preview not appearing/playing.
-    const vCandidates = videoCandidates(data);
+    const vCandidates = videoCandidates(data);           // HD-first, for the Download button
+    const previewCandidates = previewVideoCandidates(data); // fastest-first, for the inline preview
     S.videoUrl = vCandidates[0] || null; // used by the "Download Video" button
     S.audioUrl = cleanMediaUrl(data.music || (data.music_info && data.music_info.play) || null);
     S.currentData = data;
@@ -637,18 +688,17 @@ function processData(data, originalUrl) {
         document.getElementById('btnMp4').style.display = 'none';
         document.getElementById('btnAllImg').style.display = 'flex';
         document.getElementById('btnAllImgSub').textContent = `${S.images.length} slides · Save all at once`;
-    } else if (vCandidates.length > 0) {
+    } else if (previewCandidates.length > 0) {
         document.getElementById('contentBadge').textContent = '🎬 HD Video';
         setPosterWithFallback(videoEl, data);
         videoWrap.style.display = 'block';
         document.getElementById('btnMp4').style.display = 'flex';
         document.getElementById('btnAllImg').style.display = 'none';
 
-        // FIX: fast native streaming first (works instantly, no CORS
-        // needed, most compatible across browsers/devices including
-        // mobile), auto-falling back to a full-fetch blob only if native
-        // streaming genuinely stalls on every source.
-        playVideoFast(videoEl, videoWrap, vCandidates, () => {
+        // FIX: race all candidates in parallel (fastest response wins),
+        // preferring the smaller/faster variant for the preview specifically,
+        // with tight timeouts and continuous stall-recovery.
+        playVideoFast(videoEl, videoWrap, previewCandidates, () => {
             videoWrap.style.display = 'none';
             placeholder.style.display = 'block';
             document.getElementById('btnMp4').style.display = 'none';
