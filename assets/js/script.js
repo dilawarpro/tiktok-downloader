@@ -56,39 +56,123 @@ function videoCandidates(data) {
         .filter((u, i, all) => u && all.indexOf(u) === i);
 }
 
-/* Fetches each candidate video fully (same approach as the working
-   "Download Video" button) and plays it from a local blob URL instead
-   of streaming directly from the remote URL. This sidesteps a very
-   common issue with TikTok's video CDN: it handles HTTP Range requests
-   (which is what a <video> tag uses to stream/seek) unreliably for
-   cross-origin players, even though a plain single-shot fetch/image
-   request to the same CDN works fine. That mismatch is exactly the
-   "thumbnail shows, video never actually plays" symptom. */
-async function loadVideoAsBlob(videoEl, candidates, onAllFailed) {
+/* Fetches a candidate video fully with a hard timeout (so a slow/blocked
+   mobile connection can't hang forever) and plays it from a local blob URL.
+   Used only as a fallback when native streaming (below) doesn't pan out. */
+async function fetchVideoBlob(url, timeoutMs) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+        const res = await fetch(url, { mode: 'cors', signal: controller.signal });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const blob = await res.blob();
+        if (!blob || blob.size < 1000) throw new Error('Empty/invalid response (size ' + (blob && blob.size) + ')');
+        return blob;
+    } finally {
+        clearTimeout(timer);
+    }
+}
+
+function setVideoLoadingHint(videoWrap, show) {
+    let hint = videoWrap.querySelector('.vw-loading-hint');
+    if (show) {
+        if (!hint) {
+            hint = document.createElement('div');
+            hint.className = 'vw-loading-hint';
+            hint.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.35);color:#fff;font-size:0.8rem;font-weight:600;pointer-events:none;z-index:2;';
+            hint.textContent = 'Loading preview…';
+            if (getComputedStyle(videoWrap).position === 'static') videoWrap.style.position = 'relative';
+            videoWrap.appendChild(hint);
+        }
+    } else if (hint) {
+        hint.remove();
+    }
+}
+
+/* Two-stage strategy, fastest-working option wins:
+   STAGE 1 — Native streaming: point <video src> straight at the candidate.
+   This needs NO CORS approval at all (browsers can always play cross-origin
+   media natively) and starts instantly, so it's tried first on every
+   browser/device, including mobile.
+   STAGE 2 — Blob fallback: only used if native streaming stalls or errors
+   on every candidate (this covers the minority of CDN links that mishandle
+   Range-based streaming for cross-origin players). This stage needs CORS
+   and a full download, so it's slower — which is exactly why it's the
+   fallback, not the default. Mobile Chrome's data-saver/compression proxy
+   can interfere with this fetch-based path even when native streaming
+   works fine, so trying native first also fixes mobile compatibility. */
+function playVideoFast(videoEl, videoWrap, candidates, onAllFailed) {
     if (videoEl.dataset.blobUrl) {
         URL.revokeObjectURL(videoEl.dataset.blobUrl);
         delete videoEl.dataset.blobUrl;
     }
-    for (let i = 0; i < candidates.length; i++) {
+    setVideoLoadingHint(videoWrap, true);
+
+    let i = 0;
+    let settled = false;
+
+    function tryNativeNext() {
+        if (i >= candidates.length) { tryBlobFallback(); return; }
         const url = candidates[i];
-        try {
-            console.log(`[TikTok Downloader] Fetching video for preview (source ${i + 1}/${candidates.length}):`, url);
-            const res = await fetch(url, { mode: 'cors' });
-            if (!res.ok) throw new Error('HTTP ' + res.status);
-            const blob = await res.blob();
-            if (!blob || blob.size < 1000) throw new Error('Empty/invalid response (size ' + (blob && blob.size) + ')');
-            const objectUrl = URL.createObjectURL(blob);
-            videoEl.dataset.blobUrl = objectUrl;
-            videoEl.src = objectUrl;
-            videoEl.load();
-            console.log('[TikTok Downloader] Preview loaded via blob from source', i + 1, '- size:', blob.size, 'type:', blob.type);
-            return;
-        } catch (err) {
-            console.warn(`[TikTok Downloader] Source ${i + 1} failed for preview:`, err && err.message ? err.message : err);
+        console.log(`[TikTok Downloader] Native streaming attempt ${i + 1}/${candidates.length}:`, url);
+        i++;
+        videoEl.onerror = null;
+        videoEl.oncanplay = null;
+        videoEl.src = url;
+        videoEl.load();
+
+        const readyTimer = setTimeout(() => {
+            if (settled) return;
+            console.warn('[TikTok Downloader] Native streaming timed out (no canplay within 3.5s):', url);
+            tryNativeNext();
+        }, 3500);
+
+        videoEl.oncanplay = () => {
+            if (settled) return;
+            settled = true;
+            clearTimeout(readyTimer);
+            setVideoLoadingHint(videoWrap, false);
+            console.log('[TikTok Downloader] Native streaming ready:', url);
+        };
+        videoEl.onerror = () => {
+            if (settled) return;
+            clearTimeout(readyTimer);
+            console.warn('[TikTok Downloader] Native streaming error on:', url);
+            tryNativeNext();
+        };
+    }
+
+    async function tryBlobFallback() {
+        console.log('[TikTok Downloader] Native streaming failed on all sources, trying full-fetch fallback...');
+        for (let j = 0; j < candidates.length; j++) {
+            const url = candidates[j];
+            try {
+                console.log(`[TikTok Downloader] Fetching video (fallback ${j + 1}/${candidates.length}):`, url);
+                const blob = await fetchVideoBlob(url, 12000);
+                if (settled) return;
+                settled = true;
+                const objectUrl = URL.createObjectURL(blob);
+                videoEl.dataset.blobUrl = objectUrl;
+                videoEl.onerror = null;
+                videoEl.oncanplay = null;
+                videoEl.src = objectUrl;
+                videoEl.load();
+                setVideoLoadingHint(videoWrap, false);
+                console.log('[TikTok Downloader] Preview loaded via fallback fetch, size:', blob.size, 'type:', blob.type);
+                return;
+            } catch (err) {
+                console.warn(`[TikTok Downloader] Fallback source ${j + 1} failed:`, err && err.message ? err.message : err);
+            }
+        }
+        if (!settled) {
+            settled = true;
+            setVideoLoadingHint(videoWrap, false);
+            console.warn('[TikTok Downloader] All video sources failed (native + fallback):', candidates);
+            onAllFailed();
         }
     }
-    console.warn('[TikTok Downloader] All video sources failed for preview:', candidates);
-    onAllFailed();
+
+    tryNativeNext();
 }
 
 /* ============================================================
@@ -484,6 +568,8 @@ function processData(data, originalUrl) {
     slideshowWrap.style.display = 'none';
     placeholder.style.display = 'none';
     videoEl.onerror = null;
+    videoEl.oncanplay = null;
+    setVideoLoadingHint(videoWrap, false);
     if (videoEl.dataset.blobUrl) { URL.revokeObjectURL(videoEl.dataset.blobUrl); delete videoEl.dataset.blobUrl; }
     videoEl.removeAttribute('poster');
     videoEl.src = '';
@@ -506,11 +592,11 @@ function processData(data, originalUrl) {
         document.getElementById('btnMp4').style.display = 'flex';
         document.getElementById('btnAllImg').style.display = 'none';
 
-        // FIX: fetch the video fully and play from a local blob instead of
-        // streaming <video src> directly from the remote CDN — avoids the
-        // Range-request streaming issue that leaves the play button dead
-        // even though the poster/thumbnail (a plain image request) works.
-        loadVideoAsBlob(videoEl, vCandidates, () => {
+        // FIX: fast native streaming first (works instantly, no CORS
+        // needed, most compatible across browsers/devices including
+        // mobile), auto-falling back to a full-fetch blob only if native
+        // streaming genuinely stalls on every source.
+        playVideoFast(videoEl, videoWrap, vCandidates, () => {
             videoWrap.style.display = 'none';
             placeholder.style.display = 'block';
             document.getElementById('btnMp4').style.display = 'none';
