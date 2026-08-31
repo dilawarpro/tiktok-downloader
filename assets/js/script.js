@@ -89,18 +89,42 @@ function setVideoLoadingHint(videoWrap, show) {
     }
 }
 
-/* Two-stage strategy, fastest-working option wins:
+/* Poster/thumbnail sometimes fails too — verify it actually loads before
+   assigning it, and fall back to an alternate cover field if it doesn't,
+   instead of leaving a blank/broken poster. */
+function setPosterWithFallback(videoEl, data) {
+    const candidates = [data.cover, data.origin_cover, data.ai_dynamic_cover, data.dynamic_cover]
+        .map(cleanMediaUrl)
+        .filter((u, i, all) => u && all.indexOf(u) === i);
+    let i = 0;
+    (function tryNext() {
+        if (i >= candidates.length) return;
+        const url = candidates[i++];
+        const probe = new Image();
+        probe.onload = () => { videoEl.poster = url; };
+        probe.onerror = () => tryNext();
+        probe.src = url;
+    })();
+}
+
+/* Two-stage strategy, fastest-working option wins, WITH continuous
+   mid-playback stall detection (not just initial-load detection):
+
    STAGE 1 — Native streaming: point <video src> straight at the candidate.
-   This needs NO CORS approval at all (browsers can always play cross-origin
-   media natively) and starts instantly, so it's tried first on every
-   browser/device, including mobile.
-   STAGE 2 — Blob fallback: only used if native streaming stalls or errors
-   on every candidate (this covers the minority of CDN links that mishandle
-   Range-based streaming for cross-origin players). This stage needs CORS
-   and a full download, so it's slower — which is exactly why it's the
-   fallback, not the default. Mobile Chrome's data-saver/compression proxy
-   can interfere with this fetch-based path even when native streaming
-   works fine, so trying native first also fixes mobile compatibility. */
+   Needs NO CORS approval (browsers can always play cross-origin media
+   natively) and starts instantly, so it's tried first everywhere,
+   including mobile. Even after the first frame loads successfully, we
+   keep watching for the browser's 'waiting'/'stalled' events — the
+   signature of a Range-request that got cut off mid-stream (thumbnail
+   shows, playback freezes at 0:00) — and escalate to Stage 2 if playback
+   doesn't recover within a few seconds.
+
+   STAGE 2 — Blob fallback: fetch the whole file (same technique as the
+   working Download button) and play from a local blob URL, which needs
+   no further streaming/Range requests at all. Slower to start (needs a
+   full download) but far more reliable for CDN links that mishandle
+   cross-origin Range streaming — and it's also the safety net if native
+   streaming looked fine at first but then stalled mid-playback. */
 function playVideoFast(videoEl, videoWrap, candidates, onAllFailed) {
     if (videoEl.dataset.blobUrl) {
         URL.revokeObjectURL(videoEl.dataset.blobUrl);
@@ -109,7 +133,21 @@ function playVideoFast(videoEl, videoWrap, candidates, onAllFailed) {
     setVideoLoadingHint(videoWrap, true);
 
     let i = 0;
-    let settled = false;
+    let escalated = false;
+    let usingBlob = false;
+    let stallTimer = null;
+
+    function clearStallTimer() { if (stallTimer) { clearTimeout(stallTimer); stallTimer = null; } }
+
+    function armStallWatch() {
+        clearStallTimer();
+        stallTimer = setTimeout(() => {
+            if (escalated || usingBlob) return;
+            console.warn('[TikTok Downloader] Playback stalled mid-stream at', videoEl.currentTime, '- escalating to full-fetch fallback.');
+            escalated = true;
+            tryBlobFallback();
+        }, 4000);
+    }
 
     function tryNativeNext() {
         if (i >= candidates.length) { tryBlobFallback(); return; }
@@ -118,24 +156,34 @@ function playVideoFast(videoEl, videoWrap, candidates, onAllFailed) {
         i++;
         videoEl.onerror = null;
         videoEl.oncanplay = null;
+        videoEl.onwaiting = null;
+        videoEl.onstalled = null;
+        videoEl.onplaying = null;
         videoEl.src = url;
         videoEl.load();
 
+        let readyFired = false;
         const readyTimer = setTimeout(() => {
-            if (settled) return;
+            if (readyFired || escalated) return;
             console.warn('[TikTok Downloader] Native streaming timed out (no canplay within 3.5s):', url);
             tryNativeNext();
         }, 3500);
 
         videoEl.oncanplay = () => {
-            if (settled) return;
-            settled = true;
+            if (readyFired || escalated) return;
+            readyFired = true;
             clearTimeout(readyTimer);
             setVideoLoadingHint(videoWrap, false);
             console.log('[TikTok Downloader] Native streaming ready:', url);
+            // Keep watching AFTER the first frame loads — a stall here
+            // (data stops arriving mid-playback) is the "thumbnail shows
+            // but never plays" symptom and needs its own escalation.
+            videoEl.onwaiting = armStallWatch;
+            videoEl.onstalled = armStallWatch;
+            videoEl.onplaying = clearStallTimer;
         };
         videoEl.onerror = () => {
-            if (settled) return;
+            if (readyFired || escalated) return;
             clearTimeout(readyTimer);
             console.warn('[TikTok Downloader] Native streaming error on:', url);
             tryNativeNext();
@@ -143,18 +191,23 @@ function playVideoFast(videoEl, videoWrap, candidates, onAllFailed) {
     }
 
     async function tryBlobFallback() {
-        console.log('[TikTok Downloader] Native streaming failed on all sources, trying full-fetch fallback...');
+        if (usingBlob) return;
+        usingBlob = true;
+        clearStallTimer();
+        setVideoLoadingHint(videoWrap, true);
+        console.log('[TikTok Downloader] Trying full-fetch fallback...');
         for (let j = 0; j < candidates.length; j++) {
             const url = candidates[j];
             try {
                 console.log(`[TikTok Downloader] Fetching video (fallback ${j + 1}/${candidates.length}):`, url);
                 const blob = await fetchVideoBlob(url, 12000);
-                if (settled) return;
-                settled = true;
                 const objectUrl = URL.createObjectURL(blob);
                 videoEl.dataset.blobUrl = objectUrl;
                 videoEl.onerror = null;
                 videoEl.oncanplay = null;
+                videoEl.onwaiting = null;
+                videoEl.onstalled = null;
+                videoEl.onplaying = null;
                 videoEl.src = objectUrl;
                 videoEl.load();
                 setVideoLoadingHint(videoWrap, false);
@@ -164,12 +217,9 @@ function playVideoFast(videoEl, videoWrap, candidates, onAllFailed) {
                 console.warn(`[TikTok Downloader] Fallback source ${j + 1} failed:`, err && err.message ? err.message : err);
             }
         }
-        if (!settled) {
-            settled = true;
-            setVideoLoadingHint(videoWrap, false);
-            console.warn('[TikTok Downloader] All video sources failed (native + fallback):', candidates);
-            onAllFailed();
-        }
+        setVideoLoadingHint(videoWrap, false);
+        console.warn('[TikTok Downloader] All video sources failed (native + fallback):', candidates);
+        onAllFailed();
     }
 
     tryNativeNext();
@@ -569,6 +619,9 @@ function processData(data, originalUrl) {
     placeholder.style.display = 'none';
     videoEl.onerror = null;
     videoEl.oncanplay = null;
+    videoEl.onwaiting = null;
+    videoEl.onstalled = null;
+    videoEl.onplaying = null;
     setVideoLoadingHint(videoWrap, false);
     if (videoEl.dataset.blobUrl) { URL.revokeObjectURL(videoEl.dataset.blobUrl); delete videoEl.dataset.blobUrl; }
     videoEl.removeAttribute('poster');
@@ -586,8 +639,7 @@ function processData(data, originalUrl) {
         document.getElementById('btnAllImgSub').textContent = `${S.images.length} slides · Save all at once`;
     } else if (vCandidates.length > 0) {
         document.getElementById('contentBadge').textContent = '🎬 HD Video';
-        const resolvedCover = cleanMediaUrl(data.cover || data.origin_cover || null);
-        if (resolvedCover) videoEl.poster = resolvedCover;
+        setPosterWithFallback(videoEl, data);
         videoWrap.style.display = 'block';
         document.getElementById('btnMp4').style.display = 'flex';
         document.getElementById('btnAllImg').style.display = 'none';
