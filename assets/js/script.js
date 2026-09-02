@@ -413,7 +413,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); S.pwaPrompt = e; });
 
-    console.log('%c🎵 TikTok Downloader · tiktokdownloader.dilawarpro.com · by Dilawar Pro', 'background:#6C3EF4;color:#fff;padding:8px 18px;border-radius:8px;font-weight:700;');
+    console.log('%c🎵 TikTok Downloader · tiktokvideodownload.app · by Dilawar Pro', 'background:#6C3EF4;color:#fff;padding:8px 18px;border-radius:8px;font-weight:700;');
     window.AutoTheme = AutoTheme;
 });
 
