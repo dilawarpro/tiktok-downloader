@@ -1,27 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-    <!-- Sets theme before first paint to avoid a flash of the wrong theme -->
-    <script>
-    (function(){
-      try{
-        var manual = localStorage.getItem('tt-theme-manual');
-        var expiry = localStorage.getItem('tt-theme-manual-expiry');
-        var theme;
-        if (manual && expiry && Date.now() < parseInt(expiry,10)) {
-          theme = manual;
-        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          theme = 'dark';
-        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-          theme = 'light';
-        } else {
-          var h = new Date().getHours();
-          theme = (h >= 6 && h < 20) ? 'light' : 'dark';
-        }
-        document.documentElement.setAttribute('data-theme', theme);
-      } catch(e){}
-    })();
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -91,13 +70,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/styles.css">
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HDYW8DLB56"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-35M67CWVDE"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-HDYW8DLB56');
+  gtag('config', 'G-35M67CWVDE');
 </script>
 </head>
 <body>
@@ -805,7 +784,7 @@
     </div>
 </footer>
 <!-- Modal for monetization -->
-<style>
+<!-- <style>
   .mm-overlay{
     position:fixed; inset:0; background:rgba(17,10,33,0.6);
     backdrop-filter: blur(6px);
@@ -884,9 +863,9 @@
   @media (prefers-reduced-motion: reduce){
     .mm-overlay, .mm-card, .mm-close{ transition:none; }
   }
-</style>
+</style> -->
 
-<div class="mm-overlay" id="moneyModal" role="dialog" aria-modal="true" aria-labelledby="mmTitle">
+<!-- <div class="mm-overlay" id="moneyModal" role="dialog" aria-modal="true" aria-labelledby="mmTitle">
   <div class="mm-card">
     <button class="mm-close" id="mmClose" aria-label="Close">✕</button>
 
@@ -898,9 +877,9 @@
     <button class="mm-cta" href="https://dilawarpro.com" id="mmCta">Get the Free Guide <i class="bi bi-box-arrow-right"></i></button>
     <button class="mm-dismiss" id="mmDismiss">Maybe later</button>
   </div>
-</div>
+</div> -->
 
-<script>
+<!-- <script>
 (function(){
   var overlay = document.getElementById('moneyModal');
   var closeBtn = document.getElementById('mmClose');
@@ -933,7 +912,7 @@
     setTimeout(openModal, 10000); // 10 seconds after load
   });
 })();
-</script>
+</script> -->
 <!-- ================= END MONEY MODAL ================= -->
 
 <!-- Scroll to Top -->
@@ -943,7 +922,27 @@
 
 <!-- Toast Container -->
 <div id="toastBox" aria-live="polite" aria-atomic="true"></div>
-
+    <!-- Sets theme before first paint to avoid a flash of the wrong theme -->
+    <script>
+    (function(){
+      try{
+        var manual = localStorage.getItem('tt-theme-manual');
+        var expiry = localStorage.getItem('tt-theme-manual-expiry');
+        var theme;
+        if (manual && expiry && Date.now() < parseInt(expiry,10)) {
+          theme = manual;
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          theme = 'dark';
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+          theme = 'light';
+        } else {
+          var h = new Date().getHours();
+          theme = (h >= 6 && h < 20) ? 'light' : 'dark';
+        }
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch(e){}
+    })();
+    </script>
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/script.js"></script>
